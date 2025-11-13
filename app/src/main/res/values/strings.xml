@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CA</string>
+
+    <!-- Generic Info Messages -->
+    <string name="cp_something_went_wrong">Something went wrong please try again later!</string>
+    <string name="str_no">No</string>
+    <string name="str_yes">Yes</string>
+    <string name="str_ok">Ok</string>
+    <string name="str_alert">Alert</string>
+</resources>

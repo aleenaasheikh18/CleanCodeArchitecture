@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_background"
+    android:padding="@dimen/new_dimen_20_dp">
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivIcon"
+        android:layout_width="@dimen/new_dimen_56_dp"
+        android:layout_height="@dimen/new_dimen_56_dp"
+        android:layout_marginTop="@dimen/new_dimen_20_dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_dimen_20_dp"
+        android:elevation="@dimen/new_dimen_2_dp"
+        tools:text="Heading"
+        android:textAlignment="center"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="@dimen/txt_mediumXXX"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivIcon"
+        tools:visibility="visible" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_dimen_10_dp"
+        android:clickable="true"
+        android:focusable="true"
+        tools:text="Are you sure?"
+        android:textAlignment="center"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="@dimen/txt_mediumX"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <LinearLayout
+        android:id="@+id/linearButtonLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_dimen_30_dp"
+        android:layout_marginBottom="@dimen/new_dimen_4_dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMessage">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/new_dimen_4_dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_rounded_outline"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:padding="@dimen/new_dimen_10_dp"
+            android:text="@string/str_no"
+            android:textAllCaps="false"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="@dimen/txt_smallXX"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnConfirm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/new_dimen_4_dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_rounded"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:padding="@dimen/new_dimen_10_dp"
+            android:text="@string/str_ok"
+            android:textAllCaps="false"
+            android:textColor="@color/defaultButtonTextColor"
+            android:textSize="@dimen/txt_smallXX" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

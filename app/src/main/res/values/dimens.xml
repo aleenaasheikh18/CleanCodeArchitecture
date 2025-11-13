@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="txt_smallX">10sp</dimen>
+    <dimen name="txt_smallXX">12sp</dimen>
+    <dimen name="txt_smallXXX">12sp</dimen>
+    <dimen name="txt_mediumX">14sp</dimen>
+    <dimen name="txt_mediumXX">16sp</dimen>
+    <dimen name="txt_mediumXXX">18sp</dimen>
+    <dimen name="txt_mediumXXXX">20sp</dimen>
+    <dimen name="txt_big">22sp</dimen>
+    <dimen name="txt_bigX">24sp</dimen>
+    <dimen name="txt_bigXX">28sp</dimen>
+    <dimen name="txt_bigXXX">32sp</dimen>
+    <dimen name="txt_bigXXXX">36sp</dimen>
+    <dimen name="txt_bigXXXXX">40sp</dimen>
+    <dimen name="txt_title_header">20sp</dimen>
+
+
+    <dimen name="group_right_padding">12dp</dimen>
+    <dimen name="item_top_margin">6dp</dimen>
+    <dimen name="item_horizontal_margin">6dp</dimen>
+    <dimen name="item_horizontal_padding">6dp</dimen>
+    <dimen name="item_level2_left_padding">12dp</dimen>
+
+    <dimen name="new_dimen_0_dp">0dp</dimen>
+    <dimen name="new_dimen_1_dp">1dp</dimen>
+    <dimen name="new_dimen_2_dp">1dp</dimen>
+    <dimen name="new_dimen_6_dp">6dp</dimen>
+    <dimen name="new_dimen_8_dp">8dp</dimen>
+    <dimen name="new_dimen_4_dp">4dp</dimen>
+    <dimen name="new_dimen_9_dp">9dp</dimen>
+    <dimen name="new_dimen_10_dp">10dp</dimen>
+    <dimen name="new_dimen_11_dp">11dp</dimen>
+    <dimen name="new_dimen_12_dp">12dp</dimen>
+    <dimen name="new_dimen_13_dp">13dp</dimen>
+    <dimen name="new_dimen_14_dp">14dp</dimen>
+    <dimen name="new_dimen_14_and_3_dp">14.3dp</dimen>
+    <dimen name="new_dimen_15_dp">15dp</dimen>
+    <dimen name="new_dimen_16_dp">16dp</dimen>
+    <dimen name="new_dimen_18_dp">18dp</dimen>
+    <dimen name="new_dimen_19_dp">19dp</dimen>
+    <dimen name="new_dimen_20_dp">20dp</dimen>
+    <dimen name="new_dimen_21_dp">21dp</dimen>
+    <dimen name="new_dimen_22_dp">22dp</dimen>
+    <dimen name="new_dimen_24_dp">24dp</dimen>
+    <dimen name="new_dimen_25_and_4_dp">25.4dp</dimen>
+    <dimen name="new_dimen_28_dp">28dp</dimen>
+    <dimen name="new_dimen_30_dp">30dp</dimen>
+    <dimen name="new_dimen_32_dp">32dp</dimen>
+    <dimen name="new_dimen_35_dp">35dp</dimen>
+    <dimen name="new_dimen_36_dp">36dp</dimen>
+    <dimen name="new_dimen_38_dp">38dp</dimen>
+    <dimen name="new_dimen_40_dp">40dp</dimen>
+    <dimen name="new_dimen_44_dp">44dp</dimen>
+    <dimen name="new_dimen_48_dp">48dp</dimen>
+    <dimen name="new_dimen_51_dp">51dp</dimen>
+    <dimen name="new_dimen_56_dp">56dp</dimen>
+    <dimen name="new_dimen_60_dp">60dp</dimen>
+    <dimen name="new_dimen_80_dp">80dp</dimen>
+    <dimen name="new_dimen_72_dp">72dp</dimen>
+    <dimen name="new_dimen_90_dp">90dp</dimen>
+    <dimen name="new_dimen_130_dp">130dp</dimen>
+    <dimen name="new_dimen_100_dp">100dp</dimen>
+    <dimen name="new_dimen_120_dp">120dp</dimen>
+    <dimen name="new_dimen_160_dp">160dp</dimen>
+    <dimen name="new_dimen_200_dp">200dp</dimen>
+    <dimen name="new_dimen_240_dp">240dp</dimen>
+    <dimen name="new_dimen_254_dp">254dp</dimen>
+    <dimen name="new_dimen_264_dp">264dp</dimen>
+    <dimen name="new_minus_dimen_30_dp">-30dp</dimen>
+
+    <dimen name="new_dimen_10_sp">10sp</dimen>
+    <dimen name="new_dimen_11_sp">11sp</dimen>
+    <dimen name="new_dimen_12_sp">12sp</dimen>
+    <dimen name="new_dimen_13_sp">13sp</dimen>
+    <dimen name="new_dimen_16_sp">16sp</dimen>
+    <dimen name="new_dimen_21_sp">21sp</dimen>
+    <dimen name="new_dimen_25_sp">25sp</dimen>
+    <dimen name="new_dimen_30_sp">30sp</dimen>
+    <dimen name="new_dimen_40_sp">40sp</dimen>
+    <dimen name="new_dimen_60_sp">60sp</dimen>
+
+    <dimen name="standard_margin">@dimen/new_dimen_16_dp</dimen>
+    <dimen name="new_standard_margin">@dimen/new_dimen_16_dp</dimen>
+    <dimen name="standard_margin_setting">@dimen/new_dimen_6_dp</dimen>
+    <dimen name="toolbar_elevation">@dimen/new_dimen_1_dp</dimen>
+    <dimen name="toolbar_size">@dimen/new_dimen_56_dp</dimen>
+    <dimen name="button_size">@dimen/new_dimen_48_dp</dimen>
+    <dimen name="dialog_button_size">@dimen/new_dimen_44_dp</dimen>
+    <dimen name="image_size">@dimen/new_dimen_51_dp</dimen>
+
+
+</resources>
