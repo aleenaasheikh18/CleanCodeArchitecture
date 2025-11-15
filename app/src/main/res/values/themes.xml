@@ -5,5 +5,16 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" />
+    <style name="Theme.MyApplication" parent="Base.Theme.MyApplication" >
+        <item name="fontFamily">@font/monstreat_medium</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="NavTextStyle" parent="Widget.Material3.NavigationView">
+        <item name="android:textSize">@dimen/new_dimen_21_sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/montserrat_bold</item>
+        <item name="maxLines">2</item>
+    </style>
+
 </resources>

@@ -21,7 +21,7 @@ abstract class BaseActivity<VB : ViewBinding>(private val inflate: Inflate<VB>) 
     lateinit var dialogManager: DialogManager
 
     @Suppress("UNCHECKED_CAST")
-    protected val viewDataBinding: VB
+    protected val bi: VB
         get() = _binding as VB
 
     override fun onCreate(savedInstanceState: Bundle?) {

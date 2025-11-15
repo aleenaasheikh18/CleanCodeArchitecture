@@ -55,6 +55,8 @@ dependencies {
 
     //Hilt
     implementation(libs.hilt)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
     kapt(libs.hilt.gradle.plugin)
     kapt(libs.hilt.google.android.compiler)
     kapt(libs.hilt.androidx.compiler)
@@ -71,6 +73,11 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
     implementation(libs.okhttp.logging.interceptor)
     implementation(libs.retrofit.converter.scalars)
+
+    // Drawer Layout
+    implementation(libs.drawerlayout)
+    implementation(libs.navigationFragment)
+    implementation(libs.navigationUi)
 
     // Testing
     testImplementation(libs.junit)

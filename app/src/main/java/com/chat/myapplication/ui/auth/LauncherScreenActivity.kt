@@ -3,7 +3,6 @@ package com.chat.myapplication.ui.auth
 import android.media.MediaPlayer
 import android.os.Handler
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -14,14 +13,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.chat.myapplication.R
 import com.chat.myapplication.base.BaseActivity
-import com.chat.myapplication.core.data.auth.model.SignInRequest
 import com.chat.myapplication.databinding.ActivityLauncherBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import com.chat.myapplication.core.domain.State
-import com.chat.myapplication.utility.TAG
-import com.chat.myapplication.utility.setOnSingleClickListener
 
 @AndroidEntryPoint
 class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLauncherBinding::inflate),Animation.AnimationListener {
@@ -42,12 +38,12 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
 
     private fun initSplashAnimations(){
         val logoAnim = AnimationUtils.loadAnimation(this, R.anim.splash_animation)
-        viewDataBinding.ivSplash.startAnimation(logoAnim)
+        bi.ivSplash.startAnimation(logoAnim)
 
         val splashScreenTime = 1000
         Handler().postDelayed({
             val logoAnim1 = AnimationUtils.loadAnimation(this, R.anim.splash_animation1)
-            viewDataBinding.ivSplash.animation = logoAnim1
+            bi.ivSplash.animation = logoAnim1
             logoAnim1.setAnimationListener(this)
             startVideo()
         }, splashScreenTime.toLong())
@@ -57,19 +53,19 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
     private fun startVideo() {
         try {
             val videoPath = "android.resource://" + packageName + "/" + R.raw.eater_video
-            viewDataBinding.videoView.setVideoPath(videoPath)
-            viewDataBinding.videoView.setOnPreparedListener { obj: MediaPlayer? -> obj!!.start() }
-            viewDataBinding.videoView.setOnCompletionListener { obj: MediaPlayer? -> obj!!.start() }
+            bi.videoView.setVideoPath(videoPath)
+            bi.videoView.setOnPreparedListener { obj: MediaPlayer? -> obj!!.start() }
+            bi.videoView.setOnCompletionListener { obj: MediaPlayer? -> obj!!.start() }
             val metrics = DisplayMetrics()
             windowManager.defaultDisplay.getMetrics(metrics)
-            val params = viewDataBinding.videoView.layoutParams as RelativeLayout.LayoutParams
+            val params = bi.videoView.layoutParams as RelativeLayout.LayoutParams
             params.width = metrics.widthPixels
             params.height = metrics.heightPixels
             params.leftMargin = 0
             params.rightMargin = 0
             params.bottomMargin = 0
             params.topMargin = 0
-            viewDataBinding.videoView.layoutParams = params
+            bi.videoView.layoutParams = params
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -95,8 +91,8 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
     }
 
     override fun onAnimationEnd(animation: Animation?) {
-        viewDataBinding.relativeLayout.visibility = View.VISIBLE
-        viewDataBinding.llSplash.visibility = View.GONE
+        bi.relativeLayout.visibility = View.VISIBLE
+        bi.llSplash.visibility = View.GONE
     }
 
     override fun onAnimationRepeat(animation: Animation?) = Unit

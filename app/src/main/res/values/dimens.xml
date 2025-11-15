@@ -80,14 +80,14 @@
     <dimen name="new_dimen_40_sp">40sp</dimen>
     <dimen name="new_dimen_60_sp">60sp</dimen>
 
-    <dimen name="standard_margin">@dimen/new_dimen_16_dp</dimen>
+    <dimen name="standard_size">@dimen/new_dimen_16_dp</dimen>
     <dimen name="new_standard_margin">@dimen/new_dimen_16_dp</dimen>
     <dimen name="standard_margin_setting">@dimen/new_dimen_6_dp</dimen>
     <dimen name="toolbar_elevation">@dimen/new_dimen_1_dp</dimen>
     <dimen name="toolbar_size">@dimen/new_dimen_56_dp</dimen>
     <dimen name="button_size">@dimen/new_dimen_48_dp</dimen>
     <dimen name="dialog_button_size">@dimen/new_dimen_44_dp</dimen>
-    <dimen name="image_size">@dimen/new_dimen_51_dp</dimen>
+    <dimen name="image_size">@dimen/new_dimen_120_dp</dimen>
 
 
 </resources>

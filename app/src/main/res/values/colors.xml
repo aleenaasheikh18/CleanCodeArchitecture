@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="defaultColorPrimary">#3772FF</color>
+    <color name="defaultColorPrimary">#BC0000</color>
 
     <color name="progressBackgroundColor">#30000000</color>
     <color name="progressDialogColor">#FFFFFF</color>
@@ -10,11 +10,11 @@
     <color name="background_color">#F3F5F7</color>
 
     <color name="titleColor">#24283B</color>
-    <color name="colorPrimary">#C71920</color>
-    <color name="colorHighlighted">#40C71920</color>
+    <color name="colorPrimary">#BC0000</color>
+    <color name="colorHighlighted">#40BC0000</color>
     <color name="colorPrimaryDark">#B90D0D</color>
-    <color name="opacity">#50C71920</color>
-    <color name="colorAccent">#C71920</color>
+    <color name="opacity">#50BC0000</color>
+    <color name="colorAccent">#BC0000</color>
     <color name="colorSelected">#65ED676B</color>
     <color name="colorSelectedTwo">#66CA474A</color>
     <color name="colorBlack">#000000</color>
@@ -56,5 +56,5 @@
     <color name="opacity_popup">#BF000000</color>
     <color name="textColorBlack">#1F2937</color>
     <color name="shake_prompt_scrim">#B3000000</color>
-    <color name="shake_prompt_icon">#C71920</color>
+    <color name="shake_prompt_icon">#BC0000</color>
 </resources>
