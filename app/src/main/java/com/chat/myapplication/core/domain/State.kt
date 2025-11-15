@@ -42,7 +42,11 @@ sealed class State<T> {
          * Returns [State.Error] instance.
          * @param message Description of failure.
          */
-        fun <T> error(message: String, code : CPResponseErrors = CPResponseErrors.RESPONSE_ERROR, uri : Uri? = null) =
+        fun <T> error(
+            message: String,
+            code: CPResponseErrors = CPResponseErrors.RESPONSE_ERROR,
+            uri: Uri? = null
+        ) =
             Error<T>(message, code, uri)
 
     }

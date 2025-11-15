@@ -1,10 +1,792 @@
-<resources>
-    <string name="app_name">CA</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">FoodChoo</string>
+    <string name="version">"Version: "</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="shake_listening_title">Shake to open</string>
+    <string name="shake_listening_text">Shake your phone to open the app</string>
+    <string name="shake_listen_channel_name">Shake Listener</string>
+    <string name="shake_listen_channel_desc">Listens for a shake after a notification.</string>
+    <string name="shake_detected_title">Shake detected</string>
+    <string name="shake_launching_app">Launching FoodChoo...</string>
+    <string name="shake_launch_channel_name">Shake Launch</string>
+    <string name="shake_launch_channel_desc">Alerts used to bring the app to the foreground after a shake.</string>
+    <string name="shake_prompt_text">Shake your phone to open FoodChoo</string>
+    <string name="shake_prompt_title">Shake to open FoodChoo</string>
+    <string name="shake_prompt_message">Give your phone a quick shake to jump straight into the app.</string>
+    <string name="shake_prompt_dismiss">Maybe later</string>
+    <string name="shake_accessibility_icon">Phone shake icon</string>
+    <string name="shake_no_orders">No menus are available right now.</string>
+    <string name="shake_distance_unknown">Distance n/a</string>
+    <string name="shake_eta_template">%1$d min away</string>
+    <string name="shake_eta_unknown">ETA n/a</string>
+    <string name="shake_distance_eta_template">%1$s • %2$s</string>
+    <string name="shake_unknown_establishment">Unknown establishment</string>
+    <string name="shake_unknown_product">Menu item</string>
+    <string name="shake_error_loading">Couldn\'t load menus</string>
+    <string name="shake_need_location">Turn on FoodChoo to update your location.</string>
+    <string name="shake_location_unavailable">Unable to fetch location. There are drivers nearby.</string>
 
-    <!-- Generic Info Messages -->
+    <!-- Splash -->
+    <string name="sign_in">Sign In</string>
+    <string name="create_account_">Create Account</string>
+
+    <!-- Login -->
+    <string name="email_address">Email Address</string>
+    <string name="email_address_">Email Address*</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="create_my_account">Create My Account</string>
+    <string name="error_enter_email">Please provide a valid Email Address.</string>
+    <string name="error_enter_f_name">Please provide First Name.</string>
+    <string name="error_enter_l_name">Please provide Last Name.</string>
+    <string name="hint_email">abc@example.com</string>
+    <string name="hint_password_">8 characters min</string>
+    <string name="lost_password">LOST PASSWORD</string>
+
+    <!-- Forgot Password -->
+    <string name="please_enter">For verification we will send you a 4 digit access code via email, please don\'t forget to check your spam</string>
+
+    <!-- Set Password -->
+    <string name="please_enter_pc">Please enter your old and new password.</string>
+    <string name="new_password">New Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="error_enter_o_password">Please enter old password</string>
+    <string name="error_enter_n_password">Please enter new password</string>
+    <string name="error_enter_c_password">Please confirm password</string>
+
+    <!-- SignUp -->
+    <string name="account">Create your foodchoo account</string>
+    <string name="f_name">First Name</string>
+    <string name="l_name">Last Name</string>
+    <string name="f_name_hint">Dave</string>
+    <string name="l_name_hint">Smith</string>
+    <string name="phone">Phone</string>
+    <string name="phone_no">Phone Number</string>
+    <string name="location">Location</string>
+    <string name="country">Country</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="invite_code">Invite Code</string>
+    <string name="already">Already have an account?</string>
+    <string name="by">By signing up, you agree with our</string>
+    <string name="by_continuing">By continuing, you agree to our</string>
+    <string name="create_influencer_profile">you agree to be bound by our Eater Influencer</string>
+    <string name="terms">Terms of Services</string>
+    <string name="and">and</string>
+    <string name="policy">Privacy Policy.</string>
+    <string name="error_length_password">Password should have 12 to 16 characters.</string>
+    <string name="error_phone_valid">Please provide a valid Phone Number.</string>
+    <string name="error_match_password">New password and confirm password does not match.</string>
+    <string name="confirm_location">Confirm Location</string>
+    <string name="no_active_orders">No active orders right now</string>
+    <string name="select_country">Please select country first!</string>
+    <string name="sign_up_">Signup</string>
+
+    <string name="search_here">Search here</string>
+    <string name="country_">Select Country</string>
+    <string name="e_wallet_recharge">E-Wallet Recharge</string>
+    <string name="loading">Loading…</string>
+    <string name="no_internet_title">Your internet connection is..meh</string>
+    <string name="no_internet_message">Tap the button. We dare you.</string>
+    <string name="no_internet_retry">Try again</string>
+    <string name="no_internet_settings">Open Wi-Fi settings</string>
+    <string name="no_internet_retry_pending">Still offline - double-check your connection.</string>
+
+    <!-- Code Verification -->
+    <string name="confirm_account">Confirm your account</string>
+    <string name="c_acc_text">For verification we have sent you a 4 digit\naccess code via email, please don\'t forget\n to check your spam</string>
+    <string name="enter_code">Enter code here</string>
+    <string name="resend_code">Resend Code</string>
+    <string name="success_verify">Verification Code Sent\nplease check email</string>
+    <string name="account_created">Account created successfully</string>
+    <string name="error_enter_code">Please provide otp code</string>
+
+    <!-- Tutorial -->
+    <string name="welcome">Welcome</string>
+    <string name="welcome_text">First, let\'s ask you what sort of food you like, Tastes change: You can always change this later!</string>
+    <string name="items_remain">items remaining</string>
+    <string name="sorry_">Sorry!</string>
+    <string name="special_delivery">Special delivery instructions</string>
+    <string name="text_count">&#160;/ 255</string>
+    <string name="back_to_map">Back to map</string>
+    <string name="someone_else_grab">Someone else grabbed this menu deal!</string>
+    <string name="image_copyright">© Illumination Entertainment, Universal Pictures</string>
+    <string name="food_intolerance">OK, any food intolerances?</string>
+    <string name="food_text">You can change this later if you need to</string>
+
+    <!-- Side Menu -->
+    <string name="home">Home</string>
+    <string name="home_"><u>Home</u></string>
+    <string name="my_order">My Orders</string>
+    <string name="chat">Chat</string>
+    <string name="my_profile">My Profile</string>
+    <string name="settings">Settings</string>
+    <string name="refund_history">Refund History</string>
+    <string name="share_for_bonus">SHARE FOR BONUSES</string>
+    <string name="share">Share</string>
+    <string name="drawer_open">Open drawer</string>
+    <string name="drawer_close">Close drawer</string>
+
+    <!-- Influencer -->
+    <string name="influencer">Influencer</string>
+    <string name="become_influencer">Become an Influencer</string>
+    <string name="start_influencing">Start Influencing</string>
+    <string name="become_eater_influencer">Become an Eater Influencer</string>
+    <string name="your_referral_link">Unique Referral Link</string>
+    <string name="last_week">Last Week</string>
+    <string name="last_month">Last Month</string>
+    <string name="signups_this_week">Signups This Week</string>
+    <string name="purchased_this_week">Menus Sold This Week</string>
+    <string name="signups_last_month">Signups Last Month</string>
+    <string name="purchased_last_month">Menus Sold Last Month</string>
+    <string name="commision_earned_">Commision Earned 💸</string>
+    <string name="copied_to_clipboard">Copied to clipboard</string>
+    <string name="upload_your_driving_license">Upload Your Driving License</string>
+    <string name="please_verify">Please verify your identity \n for smooth signup</string>
+    <string name="verify_persona">Verify with persona</string>
+    <string name="last_step_where">Last step! We need to know where to send your commissions.</string>
+    <string name="any_wrong_info">ANY WRONG INFO MEANS WE CAN\'T PAY YOU! Please check all details, ok?</string>
+    <string name="bank_name_imp">Bank Name*</string>
+    <string name="apply_again_in">Apply again in&#160;</string>
+    <string name="id_verified">ID Verified</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="bank_branch_imp">Bank Branch*</string>
+    <string name="bank_branch">Bank Branch</string>
+    <string name="bank_branch_address_imp">Bank Branch Address*</string>
+    <string name="bank_branch_address">Bank Branch Address</string>
+    <string name="swift_bic_code_imp">Swift / BIC Code*</string>
+    <string name="swift_bic_code">Swift / BIC Code</string>
+    <string name="account_name_imp">Account Name*</string>
+    <string name="account_name">Account Name</string>
+    <string name="account_number_imp">Account Number*</string>
+    <string name="account_number">Account Number</string>
+    <string name="social_info">Social Info</string>
+    <string name="how_many_people">How many people can you influence? *</string>
+    <string name="social_media">Social Media</string>
+    <string name="estimated_number">Estimated number</string>
+    <string name="paste_your_social">Paste your social media Link</string>
+    <string name="add_more">Add More</string>
+
+    <!-- Persona Verification -->
+    <string name="_continue">Continue</string>
+
+    <string name="continue_with_email">Continue with email</string>
+
+
+    <!-- Dashboard-->
+    <string name="notification">Notifications</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="_new">New</string>
+    <string name="i_am_hungry">I AM HUNGRY</string>
+    <string name="notification_end_in">Notifications end in:</string>
+    <string name="add_notification_schedule">Add Notification Schedule</string>
+    <string name="edit_notification_schedule">Edit Notification Schedule</string>
+    <string name="schedule_name">Schedule Name</string>
+    <string name="set_automated_notification"><b>Set Automated Notifications</b>\n\nChoose the times you\’d like FoodChoo to automatically start notifying you of when you\’d like those notifications to stop.\n\nExamples of this would be you working office hours Mon-Fri and wanting us to start notifying you between 12 - 1pm when there are Drivers near you who could bring you lunch within a few minutes!</string>
+    <string name="schedule_notification">Schedule Notification</string>
+    <string name="i_am_hungry_text">Start 20 minutes timer, and we\'ll notify you as soon as drivers with the food you want are near!</string>
+    <string name="dont_show_again">Don\'t show this again</string>
+    <string name="start_timer">Start Timer</string>
+    <string name="get_started">Get Started</string>
+    <string name="_start">Start:</string>
+    <string name="_ends">Ends:</string>
+    <string name="for_which_days">For which days?</string>
+    <string name="please_select_weekday">Please select any week day to continue.</string>
+    <string name="what_sort_of_to_notify">What sort of food do you want us to notify you about?</string>
+    <string name="max_allergies">(Max 6 food types)</string>
+    <string name="check_email">Check your email inbox (and sometimes your spam folder)</string>
+    <string name="cancel_timer">Cancel Timer</string>
+    <string name="hungry_for">I\'m hungry for...</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="keep_order">Keep Order</string>
+    <string name="final_cancel_order">YES-CANCEL ORDER</string>
+    <string name="cancel_order_text">Are you sure you want\nto cancel this order?</string>
+    <string name="sorry_no_deal_available">Sorry!\nNo deals are available in your area now.\nPlease try again later.</string>
+    <string name="update_timer">Update Timer</string>
+    <string name="no_country_text">Oh snap!We\'re not in your area yet</string>
+    <string name="no_country_text_1">Keep the app installed and we\'ll VIP notify you when we\'re here (and give freebies!)</string>
+    <string name="canceling_order">Canceling Order</string>
+    <string name="i_understand">I Understand</string>
+    <string name="cancel_order_prompt">You can obviously cancel orders for whatever reason, no worries at all - BUT - if you cancel too many orders in succession, we might have to limit your account for a bit to cool off.\n\nWhy?\n\nWell, because the Drivers will most likely be on their way to you and the food continues to get cold for other Eaters that will order after you cancel.\n\nWe\’re on your side - this isn\’t scary, it\’s just head up is all!</string>
+    <string name="searched_for">You have searched for:</string>
+
+    <!-- My Orders -->
+    <string name="no_orders">No order(s) found!</string>
+    <string name="orders_for">Orders for&#160;</string>
+    <string name="order_for">Order for&#160;</string>
+    <string name="leave_review">Leave Review</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="cancelled_by_you">Cancelled By You</string>
+    <string name="cancelled_by_driver">Cancelled By Driver</string>
+    <string name="rider_tip">Rider Tip</string>
+    <string name="review">Review your order</string>
+    <string name="food_quality">and how was your food quality?</string>
+    <string name="notes_rider">Notes to driver</string>
+    <string name="paid_via">Paid Via</string>
+
+    <!-- Menu Detail -->
+    <string name="deal_info">Deal Info</string>
+    <string name="allergies">Allergens</string>
+    <string name="sold_out">SOLD OUT!</string>
+    <string name="left">Left</string>
+    <string name="price">Price</string>
+    <string name="go_to_checkout">Go To Checkout</string>
+    <string name="delivering">Delivering to you now:</string>
+    <string name="delete_schedule">Are you sure you want to delete this scheduled notification?</string>
+
+    <string name="awesome_">AWESOME!</string>
+    <string name="influencer_term_1">So you want to become an Eater Influencer here in FoodChoo?\n\nHere\'s a few things you need to know before you get started:</string>
+    <string name="influencer_term_2">1. You need to be fully-verified - so grab your driving license, or passport or ID card for the instant identity check.\n\n2. Once verified, you\'ll need to give us your bank account details to pay your commission into.\n\n3. Your commissions are eligible for payment 60 days after the completed transaction, and we pay you at the end of each calendar month (this is all shown in the app for total transparency)\n\n4. You agree to not spam your personal FoodChoo Eater Influencer link, or use any illegal or scam-based avenues. If we find out you have, your Eater Influencer account is immediately banned and all your commission is voided. You\'re going to have a bad legal time, basically. Stick to being legit, have fun and make money.\n\n5. Becoming an FoodChoo Eater Influencer means you agree to being honest about FoodChoo\'s product, and you\'re free to use as much creativity as you like in promoting us. Don\'t overpromise and don\'t show us in a bad light if you\'re having a bad day. </string>
+
+    <!-- Refund History -->
+    <string name="pending">Pending</string>
+    <string name="completed">Completed</string>
+    <string name="refund_request">Request Refund</string>
+    <string name="refund_requested">Refund requested</string>
+    <string name="refund_denied">Refund denied</string>
+    <string name="refund_in_progress">Refund in-progress</string>
+    <string name="refund_completed">Refund completed</string>
+    <string name="reason_refund">Reason for refund</string>
+    <string name="required"><i>(required min. 12 Characters)</i></string>
+    <string name="_your_driver">your Driver</string>
+    <string name="proof_of_delivery">Proof of delivery</string>
+    <string name="enter_refund">Reason for refund should contain at least 12 characters."</string>
+    <string name="type_reason">Type your reason here...</string>
+    <string name="type_here_">Type here...</string>
+    <string name="order_id">Order ID:</string>
+    <string name="chat_now">Chat Now</string>
+    <string name="no_refund">No refund history found!</string>
+
+    <!-- Refund Chat -->
+    <string name="refund_chat">Refund Chat</string>
+
+    <!-- Voucher -->
+    <string name="no_vouchers">No voucher(s) found!</string>
+    <string name="total_to_be_paid">Total to be paid: </string>
+    <string name="total_left_to_be_paid">Total left to be paid: </string>
+
+    <!-- Cart -->
+    <string name="cart_detail">My Cart</string>
+
+    <!-- Chat -->
+    <string name="support_typing">Support is typing…</string>
+    <string name="rider_typing">is typing</string>
+    <string name="video">Video Library</string>
+    <string name="record_video">Take Video</string>
+    <string name="file_size_limit">File size limit exceeded</string>
+
+    <!--Stripe-->
+    <string name="connect_with_stripe">Connect with Stripe</string>
+    <string name="note_">Note:</string>
+    <string name="confirm">Confirm</string>
+    <string name="enter_email">Enter email address</string>
+    <string name="enter_stripe_email">Enter your STRIPE email address if you have one</string>
+    <string name="manage_payment_account_stripe">Manage Payment Account (Stripe)</string>
+
+    <!-- Place Order -->
+    <string name="tip_amount_">Tip Amount:</string>
+    <string name="map_mode">Go to Map View</string>
+    <string name="allow_location_access">Allow Location Access</string>
+    <string name="confirm_delivery">Confirm Delivery Address</string>
+    <string name="where_are_you_at">Where you at</string>
+    <string name="dialog_location_access_text">FoodChoo only works when you can see our Drivers, and when our Drivers can see you!\n\nPlease enable location and the delivery magic will happen</string>
+    <string name="change_address">Change Address</string>
+    <string name="change_method">Change Method</string>
+    <string name="set_delivery_address">Set Delivery Address</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="delivery_instruction">Delivery Instructions</string>
+    <string name="place_order">Place Order</string>
+    <string name="pay_now">Pay Now</string>
+    <string name="total_payment">Total Payment</string>
+    <string name="order_conditions">Terms &amp; Conditions</string>
+    <string name="tip_text">Type in the amount for tip</string>
+    <string name="only_num">Please enter only numbers.</string>
+    <string name="tip_hint">Tip amount</string>
+    <string name="pt_cash">Cash On Delivery</string>
+    <string name="order_placed">Order Placed!</string>
+    <string name="invoice_tax">Invoice Tax</string>
+    <string name="invoice_tax_">Invoice Tax:</string>
+    <string name="vouchers">Vouchers</string>
+    <string name="leave_a_review">Leave a review</string>
+    <string name="please_take_moment_review">Please take a moment to leave a review</string>
+    <string name="to_foodchoo">to FoodChoo! (No reviews yet)</string>
+    <string name="new_">New&#160;</string>
+    <string name="new_i"><i>(New)</i></string>
+    <string name="support_agent">Our Support Agents?</string>
+    <string name="recommend_food_choo">Would you recommend FoodChoo?</string>
+
+    <!-- Order Status -->
+    <string name="waiting_for_driver_to_accept">Waiting for Driver to accept since&#160;</string>
+    <string name="your_driver_is_arriving_in">Your Driver is arriving in&#160;</string>
+    <string name="your_driver_is_here">Your Driver is here!</string>
+    <string name="view_all_details">View all details</string>
+    <string name="will_arrive_soon">&#160;will arrive soon</string>
+    <string name="has_arrived">&#160;has arrived</string>
+    <string name="message_driver_available">Message driver available once they accept your order </string>
+
+    <!-- Address -->
+    <string name="map_info_2">Move the pin to your address. Your Driver will deliver to the pin location when the address isn’t complete.</string>
+    <string name="address">Address</string>
+    <string name="tap_address">(Tap to search your address)</string>
+    <string name="city">City</string>
+    <string name="business_name"><i>Business name</i></string>
+    <string name="hint_unit_no"><i>Unit/Apartment No</i></string>
+    <string name="hint_floor"><i>Floor</i></string>
+    <string name="hint_street_address"><i>Street address</i></string>
+    <string name="hint_town_county"><i>Town / County</i></string>
+    <string name="hint_zip_code"><i>Zip Code</i></string>
+    <string name="hint_state_province"><i>State / Province</i></string>
+    <string name="notes">Notes for Delivery Driver</string>
+    <string name="notes_hint">You can write anything here that will help your Driver deliver quickly and safely (dogs side entrances etc)</string>
+    <string name="set_default_address">Set As Default Delivery Address</string>
+    <string name="move_pin_to_set">Move pin to set delivery location</string>
+    <string name="type_an_address">Type an address</string>
+    <string name="_set_default_address">Set Default Delivery Address</string>
+    <string name="remove_address">Remove Address</string>
+    <string name="description">Description</string>
+
+    <!-- Payment Method -->
+    <string name="cards">Cards</string>
+    <string name="to_payment">To Payment</string>
+    <string name="heads_up">HEADS UP!</string>
+    <string name="remove_card">Remove Card</string>
+    <string name="remove_card_dialog_text">You\'re about to remove your card.\n\nOnce you remove it, you will no longer see your quick report here.\n\nBUT you can still see ALL of your credit card purchases in your MY ORDERS screen.</string>
+    <string name="valid_till">VALID\nTHRU</string>
+    <string name="total_spents">Total Spent</string>
+    <string name="total_refund">Total Refunds</string>
+    <string name="add_card">Add Card</string>
+    <string name="add_new_card">Add New Card</string>
+    <string name="no_cards_added_yet">No cards added yet</string>
+    <string name="use_new_card">Use New Card</string>
+    <string name="scan_card">Scan Card</string>
+    <string name="add_your_first_card">Add Your First Card</string>
+    <string name="no_card_text"><b>HEADS UP!</b>\n\nWe don\'t store ANY of your credit card details on our own servers - we leave that to our secure payment providers for your safety and protections</string>
+    <string name="we_dont_store">We don\'t store ANY of your credit card details on our own servers - we leave that to our secure payment providers for your safety and protections.</string>
+    <string name="recharge_wallet">Recharge Wallet</string>
+    <string name="recharge">Recharge</string>
+    <string name="for_anything">ANYTHING!</string>
+    <string name="receive_notification_for_menu">Notify me up to 20 mins when nearby Drivers are carrying:</string>
+    <string name="enter_top_up_amount">Enter Top Up Amount</string>
+    <string name="no_transaction">No Transactions!</string>
+    <string name="transaction">Transactions</string>
+    <string name="ref_transaction_id">Reference Transaction ID:&#160;</string>
+    <string name="transaction_id">Transaction ID:&#160;</string>
+    <string name="amount_hint_">0.00</string>
+    <string name="payment_methods">Payment Types</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="confirming_order_details">Confirming Order Details</string>
+    <string name="card_detail">Card Details</string>
+    <string name="card_holder">Card Holder\’s Name</string>
+    <string name="wallet">Wallet</string>
+    <string name="_default_">Default</string>
+    <string name="default_simple">default</string>
+    <string name="order_completed">Order Completed</string>
+    <string name="sub_total_">Sub Total:</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="order_refunded">Order Refunded</string>
+    <string name="account_suspended">Account Suspended</string>
+    <string name="account_suspended_desc">This account has been suspended.\n\nFor more Information please contact support.</string>
+    <string name="wallet_recharge">Wallet Recharge</string>
+    <string name="top_up_refund">Top-up Refund</string>
+    <string name="top_up_chargeback">Top-up Chargeback</string>
+    <string name="foodchoo_fees_refund">FoodChoo Fees Refund</string>
+    <string name="payment_withdrawn">Payment Withdrawn</string>
+    <string name="food_choo_fees">FoodChoo Fees</string>
+    <string name="remember_this_card">Remember this card for the next time.</string>
+    <string name="we_care">We care a lot about your privacy, That\’s why we do not keep any of your information unless you ask for it.</string>
+
+    <!-- Profile -->
+    <string name="eater">Eater</string>
+    <string name="support_chat">Support Chat</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="logout">Logout</string>
+    <string name="logout_text">Are you sure you want to logout?</string>
+    <string name="eater_preferences">Eater Preferences</string>
+    <string name="allergy">Intolerance/Allergies</string>
+    <string name="your_photo">Your Photo</string>
+    <string name="for_your_security">For your security and our Drivers to know\nwho to give food items to!</string>
+    <string name="default_address">My delivery address</string>
+
+    <!-- Settings -->
+    <string name="change_password">Change Password</string>
+    <string name="change_your_password">Change Your Password</string>
+    <string name="terms_service">Terms of Services Agreement</string>
+    <string name="settings_">Notifications Settings</string>
+    <string name="product_announcements">Product Announcement</string>
+    <string name="hungry">I am hungry notification</string>
+    <string name="activity">Account Activity</string>
+    <string name="_receipt">Receipt</string>
+    <string name="_receipt_id">Receipt ID</string>
+    <string name="select_date">Select Date</string>
+    <string name="new_message">New Messages</string>
+    <string name="push">Push</string>
+    <string name="_email">Email</string>
+    <string name="connect_a">Connect with Alexa</string>
+    <string name="connect_a_text">(Use same account as of Alexa hosted device)</string>
+    <string name="connect_g">Connect with Google Assistant</string>
+    <string name="connect_g_text">(Use same account as of Assistant hosted device)</string>
+
+    <!-- Notification -->
+    <string name="no_notification">No notifications to show yet!</string>
+
+    <!-- Bonus -->
+    <string name="bonus_text">We want to expand. \nYou want free stuff.\nLet\'s do something epic together!</string>
+    <string name="bonus_desc">Simple:</string>
+    <string name="bonus_description">Just share your unique link blow. when someone signs up with your link, and buy their first item from us, we\'ll give you </string>
+    <string name="food_choo_credit">in FoodChoo credit!</string>
+    <string name="your_bonuses">Your Bonuses</string>
+    <string name="how">How it works</string>
+    <string name="account_created_">Account \nCreated</string>
+    <string name="first_purchase">First \nPurchase</string>
+    <string name="bonus_awarded">Bonus \nAwarded</string>
+    <string name="no_invite_code">No invite codes information yet</string>
+    <string name="dashes">- - - -</string>
+
+    <!-- Basic Strings -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="send_code">Send Code</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="submit_request">Submit Request</string>
+    <string name="search">Search</string>
+    <string name="search_by">Search By</string>
+    <string name="type_here">Message here</string>
+    <string name="no_messages">No chats to show yet!</string>
+    <string name="done">Done</string>
+    <string name="next">Next</string>
+    <string name="library">Phone Library</string>
+    <string name="photo">Take Photo</string>
+    <string name="finish">Finish</string>
+    <string name="edit">Edit</string>
+    <string name="proceed">Proceed</string>
+    <string name="update">Update</string>
+    <string name="save">Save</string>
+    <string name="save_card">Save Card</string>
+    <string name="save_and_continue">Save and Continue</string>
+    <string name="save_count_and_continue">Save _COUNT and Continue</string>
+    <string name="skip">Skip</string>
+    <string name="no_record">No Record(s) Found</string>
+    <string name="both">Both</string>
+    <string name="asterik">*</string>
+    <string name="click_to_copy">(Tap to copy to clipboard)</string>
+    <string name="copied">Copied to clipboard</string>
+    <string name="nudge">Nudge</string>
+    <string name="close"><u>Close</u></string>
+    <string name="close_">Close</string>
+    <string name="exit">Exit</string>
+    <string name="list_mode">Go to List View</string>
+    <string name="slide_to_cancel">"Slide to cancel"</string>
+    <string name="type_a_message">Type a message</string>
+    <bool name="is_right_to_left">false</bool>
+    <string name="select_all">Select All</string>
+    <string name="select">Select</string>
+    <string name="selected">Selected</string>
+    <string name="attach_evidence">Attach evidence (max 3 photos)</string>
+    <string name="option_italic"><i>(Optional)</i></string>
+
+    <!-- Api related messages -->
+    <!-- Server Side Messages -->
+    <string name="server_error">Unable to connect server \n Please check your internet \n connection and try again later</string>
+    <string name="internet_error">Please check your internet connection</string>
+    <string name="prompt_terms">Please accept our Terms of Services and Privacy Policy to continue</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="title_activity_request_refund">RequestRefundActivity</string>
+    <!-- Strings used for fragments for navigation -->
+
+    <string name="or_use_biometric">Or use touch id to login</string>
+    <string name="authentication">Authentication</string>
+    <string name="immediately">Immediately</string>
+    <string name="off">off</string>
+    <string name="after_5_minutes">After 5 minutes</string>
+    <string name="after_10_minutes">After 10 minutes</string>
+    <string name="after_15_minutes">After 15 minutes</string>
+    <string name="todo">TODO</string>
+    <string name="fingerprint">Fingerprint</string>
+    <string name="require_biometric_authentication">Require Biometric Authentication</string>
+    <string name="verify_now">Verify Now !</string>
+    <string name="deposit_fee">-FEE_PERCENT FoodChoo Wallet Deposit Fee:</string>
+    <string name="withdraw_fee">-FEE_PERCENT FoodChoo Wallet Withdrawal Fee:</string>
+    <string name="amount_withdrawn">Please check your Stripe account we have launched the payout request.</string>
+    <string name="current_wallet_balance">Current wallet balance:</string>
+    <string name="topup_amount_min_currency">Enter Top-up amount: (min CURRENCY_)</string>
+    <string name="withdraw_amount_min_currency">Withdraw amount: (min CURRENCY_1.00)</string>
+    <string name="withdraw_now">Withdraw Now</string>
+    <string name="no_current_pop_up_menus_available_right_now">No Current Pop Up Menus Available Right Now!</string>
+    <string name="we_are_not_near_right_now">We Are Not Near You Right Now!</string>
+    <string name="giphy">© Giphy</string>
+    <string name="suggest_now">Suggest Now!</string>
+    <string name="suggested_restaurants">Suggest Restaurants</string>
+    <string name="your_feedback_is_saved_we_will_let_you_know_as_we_are_around">Your feedback is saved, we will let you know as we are around</string>
+    <string name="wallet_withdrawal">Wallet Withdrawal</string>
+    <string name="dollar">$</string>
+    <string name="holders_name">Enter card holder\'s name</string>
+    <string name="using_wallet">Using wallet:</string>
+    <string name="using_voucher">Using voucher:</string>
+    <string name="enter_your_card_details">Enter your card details</string>
+    <string name="change_country">Change Country</string>
+    <string name="ask_me_later">Ask me later</string>
+    <string name="change_country_to">Change country</string>
+    <!--<string name="change_country_to">Change country to COUNTRY_</string>-->
+    <string name="change_country_desc">It seems like you\'re currently in COUNTRY_,\nDo you want to change your default country?</string>
+    <string name="seems_we_re_not_in_country_yet">Seems we\'re not in COUNTRY_.</string>
+    <string name="hold_tight_and_dry_those_eyes_we_re_expanding">Hold tight and dry those eyes.\nWe\'re expanding!</string>
+    <string name="your_default_country_changed_successfully_restarting_app">Your default country changed Successfully\nRestarting App…</string>
+    <string name="unable_to_process_card">Unable to process card</string>
+    <string name="total_withdrawal_to_your_stripe_account_today_will_be">Total withdrawal to your Stripe account today will be:</string>
+    <string name="refund">Refund</string>
+    <string name="are_you_sure_you_want_to_refund_this_transaction">Are you sure you want to refund this transaction?</string>
+    <string name="topup_refunded_successfully">Topup Refunded Successfully</string>
+    <string name="enter_your_delivery_address">Enter Your Delivery Address</string>
+    <string name="waiting">Waiting…</string>
+    <string name="arrived">Arrived…</string>
+    <string name="on_the_way">On the way…</string>
+    <string name="_0">+0%</string>
+    <string name="zero">0</string>
+    <string name="available_balance">Available Balance</string>
+    <string name="commission_earned">Commission Earned</string>
+    <string name="available_vouchers">Available Vouchers</string>
+    <string name="used_vouchers">Used Vouchers</string>
+    <string name="discounted_">Discounted!</string>
+    <string name="_1_min"><![CDATA[<1 min]]></string>
+    <string name="total_balance">Total balance</string>
+    <string name="total_earnings">Total Earnings</string>
+    <string name="add_money">Add money</string>
+    <string name="withdraw_money">Withdraw Money</string>
+    <string name="no_chats_to_show">No chats to show</string>
+
+    <string name="we_re_not_operating_in_this_country">Sorry! We\'re not operating in this country</string>
+    <string name="referral_bonus">Referral Bonus</string>
+    <string name="every">Every&#160;</string>
+    <string name="they_get_100_of_the_tip">They get 100% of the tip!</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="set_tip_amount">Set Tip Amount</string>
+    <string name="set_tip_percentage">Set Tip Percentage</string>
+    <string name="or_">Or</string>
+    <string name="gets_100_of_your_tip">&#160;gets 100% of your tip!</string>
+    <string name="use">Use</string>
+    <string name="ending">Ending :</string>
+    <string name="three_miles">3 Miles</string>
+    <string name="search_influencing_gigs_in">Search influencing gigs in:</string>
+    <string name="reset">Reset</string>
+    <string name="enter_a_town_city_or_country">Enter a town, city or country</string>
+    <string name="more_options">More Options</string>
+    <string name="just_">&#160;JUST&#160;</string>
+    <string name="for_these_menu_types">for these menu types</string>
+    <string name="excluding_">&#160;EXCLUDING&#160;</string>
+    <string name="search_just_for_these_menu_types">Search JUST for these menu types</string>
+    <string name="search_excluding_these_menu_types">Search EXCLUDING these menu types</string>
+    <string name="menu_types">Menu Types</string>
+    <string name="available_offers">Available Offers</string>
+    <string name="search_for_offers">Search for offers</string>
+    <string name="commission_per_order">Commission per order:</string>
+    <string name="average_menu_item">Average menu item:</string>
+    <string name="instant_apply">Instant Apply</string>
+    <string name="business_details">Business Details</string>
+    <string name="welcome_to_affiliate_marketplace">Welcome to Affiliate Marketplace</string>
+    <string name="here_is_the_deal">Here is the deal..</string>
+    <string name="influencer_splash_text_second">Make money with your audience!\n\nEveryone needs to eat, and if you can influence your Followers into buying their menu items from an Establishment on FoodChoo? \n\nYou can earn BIG!</string>
+    <string name="influencer_splash_text_third">Simple.\n\nYou find an Establishment you like or think your Followers would love ordering from.\n\nYou see upfront how much per transaction you will make every time one of your Followers orders from this Establishment.\n\nIf you agree to this amount, you tap to agree.\n\nThat’s it.\n\nNow you’ll get a unique link and QR code to share as you want.\n\nEvery time a Follower orders?\n\nYou earn $$$</string>
+    <string name="influencer_splash_text_fourth">As soon as your Follower buys from an Establishment you’re influencing for, your commission from the Establishment is paid 30 days.\n\nThis is a ‘rolling’ 30 day, which simply means after your very first 30 days, if there is commission to pay to you, then you will get that ‘rolling’ commission every day after the initial 30 days.\n\nOh, and of course you can see at anytime how much you’ve earned.\n\nPull that commission out to your Bank account anytime via our Payment Partner, Stripe.</string>
+    <string name="influencer_splash_text_fifth">Ready to start earning?\n\nTap the Get Started button to now see the Establishments.\n\nGood luck, Evan!</string>
+    <string name="so_how_does_it_work">So how does it work?</string>
+    <string name="and_how_quick_do_i_get_paid">And how quick do I get paid?</string>
+    <string name="start_earning_in_the_next_5_minutes">Start earning in the next 5 minutes!</string>
+    <string name="notify_me_when_near">Notify me when near</string>
+    <string name="influencer_recommend_text1">&#160;recommends you try&#160;</string>
+    <string name="influencer_recommend_text2">&#160;next time they’re delivering in your area</string>
+    <string name="my_gigs">My Gigs</string>
+    <string name="go_to_influencer_s_market">Go to Influencer\'s Market</string>
+    <string name="enter_menu_type">Enter menu type</string>
+    <string name="apply_filters">Apply Filters</string>
+    <string name="auto_hire">Auto Hire:</string>
+    <string name="gig_expires_">Gig expires at&#160;</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
+    <string name="you_have_hired_successfully">Your have hired in this gig successfully.</string>
+    <string name="you_have_applied_successfully">Your have applied to this gig successfully\nWe will let you know as soon you get hired.</string>
+    <string name="recommended_by">Recommended By</string>
+    <string name="recommended_by_">Recommended By&#160;</string>
+    <string name="sure">Sure</string>
+    <string name="maybe_later">Maybe later</string>
+    <string name="please_provide_your_address_to_connect_your_alexa_device_to_your_account">Please provide your address to connect your Alexa device to your account.</string>
+    <string name="influencer_gig_history">Influencer Gig History</string>
+    <string name="active">Active</string>
+    <string name="set_as_default">Set as Default</string>
+    <string name="please_enter_your_commission_rate">Please enter your commission rate</string>
+    <string name="save_to_prefrences">Save prefrences</string>
+    <string name="ended">Ended</string>
+    <string name="ended_0">Ended(0)</string>
+    <string name="current">Current</string>
+    <string name="current_0">Current(0)</string>
+    <string name="last_near_you">Last near you</string>
+    <string name="remove_recommendations">Remove Recommendations</string>
+    <string name="no_gigs_history_found">No gigs history found!</string>
+    <string name="gig_id">Gig ID:</string>
+    <string name="gig_expiry">Gig Expiry</string>
+    <string name="total_orders">Total Orders</string>
+    <string name="cleared_orders">Cleared Orders</string>
+    <string name="cancelled_orders">Cancelled Orders</string>
+    <string name="gig_earnings">Gig Earnings</string>
+    <string name="influencing_for">Influencing for:</string>
+    <string name="show_stats">Show stats</string>
+    <string name="end_this_gig">End this Gig</string>
+    <string name="you_have_left_this_gig_successfully">You have left this gig successfully</string>
+    <string name="withdrawable_earninngs">Withdrawable earnings 💸</string>
+    <string name="total_withdrawable_earnings">Total Withdrawable Earnings</string>
+    <string name="read_all">Read All</string>
+    <string name="an_account_exists_with_this_phone_number">An account exists with this phone number</string>
+    <string name="become_a_rider">Become a Rider?</string>
+    <string name="rider_signup">Rider Signup</string>
+    <string name="your_rider_account_has_been_successfully_created">You\'ve successfully signed up as a rider!\n\nRedirecting to the Play Store to download the app…</string>
+    <string name="deselect_all">Deselect All</string>
+    <string name="login_">Login</string>
+    <string name="create_using_google">Create using Google</string>
+    <string name="create_an_account">Create an account</string>
+
+
+    <string name="your_password_must_contain_minimum_6_characters">Your password must contain minimum 12 characters</string>
+    <string name="must_contain_number">Must contain a number</string>
+    <string name="must_contain_symbol">Must contain a symbol</string>
+    <string name="email_already_exists">Email Already Exists</string>
+
+
+    <string name="text_account_verification_email">We sent an email to _EMAIL_ADDRESS. Tap the link inside to get started! Don’t forget to check your spam folder just in case!</string>
+    <string name="open_mail_app">Open Mail App</string>
+    <string name="resend_email">Resend email</string>
+    <string name="email_resent">Email resent!</string>
+    <string name="verify_your_email">Verify your email</string>
+    <string name="go_back">Go Back</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="create_one_now">Create one now!</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="forgot_your_npassword_eh">Forgot your\npassword eh?</string>
+    <string name="forgot_password_description">No worries - tap to send a new password reset link to the registered email address of this account. *cough* and then setup biometric login *cough*</string>
+    <string name="send_reset_link_now">Send reset link now</string>
+    <string name="password_reset_link_sent">Password reset link sent</string>
+    <string name="set_your_new_foodchoo_password">Set your new FoodChoo password</string>
+    <string name="enter_new_password_">Enter New Password*</string>
+    <string name="confirm_password_">Confirm Password*</string>
+    <string name="confirm_your_password">Confirm your password</string>
+    <string name="complete_your_profile">Complete your Profile</string>
+    <string name="your_profile_updated_successfully">Your Profile Updated Successfully</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="your_profile_photo_helps_our_drivers_easily_identify">Your profile photo helps our Drivers easily identify you at delivery (you\'ll also see their photo).</string>
+    <string name="where_you_at">Where you at, _FIRSTNAME?</string>
+    <string name="no_creepy_stuff_just_need_your_location_to_help_you_use_the_app_faster">No creepy stuff—just need your location to help you use the app faster!</string>
+    <string name="move_the_pin_over_your_preferred_delivery_address_you_ll_refine_the_address_in_the_next_screen">Move the pin over your preferred delivery address. You’ll refine the address in the next screen.</string>
+    <string name="remember_the_drivers_deliver_to_the_pin"><b>REMEMBER:</b> The drivers deliver to the pin (so if your address isn’t 100% correct, no worries!)</string>
+    <string name="business_or_building_name">Business or building name</string>
+    <string name="unit_condo_flat_or_house_number">Unit/Condo/Flat or house number</string>
+    <string name="street_address">Street Address</string>
+    <string name="zip_postcode">Zip/Postcode</string>
+    <string name="note_to_keep_delivery_costs_low_for"><b>NOTE:</b> To keep delivery costs low for you, it’s our policy to deliver to your front door or reception ONLY.</string>
+    <string name="set_my_delivery_address">Set My Delivery Address</string>
+    <string name="need_your_permission_please">Need your permission please!</string>
+    <string name="you_re_all_set_fname">You’re all set, _FNAME!</string>
+    <string name="take_one_more_minute_to_make_your_foodchoo_experience">Take one more minute to make your FoodChoo experience a billion times more epic.</string>
+    <string name="confirm_my_phone_number">Confirm my phone number</string>
+    <string name="in_case_driver_needs_to_call_you_if_they_re_not_able_to_find_your_house_or_office">In case Driver needs to call you if they’re not able to find your house or office.</string>
+    <string name="set_my_allergens">Set my allergens</string>
+    <string name="for_quicker_menu_matching_of_delicious_food_rather_than_menus_that_will_kill_you">For quicker menu matching of delicious food rather than menus that will kill you.</string>
+    <string name="set_payment_card">Set payment card</string>
+    <string name="set_your_preferred_payment_credit_or_debit_card">Set your preferred payment credit or debit card.</string>
+
+    <string name="enter_your_number">Enter your number</string>
+    <string name="enter_pin">Enter Pin</string>
+    <string name="send_again_attempts_remaining">Send again (_COUNT attempts remaining)</string>
+    <string name="send_again">Send again&#160;</string>
+    <string name="attempts_remaining">(_COUNT attempt remaining)</string>
+    <string name="phone_number_confirmed">Phone number confirmed!</string>
+    <string name="nice_one">Nice one.</string>
+    <string name="save_time_by_adding_any_foods_you_re_allergic_or_intolerant_to_you_can_change_these_at_any_time_from_your_profile_settings">Save time by adding any foods you’re allergic or intolerant to. You can change these at any time from your profile settings.</string>
+    <string name="set_allergens">Set allergens</string>
+    <string name="no_allergens_for_me">No allergens for me!</string>
+    <string name="_2_things_left">2 things left…</string>
+    <string name="and_finally">And finally...</string>
+    <string name="nah_i_ll_do_this_later">Nah, I’ll do this later</string>
+    <string name="add_your_card">Add your card</string>
+    <string name="confirm_card">Confirm card</string>
+    <string name="start_over">Start Over</string>
+    <string name="card_issue_country">Card Issue Country</string>
+    <string name="i_ll_use">I\'ll use</string>
+    <string name="all_done">ALL DONE!</string>
+    <string name="you_re_now_100_done_setting_up_your_foodchoo_account">You’re now 100% done setting up your FoodChoo account.</string>
+    <string name="time_to_feast">Time to feast!</string>
+    <string name="start_sending_nearby_food_notifications">Start sending nearby food notifications..</string>
+    <string name="right_now">Right Now</string>
+    <string name="schedule_my_meals">Schedule My Meals</string>
+    <string name="start_notifying_me_of_nearby_food_now">Start notifying me of nearby food now!</string>
+    <string name="respect_my_allergies_on"><b>Respect my allergies: ON</b>. Only notify me about menus that are safe for me.</string>
+    <string name="respect_my_allergies_off"><b>Respect my allergies: OFF</b>. Only notify me about menus that are safe for me.</string>
+    <string name="hangry_mode_off"><b>Hangry mode: OFF</b> - let me pick what menus and food I want.</string>
+    <string name="hangry_mode_on"><b>Hangry mode: ON</b> - let me pick what menus and food I want.</string>
+    <string name="max_of_5_menus">Max of 5 menus</string>
+    <string name="set_your_menu_preferences_and_choose_when_to_get_notified_when_a_driver_with_matching_menus_is_nearby">Set your menu preferences and choose when to get notified when a Driver with matching menus is nearby.</string>
+    <string name="set_menu_types">Set Menu Types</string>
+    <string name="set_days_and_times">Set Days and Times</string>
+    <string name="what_menu_types_to_schedule">What menu types to schedule?</string>
+    <string name="when_do_you_want_notifications">When do you want notifications?</string>
+    <string name="please_select_any_week_day_to_continue">Please select any week day to continue.</string>
+    <string name="review_">Review</string>
+    <string name="add_time">Add Time</string>
+    <string name="starts_at">Starts at:</string>
+    <string name="ends_at">Ends at:</string>
+    <string name="_slot_count">_Count slot</string>
+    <string name="which_days">Which days?</string>
+    <string name="for_count_menu_type">For _Count menu type</string>
+    <string name="for_count_menu_types">For _Count menu types</string>
+    <string name="select_time">Select Time</string>
+    <string name="repeat_for_next_days_of_week">Repeat for next days of week?</string>
+    <string name="reviewing">Reviewing…</string>
+    <string name="what_menu_types">What menu types?</string>
+    <string name="allergen_safe_menus_onlys">- Allergen-safe menus onlys</string>
+    <string name="ignore_allergens">- Ignore allergens</string>
+    <string name="save_schedule">Save Schedule</string>
+    <string name="anything_available_now">Anything available now!</string>
+    <string name="anything_available">Anything available!</string>
+    <string name="delete_schedule_">Delete schedule!</string>
+    <string name="update_schedule">Update schedule</string>
+    <string name="set_this_card_as_default">Set this card as default</string>
+    <string name="card_added_successfuly">Card added successfuly</string>
+    <string name="unable_to_process_your_card">Unable to process your card.</string>
+    <string name="repeat_dialog_title">Apply _DAYSELECTED\'s schedule to other days?</string>
+    <string name="just_for_dayselected">Just for, _DAYSELECTED</string>
+    <string name="account_holder_name">Account Holder Name</string>
+    <string name="routing_number">Sort / Routing Code / BSB</string>
+    <string name="account_type">Account Type</string>
+    <string name="this_number_cannot_be_verified_using_text_code_try_another_number">This number cannot be verified using text code. Try another number</string>
+
+    <string name="send_magic_link_title">What\'s your email</string>
+    <string name="send_magic_link_email_hint">Email address</string>
+    <string name="send_magic_link_button">Next</string>
+    <string name="email_verification_title">You got mail!</string>
+    <string name="email_verification_detail_placeholder">We sent you a magic link.\nTap the link in that email to continue.</string>
+    <string name="email_verification_detail">We sent an email to %1$s.\nTap the link in that email to continue.</string>
+    <string name="email_verification_spam_hint">And check spam folder in case your email provider hates us for some reason.</string>
+    <string name="resend_magic_link">Resend magic link</string>
+    <string name="full_name_prompt">Righto, what\'s your full name?</string>
+    <string name="full_name_hint">Full name</string>
+    <string name="full_name_continue">Continue</string>
+    <string name="password_prompt_title">Welcome back!</string>
+    <string name="password_prompt_hint">Password</string>
+    <string name="password_prompt_button">Continue</string>
+    <string name="password_prompt_send_magic">Send magic link instead</string>
+
     <string name="cp_something_went_wrong">Something went wrong please try again later!</string>
     <string name="str_no">No</string>
     <string name="str_yes">Yes</string>
     <string name="str_ok">Ok</string>
     <string name="str_alert">Alert</string>
+
+    <string-array name="account_types">
+        <item>Individual</item>
+        <item>Company</item>
+    </string-array>
+
 </resources>

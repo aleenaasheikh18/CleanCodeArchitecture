@@ -1,20 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
-    android:background="#ffffff"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.auth.LauncherScreenActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".activities.launcherScreen.SplashActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <RelativeLayout
+            android:id="@+id/llSplash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/splash">
+
+            <ImageView
+                android:id="@+id/ivSplash"
+                android:layout_width="@dimen/new_dimen_160_dp"
+                android:layout_height="@dimen/new_dimen_160_dp"
+                android:layout_centerInParent="true"
+                android:contentDescription="@string/no_record"
+                android:src="@drawable/logo_white"
+                android:transitionName="logo_image" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <VideoView
+                android:id="@+id/videoView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="@dimen/new_dimen_30_dp"
+                android:layout_marginTop="@dimen/new_dimen_40_dp"
+                android:layout_marginEnd="@dimen/new_dimen_30_dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="@dimen/new_dimen_160_dp"
+                    android:layout_height="@dimen/new_dimen_160_dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/no"
+                    android:focusable="true"
+                    android:padding="@dimen/new_dimen_4_dp"
+                    android:src="@drawable/logo_white" />
+
+                <TextView
+                    android:id="@+id/tvHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/new_dimen_20_dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/eater"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/new_dimen_30_sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/new_dimen_100_dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/new_dimen_56_dp"
+                    android:background="@drawable/button_shadow_white"
+                    android:fontFamily="@font/monstreat_semi_bold"
+                    android:text="@string/sign_in"
+                    android:layout_marginVertical="@dimen/new_dimen_8_dp"
+                    android:layout_marginHorizontal="@dimen/new_dimen_40_sp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorGreen"
+                    android:textSize="@dimen/new_dimen_16_sp"
+                    app:backgroundTint="@null" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

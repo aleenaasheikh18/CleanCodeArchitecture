@@ -36,7 +36,6 @@ android {
 
     kotlinOptions {
         jvmTarget = "11"
-        languageVersion = "1.9"
     }
 
     buildFeatures {
@@ -55,7 +54,6 @@ dependencies {
 
     //Hilt
     implementation(libs.hilt)
-    kapt(libs.hilt.gradle.plugin)
     kapt(libs.hilt.google.android.compiler)
     kapt(libs.hilt.androidx.compiler)
 
@@ -77,4 +75,3 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
-
