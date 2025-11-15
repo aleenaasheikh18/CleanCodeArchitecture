@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
     <color name="defaultColorPrimary">#3772FF</color>
 
     <color name="progressBackgroundColor">#30000000</color>
@@ -13,4 +10,51 @@
     <color name="background_color">#F3F5F7</color>
 
     <color name="titleColor">#24283B</color>
+    <color name="colorPrimary">#C71920</color>
+    <color name="colorHighlighted">#40C71920</color>
+    <color name="colorPrimaryDark">#B90D0D</color>
+    <color name="opacity">#50C71920</color>
+    <color name="colorAccent">#C71920</color>
+    <color name="colorSelected">#65ED676B</color>
+    <color name="colorSelectedTwo">#66CA474A</color>
+    <color name="colorBlack">#000000</color>
+    <color name="black">#000000</color>
+    <color name="colorGray">#616161</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="colorLightGrayNew">#F5F5F5</color>
+    <color name="colorLightGrey">#F6F6F6</color>
+    <color name="calendarTextColor">#616161</color>
+    <color name="calendarTextColorGreen">#199C54</color>
+    <color name="colorGreyBackground">#E9E9E9</color>
+    <color name="colorPurpleMarker">#7B06C1</color>
+    <color name="colorBlue">#4FAFF8</color>
+    <color name="colorBluePrimary">#00B2FF</color>
+    <color name="colorBlue_Primary">#00B2FF</color>
+    <color name="colorYellow">#FEC300</color>
+    <color name="colorSvgGrey">#797979</color>
+    <color name="colorLightGray">#B6B6B6</color>
+    <color name="colorShadow">#F7F7F7</color>
+    <color name="colorShadowOpacity">#80F7F7F7</color>
+    <color name="headerColor">#D1CECE</color>
+    <color name="headerColorDark">#B1B0B0</color>
+    <color name="lightGrey">#D1CECE</color>
+    <color name="lightGrey2">#E5E7EB</color>
+    <color name="textColor">#434343</color>
+    <color name="textColorNew">#4B5563</color>
+    <color name="colorGrayNew">#D5D3D8</color>
+    <color name="textColor2">#6B6B6B</color>
+    <color name="colorAlert">#E69C9C</color>
+    <color name="_transparent">#01FFFFFF</color>
+    <color name="colorGreen">#55BA36</color>
+    <color name="opacity_white">#D1D9D9D9</color>
+    <color name="opacity_black">#85000000</color>
+    <color name="opacity_black_0">#10000000</color>
+    <color name="opacity_black_1">#75000000</color>
+    <color name="colorSuccess">#4CC403</color>
+    <color name="colorInProgress">#2B78E4</color>
+    <color name="opacity_popup">#BF000000</color>
+    <color name="textColorBlack">#1F2937</color>
+    <color name="shake_prompt_scrim">#B3000000</color>
+    <color name="shake_prompt_icon">#C71920</color>
 </resources>

@@ -3,7 +3,6 @@ package com.chat.myapplication.utility
 import com.chat.myapplication.core.domain.ApiState
 import com.chat.myapplication.core.exception.ApiException
 import com.chat.myapplication.core.exception.CPBaseError
-import com.chat.myapplication.core.exception.CPResponseErrors
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -19,7 +18,6 @@ fun <T> Flow<T>.collectAsResult(): Flow<ApiState<T>> {
         val error = when (exception) {
             is ApiException -> {
                 CPBaseError(
-                    errorCode = exception.code,
                     errorMessage = exception.message,
                     customErrorCode = exception.customErrorCode,
                     errorBody = exception.errorBody.orEmpty(),
@@ -29,7 +27,6 @@ fun <T> Flow<T>.collectAsResult(): Flow<ApiState<T>> {
 
             else -> {
                 CPBaseError(
-                    errorCode = CPResponseErrors.UNKNOWN_EXCEPTION,
                     errorMessage = exception.message ?: "Unknown Exception",
                 )
             }
@@ -41,5 +38,5 @@ fun <T> Flow<T>.collectAsResult(): Flow<ApiState<T>> {
 val Any.TAG: String
     get() {
         val tag = javaClass.simpleName
-        return if (tag.length <= 23) tag else tag.substring(0, 23)
+        return if (tag.length <= 23) tag else tag.take(23)
     }

@@ -35,7 +35,7 @@ class LauncherViewModel @Inject constructor(
                     if (it.status) {
                         _signInResponse.emit(State.success(it))
                     } else {
-                        _signInResponse.emit(State.Error(it.message))
+                        _signInResponse.emit(State.Error(message = it.message))
                     }
                 }
             }.onApiError { error ->

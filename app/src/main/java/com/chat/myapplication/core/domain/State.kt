@@ -1,8 +1,8 @@
 package com.chat.myapplication.core.domain
 
 import android.net.Uri
+import com.chat.myapplication.core.domain.ApiState.Companion.error
 import com.chat.myapplication.core.exception.CPBaseError
-import com.chat.myapplication.core.exception.CPResponseErrors
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 
@@ -14,7 +14,7 @@ sealed class State<T> {
 
     data class Success<T>(val data: T) : State<T>()
 
-    data class Error<T>(val message: String, val code : CPResponseErrors = CPResponseErrors.RESPONSE_ERROR, val uri : Uri? = null) : State<T>()
+    data class Error<T>(val message: String) : State<T>()
 
     fun isLoading(): Boolean = this is Loading
 
@@ -42,8 +42,12 @@ sealed class State<T> {
          * Returns [State.Error] instance.
          * @param message Description of failure.
          */
-        fun <T> error(message: String, code : CPResponseErrors = CPResponseErrors.RESPONSE_ERROR, uri : Uri? = null) =
-            Error<T>(message, code, uri)
+        fun <T> error(
+            message: String,
+            code: String,
+            uri: Uri? = null
+        ) =
+            Error<T>(message)
 
     }
 }

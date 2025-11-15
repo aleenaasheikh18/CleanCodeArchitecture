@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class AuthDataRepository@Inject constructor(private val authApiService: AuthApiService):
+class AuthDataRepository @Inject constructor(private val authApiService: AuthApiService) :
     AuthRepository {
 
     override fun signIn(signInRequest: SignInRequest): Flow<SignInResponse> {
