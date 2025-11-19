@@ -10,6 +10,8 @@
     <color name="background_color">#F3F5F7</color>
 
     <color name="titleColor">#24283B</color>
+    <color name="textColor">#797979</color>
+
     <color name="colorPrimary">#BC0000</color>
     <color name="colorHighlighted">#40BC0000</color>
     <color name="colorPrimaryDark">#B90D0D</color>
@@ -40,7 +42,6 @@
     <color name="headerColorDark">#B1B0B0</color>
     <color name="lightGrey">#D1CECE</color>
     <color name="lightGrey2">#E5E7EB</color>
-    <color name="textColor">#434343</color>
     <color name="textColorNew">#4B5563</color>
     <color name="colorGrayNew">#D5D3D8</color>
     <color name="textColor2">#6B6B6B</color>

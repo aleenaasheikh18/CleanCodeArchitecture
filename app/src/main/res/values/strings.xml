@@ -344,7 +344,6 @@
     <string name="move_pin_to_set">Move pin to set delivery location</string>
     <string name="type_an_address">Type an address</string>
     <string name="_set_default_address">Set Default Delivery Address</string>
-    <string name="remove_address">Remove Address</string>
     <string name="description">Description</string>
 
     <!-- Payment Method -->
@@ -408,7 +407,7 @@
     <string name="allergy">Intolerance/Allergies</string>
     <string name="your_photo">Your Photo</string>
     <string name="for_your_security">For your security and our Drivers to know\nwho to give food items to!</string>
-    <string name="default_address">My delivery address</string>
+    <string name="default_address">Default Delivery Address</string>
 
     <!-- Settings -->
     <string name="change_password">Change Password</string>
@@ -791,5 +790,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="messages">Messages</string>
+
+
+    <!-- Profile -->
+    <string name="manage_allergen"><u>Manage Allergen</u></string>
+    <string name="remove_address"><u>Remove Address</u></string>
+    <string name="delivery_instructions">Delivery Instructions</string>
 
 </resources>

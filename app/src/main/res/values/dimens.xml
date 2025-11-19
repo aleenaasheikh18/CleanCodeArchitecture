@@ -73,6 +73,7 @@
     <dimen name="new_dimen_11_sp">11sp</dimen>
     <dimen name="new_dimen_12_sp">12sp</dimen>
     <dimen name="new_dimen_13_sp">13sp</dimen>
+    <dimen name="new_dimen_14_sp">14sp</dimen>
     <dimen name="new_dimen_16_sp">16sp</dimen>
     <dimen name="new_dimen_21_sp">21sp</dimen>
     <dimen name="new_dimen_25_sp">25sp</dimen>
@@ -89,5 +90,7 @@
     <dimen name="dialog_button_size">@dimen/new_dimen_44_dp</dimen>
     <dimen name="image_size">@dimen/new_dimen_120_dp</dimen>
 
+    <dimen name="standard_title_size">@dimen/new_dimen_14_sp</dimen>
+    <dimen name="standard_sub_title_size">@dimen/new_dimen_12_sp</dimen>
 
 </resources>

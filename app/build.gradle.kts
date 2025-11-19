@@ -79,6 +79,12 @@ dependencies {
     implementation(libs.navigationFragment)
     implementation(libs.navigationUi)
 
+    // Circle Imageview
+    implementation(libs.circleimageview)
+
+    // Maps
+    implementation(libs.playservices.maps)
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
