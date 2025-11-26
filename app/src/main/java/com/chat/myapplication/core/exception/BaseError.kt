@@ -3,10 +3,10 @@ package com.chat.myapplication.core.exception
 import com.google.gson.annotations.SerializedName
 
 
-data class CPBaseError(
+data class BaseError(
     @SerializedName("errorMessage") val errorMessage: String = "",
     @SerializedName("customErrorCode") val customErrorCode: Int = 0,
     @SerializedName("isCustomErrorCode") val isCustomErrorCode: Boolean = false,
     @SerializedName("errorBody") val errorBody: String = ""
-) : CPBaseResponse()
+) : BaseResponse()
 

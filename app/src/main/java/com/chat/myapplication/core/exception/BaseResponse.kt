@@ -2,7 +2,7 @@ package com.chat.myapplication.core.exception
 
 import com.google.gson.annotations.SerializedName
 
-open class CPBaseResponse: Throwable() {
+open class BaseResponse: Throwable() {
     @SerializedName("status")
     val status: Boolean = false
 

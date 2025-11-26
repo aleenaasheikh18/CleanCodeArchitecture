@@ -1,33 +1,11 @@
 package com.chat.myapplication.utility
 
-import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.Paint
-import android.graphics.PixelFormat
-import android.graphics.Typeface
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
-import android.view.Gravity
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.RecyclerView
-import com.chat.myapplication.R
+import android.widget.Toast
 import com.chat.myapplication.core.domain.ApiState
 import com.chat.myapplication.core.exception.ApiException
-import com.chat.myapplication.core.exception.CPBaseError
-import com.google.android.material.badge.BadgeDrawable
-import com.google.android.material.badge.BadgeUtils
-import com.google.android.material.internal.NavigationMenuItemView
+import com.chat.myapplication.core.exception.BaseError
 import com.google.android.material.navigation.NavigationView
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -43,7 +21,7 @@ fun <T> Flow<T>.collectAsResult(): Flow<ApiState<T>> {
     }.catch { exception ->
         val error = when (exception) {
             is ApiException -> {
-                CPBaseError(
+                BaseError(
                     errorMessage = exception.message,
                     customErrorCode = exception.customErrorCode,
                     errorBody = exception.errorBody.orEmpty(),
@@ -52,7 +30,7 @@ fun <T> Flow<T>.collectAsResult(): Flow<ApiState<T>> {
             }
 
             else -> {
-                CPBaseError(
+                BaseError(
                     errorMessage = exception.message ?: "Unknown Exception",
                 )
             }
@@ -80,3 +58,8 @@ fun NavigationView.setBadgeCount(itemId: Int, text: String) {
     val badge = StringBadgeDrawable(context).apply { this.text = text }
     menuItem.icon = LayerDrawable(arrayOf(icon, badge))
 }
+
+fun showToast(context: Context?,text: String) {
+    Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+}
+

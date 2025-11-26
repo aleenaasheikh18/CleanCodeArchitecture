@@ -1,6 +1,7 @@
 package com.chat.myapplication.core.domain
 
 import com.chat.myapplication.di.PublicHttpClient
+import com.chat.myapplication.utility.AppConstants.BASE_URL
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -16,7 +17,7 @@ class NetworkProvider @Inject constructor(
 ) {
 
     private var retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl("https://api.foodchoo.com/api/v1/")
+        .baseUrl(BASE_URL)
         .client(okHttpClient)
         .addConverterFactory(ScalarsConverterFactory.create())
         .addConverterFactory(GsonConverterFactory.create(gson))

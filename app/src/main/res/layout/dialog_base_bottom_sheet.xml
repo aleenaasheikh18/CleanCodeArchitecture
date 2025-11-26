@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/new_dimen_4_dp"
             android:layout_weight="1"
-            android:background="@drawable/button_rounded"
+            android:background="@drawable/button_rounded_red"
             android:gravity="center"
             android:includeFontPadding="false"
             android:padding="@dimen/new_dimen_10_dp"

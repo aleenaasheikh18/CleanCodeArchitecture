@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:fillViewport="true"
+    android:padding="@dimen/standard_layout_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Account Activity Switch -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monstreat_semi_bold"
+                android:text="@string/activity"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/standard_sub_title_size" />
+
+            <com.github.angads25.toggle.widget.LabeledSwitch
+                android:id="@+id/swAccountActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/new_dimen_6_dp"
+                app:colorBorder="@color/colorAccent"
+                app:on="false" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/new_dimen_10_dp"
+            android:background="@color/colorGreyBackground" />
+
+        <!-- I Am Hungry -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monstreat_semi_bold"
+                android:text="@string/hungry"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/standard_sub_title_size" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/monstreat_semi_bold"
+                        android:text="@string/push"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/new_dimen_10_dp" />
+
+                    <CheckBox
+                        android:id="@+id/cbHPush"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/new_dimen_6_dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/monstreat_semi_bold"
+                        android:text="@string/_email"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/new_dimen_10_dp" />
+
+                    <CheckBox
+                        android:id="@+id/cbHEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/monstreat_semi_bold"
+                        android:text="@string/both"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/new_dimen_10_dp" />
+
+                    <CheckBox
+                        android:id="@+id/cbHBoth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/new_dimen_10_dp"
+            android:background="@color/colorGreyBackground" />
+
+        <!-- Receipt -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monstreat_semi_bold"
+                android:text="@string/_receipt"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/standard_sub_title_size" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/monstreat_semi_bold"
+                        android:text="@string/push"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/new_dimen_10_dp" />
+
+                    <CheckBox
+                        android:id="@+id/cbRPush"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/new_dimen_6_dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/monstreat_semi_bold"
+                        android:text="@string/_email"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/new_dimen_10_dp" />
+
+                    <CheckBox
+                        android:id="@+id/cbREmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/monstreat_semi_bold"
+                        android:text="@string/both"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/new_dimen_10_dp" />
+
+                    <CheckBox
+                        android:id="@+id/cbRBoth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/new_dimen_10_dp"
+            android:background="@color/colorGreyBackground" />
+
+        <!-- New Message -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monstreat_semi_bold"
+                android:text="@string/new_message"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/standard_sub_title_size" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/monstreat_semi_bold"
+                        android:text="@string/push"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/new_dimen_10_dp" />
+
+                    <CheckBox
+                        android:id="@+id/cbMPush"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/new_dimen_6_dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/monstreat_semi_bold"
+                        android:text="@string/_email"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/new_dimen_10_dp" />
+
+                    <CheckBox
+                        android:id="@+id/cbMEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/monstreat_semi_bold"
+                        android:text="@string/both"
+                        android:textColor="@color/colorGray"
+                        android:textSize="@dimen/new_dimen_10_dp" />
+
+                    <CheckBox
+                        android:id="@+id/cbMBoth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="@color/colorPrimary"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/new_dimen_10_dp"
+            android:background="@color/colorGreyBackground" />
+
+        <!-- Product Announcement Switch -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/monstreat_semi_bold"
+                android:text="@string/product_announcements"
+                android:textColor="@color/colorGray"
+                android:textSize="@dimen/standard_sub_title_size" />
+
+            <com.github.angads25.toggle.widget.LabeledSwitch
+                android:id="@+id/swProductAnnouncement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/new_dimen_6_dp"
+                app:colorBorder="@color/colorAccent"
+                app:on="false" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/new_dimen_10_dp"
+            android:background="@color/colorGreyBackground" />
+
+    </LinearLayout>
+
+</ScrollView>

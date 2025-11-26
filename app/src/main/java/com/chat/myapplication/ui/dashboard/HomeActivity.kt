@@ -1,9 +1,11 @@
 package com.chat.myapplication.ui.dashboard
 
 import MultiDividerDecoration
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -16,7 +18,9 @@ import com.chat.myapplication.databinding.ActivityHomeBinding
 import com.chat.myapplication.databinding.DrawerHeaderBinding
 import com.chat.myapplication.utility.setBadgeCount
 import com.chat.myapplication.utility.setOnSingleClickListener
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate) {
 
     private lateinit var navController: NavController
@@ -28,15 +32,14 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     }
 
     private fun setupNavigation() {
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.homeFragment,
-                R.id.myOrdersFragment,
-                R.id.settingsFragment
+                R.id.nav_home
             ),
             bi.drawerLayout
         )
@@ -62,36 +65,19 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         bi.navigationView.setBadgeCount(R.id.nav_bonus, getString(R.string.new_))
 
         handleDrawerDetails()
-        bi.navigationView.setNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.homeFragment -> {
-                    navController.navigate(R.id.homeFragment)
-                    true
-                }
-                R.id.myOrdersFragment -> {
-                    navController.navigate(R.id.myOrdersFragment)
-                    true
-                }
-                R.id.settingsFragment -> {
-                    navController.navigate(R.id.settingsFragment)
-                    true
-                }
-                R.id.nav_messages -> {
-                    navController.navigate(R.id.messagesFragment)
-                    true
-                }
-                R.id.nav_bonus -> {
 
-                    true
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (!navController.popBackStack()) {
+                    finish()
                 }
-                else -> false
-            }.also {
-                // Close drawer after click
-                bi.drawerLayout.closeDrawer(GravityCompat.START)
             }
-        }
+        })
 
     }
+
+
+
 
     private fun handleDrawerDetails(){
 

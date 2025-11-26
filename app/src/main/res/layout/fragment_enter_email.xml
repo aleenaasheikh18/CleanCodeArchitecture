@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llEmailEntry"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_top_curves"
+    android:gravity="top"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/send_magic_link_title"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/standard_title_size" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/standard_size"
+        android:layout_marginVertical="@dimen/new_dimen_20_dp"
+        android:background="@drawable/bg_input_field"
+        android:fontFamily="@font/monstreat_medium"
+        android:hint="@string/send_magic_link_email_hint"
+        android:textSize="@dimen/standard_title_size"
+        android:importantForAutofill="yes"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/colorBlack"
+        android:textColorHint="@color/lightGrey" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_rounded_black"
+        android:layout_marginTop="@dimen/new_standard_margin"
+        android:fontFamily="@font/monstreat_medium"
+        android:gravity="center"
+        android:text="@string/send"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/button_text_size"
+        android:textStyle="bold" />
+
+</LinearLayout>

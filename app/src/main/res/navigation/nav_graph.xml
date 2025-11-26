@@ -3,35 +3,78 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/nav_home">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/nav_home"
         android:name="com.chat.myapplication.ui.fragments.home.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/myOrdersFragment"
+        android:id="@+id/nav_my_orders"
         android:name="com.chat.myapplication.ui.fragments.myOrders.OrderFragment"
         android:label="@string/my_orders"
         tools:layout="@layout/fragment_order" />
 
     <fragment
-        android:id="@+id/messagesFragment"
+        android:id="@+id/nav_messages"
         android:name="com.chat.myapplication.ui.fragments.messages.MessagesFragment"
         android:label="@string/messages"
         tools:layout="@layout/fragment_messages" />
 
     <fragment
-        android:id="@+id/settingsFragment"
+        android:id="@+id/nav_settings"
         android:name="com.chat.myapplication.ui.fragments.settings.SettingsFragment"
         android:label="@string/settings"
+        tools:layout="@layout/fragment_settings">
+
+        <action
+            android:id="@+id/moveToAccountSecurity"
+            app:destination="@id/accountSecurityFragment" />
+
+        <action
+            android:id="@+id/moveToNotification"
+            app:destination="@id/notificationFragment" />
+
+        <action
+            android:id="@+id/moveToLegalStuff"
+            app:destination="@id/legalStuffFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.chat.myapplication.ui.fragments.settings.NotificationSettingsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notification_settings" />
+
+    <fragment
+        android:id="@+id/legalStuffFragment"
+        android:name="com.chat.myapplication.ui.fragments.settings.legalStuff.LegalStuffFragment"
+        android:label="@string/title_legal_stuff"
+        tools:layout="@layout/fragment_legal_stuff" >
+
+        <action
+            android:id="@+id/moveToLegalDocuments"
+            app:destination="@id/legalDocFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/legalDocFragment"
+        android:name="com.chat.myapplication.ui.fragments.settings.legalStuff.utility.UtilityFragment"
+        tools:layout="@layout/fragment_utility" />
+
+    <fragment
+        android:id="@+id/accountSecurityFragment"
+        android:name="com.chat.myapplication.ui.fragments.settings.accountSecurity.AccountSecurityFragment"
+        android:label="@string/title_account_security"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.chat.myapplication.ui.profile.ProfileSettingFragment"
+        android:name="com.chat.myapplication.ui.fragments.profile.ProfileSettingFragment"
         android:label="@string/my_profile"
         tools:layout="@layout/fragment_profile_setting" />
 </navigation>

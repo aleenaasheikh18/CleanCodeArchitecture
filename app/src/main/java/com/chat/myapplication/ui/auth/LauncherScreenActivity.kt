@@ -84,6 +84,7 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
                         is State.Error -> {
                             showInfoDialog(description = state.message)
                         }
+                        else -> Unit
                     }
                 }
             }

@@ -83,14 +83,18 @@
 
     <dimen name="standard_size">@dimen/new_dimen_16_dp</dimen>
     <dimen name="new_standard_margin">@dimen/new_dimen_16_dp</dimen>
-    <dimen name="standard_margin_setting">@dimen/new_dimen_6_dp</dimen>
     <dimen name="toolbar_elevation">@dimen/new_dimen_1_dp</dimen>
     <dimen name="toolbar_size">@dimen/new_dimen_56_dp</dimen>
     <dimen name="button_size">@dimen/new_dimen_48_dp</dimen>
     <dimen name="dialog_button_size">@dimen/new_dimen_44_dp</dimen>
     <dimen name="image_size">@dimen/new_dimen_120_dp</dimen>
 
-    <dimen name="standard_title_size">@dimen/new_dimen_14_sp</dimen>
-    <dimen name="standard_sub_title_size">@dimen/new_dimen_12_sp</dimen>
+    <dimen name="standard_title_size">@dimen/new_dimen_16_sp</dimen>
+    <dimen name="standard_sub_title_size">@dimen/new_dimen_14_sp</dimen>
+    <dimen name="standard_text_size">@dimen/new_dimen_12_sp</dimen>
+
+    <dimen name="button_text_size">@dimen/new_dimen_16_dp</dimen>
+
+    <dimen name="standard_layout_padding">@dimen/new_dimen_16_dp</dimen>
 
 </resources>

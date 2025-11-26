@@ -75,7 +75,7 @@
     <string name="create_influencer_profile">you agree to be bound by our Eater Influencer</string>
     <string name="terms">Terms of Services</string>
     <string name="and">and</string>
-    <string name="policy">Privacy Policy.</string>
+    <string name="policy">Privacy Policy</string>
     <string name="error_length_password">Password should have 12 to 16 characters.</string>
     <string name="error_phone_valid">Please provide a valid Phone Number.</string>
     <string name="error_match_password">New password and confirm password does not match.</string>
@@ -655,8 +655,7 @@
 
 
     <string name="text_account_verification_email">We sent an email to _EMAIL_ADDRESS. Tap the link inside to get started! Don’t forget to check your spam folder just in case!</string>
-    <string name="open_mail_app">Open Mail App</string>
-    <string name="resend_email">Resend email</string>
+
     <string name="email_resent">Email resent!</string>
     <string name="verify_your_email">Verify your email</string>
     <string name="go_back">Go Back</string>
@@ -764,11 +763,6 @@
     <string name="send_magic_link_title">What\'s your email</string>
     <string name="send_magic_link_email_hint">Email address</string>
     <string name="send_magic_link_button">Next</string>
-    <string name="email_verification_title">You got mail!</string>
-    <string name="email_verification_detail_placeholder">We sent you a magic link.\nTap the link in that email to continue.</string>
-    <string name="email_verification_detail">We sent an email to %1$s.\nTap the link in that email to continue.</string>
-    <string name="email_verification_spam_hint">And check spam folder in case your email provider hates us for some reason.</string>
-    <string name="resend_magic_link">Resend magic link</string>
     <string name="full_name_prompt">Righto, what\'s your full name?</string>
     <string name="full_name_hint">Full name</string>
     <string name="full_name_continue">Continue</string>
@@ -796,5 +790,29 @@
     <string name="manage_allergen"><u>Manage Allergen</u></string>
     <string name="remove_address"><u>Remove Address</u></string>
     <string name="delivery_instructions">Delivery Instructions</string>
+    <string name="title_payment">Payment</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_account_security">Account security</string>
+    <string name="title_legal_stuff">Legal stuff</string>
+
+    <!-- Account Security -->
+    <string name="title_verified_mobile_number">Verified mobile number</string>
+    <string name="title_verified_email_address">Verified email address</string>
+    <string name="title_finger_print_authentication">Fingerprint authentication</string>
+    <string name="title_passkey">Passkey</string>
+    <string name="title_password">Password</string>
+    <string name="description_passkey">Login with your trusted device</string>
+    <string name="description_password">Login with a good ol\' fashioned password</string>
+    <string name="send">Send</string>
+
+    <!-- Email -->
+    <string name="email_verification_detail">We sent an email to %1$s.\nTap the link in that email to continue.\n\nAnd check spam folder in case your email provider hates us for some reason.</string>
+    <string name="open_mail_app">Open Mail App</string>
+    <string name="email_verification_title">You got mail!</string>
+    <string name="resend_magic_link"><u>Resend magic link</u></string>
+    <string name="title_email_success">Wake up babe, new email address dropped!</string>
+    <string name="email_success_detail">You\'ve successfully verified your new email address of:\n%s</string>
+    <string name="feed_me">Great now feed me</string>
+    <string name="unable_to_load">Unable to load content. Please try again</string>
 
 </resources>

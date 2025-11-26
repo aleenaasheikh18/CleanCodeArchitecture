@@ -85,6 +85,9 @@ dependencies {
     // Maps
     implementation(libs.playservices.maps)
 
+    // Switch
+    implementation(libs.toggle)
+
     // Testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
