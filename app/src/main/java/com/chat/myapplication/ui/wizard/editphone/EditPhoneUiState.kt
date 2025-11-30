@@ -7,6 +7,8 @@ data class EditPhoneUiState(
     val phoneNumber: String = "",
     val otpCode: String = "",
     val selectedCountry: CountryArea? = null,
+    val countries: List<CountryArea> = emptyList(),
+    val isCountriesLoading: Boolean = false,
     val isOtpVisible: Boolean = false,
     val isLoading: Boolean = false,
     val phoneError: Int? = null,

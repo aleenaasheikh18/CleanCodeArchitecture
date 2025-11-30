@@ -7,6 +7,7 @@ import com.chat.myapplication.core.data.auth.model.AddPhoneNumberRequest
 import com.chat.myapplication.core.data.auth.model.CountryArea
 import com.chat.myapplication.core.data.auth.model.VerifyPhoneNumberRequest
 import com.chat.myapplication.core.data.auth.usecase.AddPhoneNumberUseCase
+import com.chat.myapplication.core.data.auth.usecase.GetCountriesAreasUseCase
 import com.chat.myapplication.core.data.auth.usecase.VerifyPhoneNumberUseCase
 import com.chat.myapplication.core.domain.onApiError
 import com.chat.myapplication.core.domain.onApiSuccess
@@ -31,7 +32,8 @@ import javax.inject.Inject
 @HiltViewModel
 class EditPhoneViewModel @Inject constructor(
     private val addPhoneNumberUseCase: AddPhoneNumberUseCase,
-    private val verifyPhoneNumberUseCase: VerifyPhoneNumberUseCase
+    private val verifyPhoneNumberUseCase: VerifyPhoneNumberUseCase,
+    private val getCountriesAreasUseCase: GetCountriesAreasUseCase
 ) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(EditPhoneUiState())
@@ -41,6 +43,37 @@ class EditPhoneViewModel @Inject constructor(
     val events: SharedFlow<EditPhoneEvent> = _events.asSharedFlow()
 
     private var resendCooldownJob: Job? = null
+
+    init {
+        loadCountries()
+    }
+
+    private fun loadCountries() {
+        getCountriesAreasUseCase()
+            .collectAsResult()
+            .flowOn(Dispatchers.IO)
+            .onApiSuccess { response ->
+                if (response.status) {
+                    val countries = response.data?.countries.orEmpty()
+                    _uiState.update {
+                        it.copy(
+                            countries = countries,
+                            selectedCountry = countries.firstOrNull(),
+                            isCountriesLoading = false
+                        )
+                    }
+                } else {
+                    _uiState.update { it.copy(isCountriesLoading = false) }
+                }
+            }
+            .onApiError {
+                _uiState.update { it.copy(isCountriesLoading = false) }
+            }
+            .onStart {
+                _uiState.update { it.copy(isCountriesLoading = true) }
+            }
+            .launchIn(viewModelScope)
+    }
 
     fun setPhoneNumber(phone: String) {
         _uiState.update { it.copy(phoneNumber = phone, phoneError = null) }
@@ -67,7 +100,7 @@ class EditPhoneViewModel @Inject constructor(
 
         if (!validatePhoneInput()) return
 
-        val request = AddPhoneNumberRequest(phoneNo = state.fullPhoneNumber)
+        val request = AddPhoneNumberRequest(phoneNo = /*state.fullPhoneNumber*/"923272018758")
 
         addPhoneNumberUseCase(AddPhoneNumberUseCase.Params(request))
             .collectAsResult()

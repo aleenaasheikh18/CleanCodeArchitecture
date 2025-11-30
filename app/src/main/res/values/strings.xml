@@ -5,6 +5,9 @@
     <string name="branch_key" translatable="false">key_live_iDlWK5RRcKpeRsBWAg7nUhlkzBageSEz</string>
     <string name="branch_key_test" translatable="false">key_test_cvlZT5PNbQeoRry8yn1p3kijrzmnbGxL</string>
 
+    <!-- Google Maps API Key -->
+    <string name="google_maps_key" translatable="false">AIzaSyAVwyKaZ6NFVTM5kVpAGElJKFfND5pH8yk</string>
+
     <string name="version">"Version: "</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_maps">MapsActivity</string>
@@ -653,13 +656,19 @@
     <string name="create_an_account">Create an account</string>
 
 
-    <string name="your_password_must_contain_minimum_6_characters">Your password must contain minimum 12 characters</string>
+    <string name="your_password_length">Your password must contain minimum 8 characters</string>
     <string name="must_contain_number">Must contain a number</string>
     <string name="must_contain_symbol">Must contain a symbol</string>
+    <string name="must_contain_capital">Must contain a capital letter</string>
+    <string name="password_changed_successfully">Password changed successfully</string>
+    <string name="passwords_must_match">Passwords must match</string>
+    <string name="password_reset_successfully">Password reset successfully</string>
+    <string name="password_reset_success_description">Your password has been reset successfully. You can now log in with your new password.</string>
+    <string name="password_reset_success_title">Password Reset!</string>
+    <string name="check_your_email">Check Your Email</string>
+    <string name="password_reset_email_sent">We\'ve sent you an email with a link to reset your password. Please check your inbox and follow the instructions.</string>
     <string name="email_already_exists">Email Already Exists</string>
-
-
-    <string name="text_account_verification_email">We sent an email to _EMAIL_ADDRESS. Tap the link inside to get started! Don’t forget to check your spam folder just in case!</string>
+    <string name="text_account_verification_email">We sent an email to %s. Tap the link inside to get started! Don’t forget to check your spam folder just in case!</string>
 
     <string name="email_resent">Email resent!</string>
     <string name="verify_your_email">Verify your email</string>
@@ -797,8 +806,9 @@
     <string name="you_got_mail_title">%s,\nYou got mail!</string>
 
     <!-- Profile -->
-    <string name="manage_allergen"><u>Manage Allergen</u></string>
-    <string name="remove_address"><u>Remove Address</u></string>
+    <string name="manage_allergen">Manage Allergen</string>
+    <string name="add_address">Add Address</string>
+    <string name="remove_address">Remove Address</string>
     <string name="delivery_instructions">Delivery Instructions</string>
     <string name="title_payment">Payment</string>
     <string name="title_notifications">Notifications</string>
@@ -818,7 +828,7 @@
     <!-- Email -->
     <string name="email_verification_detail">We sent an email to %1$s.\nTap the link in that email to continue.\n\nAnd check spam folder in case your email provider hates us for some reason.</string>
     <string name="open_mail_app">Open Mail App</string>
-    <string name="email_verification_title">You got mail!</string>
+    <string name="email_verification_title">%s \nYou got mail!</string>
     <string name="resend_magic_link"><u>Resend magic link</u></string>
     <string name="title_email_success">Wake up babe, new email address dropped!</string>
     <string name="email_success_detail">You\'ve successfully verified your new email address of:\n%s</string>
@@ -836,26 +846,29 @@
     <string name="continue_text">Continue</string>
     <string name="verify_phone_title">Verify your phone</string>
     <string name="otp_sent_description">We\'ve sent a verification code to %s</string>
-    <string name="enter_otp">Enter verification code</string>
+    <string name="enter_otp">Enter PIN</string>
     <string name="clear_otp">Clear OTP</string>
     <string name="verify">Verify</string>
-    <string name="resend_otp"><u>Resend code</u></string>
+    <string name="resend_otp"><u>Resend PIN</u></string>
     <string name="hint_search_country">Search country</string>
     <string name="title_select_country">Select Country</string>
     <string name="clear_search">Clear search</string>
     <string name="phone_verified_title">Phone verified!</string>
     <string name="phone_verified_description">Your phone number has been successfully verified.</string>
-    <string name="phone_send_code">Send Code</string>
+    <string name="phone_send_code">Send PIN</string>
 
     <!-- Validation Messages -->
     <string name="error_phone_required">Phone number is required</string>
     <string name="error_phone_invalid">Please enter a valid phone number</string>
     <string name="error_country_required">Please select a country</string>
-    <string name="error_otp_required">Verification code is required</string>
+    <string name="error_otp_required">Verification PIN is required</string>
     <string name="error_otp_invalid">Please enter valid verification code</string>
     <string name="error_loading_countries">Failed to load countries</string>
     <string name="btn_retry">Retry</string>
     <string name="resend_otp_success">Code sent successfully</string>
     <string name="no_results_found">No results found</string>
+    <string name="change_password_desc">We’ll send a magic link to your %s address.\n\nTap the link in that email to be able to open the app and enter your new password.\n\nOh – and check the spam folder in case your email provider hates us for some reason.</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="send_now">Send Now</string>
 
 </resources>

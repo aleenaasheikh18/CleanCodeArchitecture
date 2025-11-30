@@ -6,7 +6,7 @@
     <corners android:radius="@dimen/new_dimen_10_dp" />
     <stroke
         android:width="1dp"
-        android:color="@color/lightGrey"
+        android:color="@color/black"
         android:dashWidth="@dimen/new_dimen_1_dp"
         android:dashGap="0dp" />
 </shape>

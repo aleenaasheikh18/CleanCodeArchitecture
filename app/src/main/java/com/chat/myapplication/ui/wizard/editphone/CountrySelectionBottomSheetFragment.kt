@@ -1,7 +1,6 @@
 package com.chat.myapplication.ui.wizard.editphone
 
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -10,16 +9,17 @@ import com.chat.myapplication.base.BaseBottomSheetDialogFragment
 import com.chat.myapplication.core.data.auth.model.CountryArea
 import com.chat.myapplication.databinding.BottomSheetCountrySelectionBinding
 import com.chat.myapplication.utility.SimpleTextWatcher
-import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class CountrySelectionBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetCountrySelectionBinding>(
     BottomSheetCountrySelectionBinding::inflate
 ) {
 
-    private val viewModel: CountrySelectionViewModel by viewModels()
+    private var countries: List<CountryArea> = emptyList()
+    private val _uiState = MutableStateFlow(CountrySelectionUiState())
 
     private val countryAdapter by lazy {
         CountryAdapter { country ->
@@ -33,8 +33,10 @@ class CountrySelectionBottomSheetFragment : BaseBottomSheetDialogFragment<Bottom
     companion object {
         const val TAG = "CountrySelectionBottomSheetFragment"
 
-        fun newInstance(): CountrySelectionBottomSheetFragment {
-            return CountrySelectionBottomSheetFragment()
+        fun newInstance(countries: List<CountryArea>): CountrySelectionBottomSheetFragment {
+            return CountrySelectionBottomSheetFragment().apply {
+                this.countries = countries
+            }
         }
     }
 
@@ -42,8 +44,17 @@ class CountrySelectionBottomSheetFragment : BaseBottomSheetDialogFragment<Bottom
         setupRecyclerView()
         setupSearch()
         setupCloseButton()
-        setupRetryButton()
         initObservers()
+        initializeCountries()
+    }
+
+    private fun initializeCountries() {
+        _uiState.update {
+            it.copy(
+                countries = countries,
+                filteredCountries = countries
+            )
+        }
     }
 
     private fun setupRecyclerView() {
@@ -55,13 +66,29 @@ class CountrySelectionBottomSheetFragment : BaseBottomSheetDialogFragment<Bottom
 
     private fun setupSearch() {
         bi.etSearch.addTextChangedListener(SimpleTextWatcher { text ->
-            viewModel.filterCountries(text)
+            filterCountries(text)
             bi.ivClearSearch.isVisible = text.isNotEmpty()
         })
 
         bi.ivClearSearch.setOnClickListener {
             bi.etSearch.text?.clear()
-            viewModel.filterCountries("")
+            filterCountries("")
+        }
+    }
+
+    private fun filterCountries(query: String) {
+        _uiState.update { state ->
+            state.copy(
+                searchQuery = query,
+                filteredCountries = if (query.isBlank()) {
+                    state.countries
+                } else {
+                    state.countries.filter { country ->
+                        country.name?.contains(query, ignoreCase = true) == true ||
+                                country.countryCode?.contains(query, ignoreCase = true) == true
+                    }
+                }
+            )
         }
     }
 
@@ -69,14 +96,10 @@ class CountrySelectionBottomSheetFragment : BaseBottomSheetDialogFragment<Bottom
         bi.ivClose.setOnClickListener { dismiss() }
     }
 
-    private fun setupRetryButton() {
-        bi.btnRetry.setOnClickListener { viewModel.retry() }
-    }
-
     private fun initObservers() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collectLatest { state ->
+                _uiState.collectLatest { state ->
                     updateUi(state)
                 }
             }

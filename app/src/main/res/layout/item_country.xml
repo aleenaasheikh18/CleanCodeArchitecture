@@ -8,13 +8,13 @@
     android:paddingHorizontal="@dimen/new_dimen_16_dp"
     android:paddingVertical="@dimen/new_dimen_12_dp">
 
-    <TextView
-        android:id="@+id/tvFlag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/txt_mediumXX" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivFlag"
+        android:layout_width="@dimen/new_dimen_32_dp"
+        android:layout_height="@dimen/new_dimen_24_dp"
+        android:scaleType="fitCenter" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCountryName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -23,11 +23,11 @@
         android:textColor="@color/colorBlack"
         android:textSize="@dimen/txt_mediumX" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvCountryCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorLightGray"
+        android:textColor="@color/colorBlack"
         android:textSize="@dimen/txt_mediumX" />
 
 </LinearLayout>

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.chat.myapplication.core.data.auth.model.CountryArea
 import com.chat.myapplication.databinding.ItemCountryBinding
+import com.chat.myapplication.utility.glide.loadSvg
 
 class CountryAdapter(
     private val onCountrySelected: (CountryArea) -> Unit
@@ -40,7 +41,7 @@ class CountryAdapter(
 
         fun bind(country: CountryArea) {
             with(binding) {
-                tvFlag.text = country.flag.orEmpty()
+                ivFlag.loadSvg(country.flag)
                 tvCountryName.text = country.name.orEmpty()
                 tvCountryCode.text = country.countryCode.orEmpty()
             }

@@ -25,6 +25,8 @@ circleimageview = "3.1.0"
 playservicesmaps = "18.2.0"
 toggle = "1.1.0"
 branch = "5.12.0"
+glide = "4.16.0"
+androidsvg = "1.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -56,6 +58,9 @@ circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circ
 playservices-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playservicesmaps" }
 toggle = { module = "com.github.angads25:toggle", version.ref = "toggle" }
 branch-io = { module = "io.branch.sdk.android:library", version.ref = "branch" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+androidsvg = { module = "com.caverock:androidsvg-aar", version.ref = "androidsvg" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

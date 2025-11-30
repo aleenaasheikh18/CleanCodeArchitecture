@@ -7,6 +7,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -18,6 +20,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.chat.myapplication.R
 import com.chat.myapplication.base.BaseActivity
 import com.chat.myapplication.core.deeplink.DeepLinkEvent
@@ -26,6 +29,8 @@ import com.chat.myapplication.core.domain.State
 import com.chat.myapplication.databinding.ActivityHomeBinding
 import com.chat.myapplication.databinding.DrawerHeaderBinding
 import com.chat.myapplication.ui.wizard.emailverified.EmailVerifiedSuccessBottomSheetFragment
+import com.chat.myapplication.ui.wizard.resetpassword.ResetPasswordBottomSheetFragment
+import com.chat.myapplication.utility.AppConstants
 import com.chat.myapplication.utility.setBadgeCount
 import com.chat.myapplication.utility.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -76,7 +81,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                 // TODO: Handle verify account API call
             }
             is DeepLinkEvent.ResetPassword -> {
-                // TODO: Handle reset password - navigate to reset password screen
+                viewModel.verifyChangePasswordToken(event.token)
             }
             is DeepLinkEvent.VerifyEmailChange -> {
                 viewModel.verifyEmailChange(event.token)
@@ -124,7 +129,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             )
         )
 
-        bi.navigationView.setBadgeCount(R.id.nav_messages, 100)
+        bi.navigationView.setBadgeCount(R.id.nav_messages, preferenceManager.unreadMessages)
         bi.navigationView.setBadgeCount(R.id.nav_bonus, getString(R.string.new_))
 
         handleDrawerDetails()
@@ -139,15 +144,58 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
 
     }
 
-    private fun handleDrawerDetails(){
-
+    private fun handleDrawerDetails() {
         val headerView = bi.navigationView.getHeaderView(0)
-        val headerBi = DrawerHeaderBinding.bind(headerView)
-        headerBi.imgProfile.setOnSingleClickListener {
+        val headerBinding = DrawerHeaderBinding.bind(headerView)
+
+        // Initial load
+        updateDrawerHeader(headerBinding)
+
+        // Update header when drawer opens (for dynamic changes)
+        bi.drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerSlide(drawerView: android.view.View, slideOffset: Float) {}
+            override fun onDrawerClosed(drawerView: android.view.View) {}
+            override fun onDrawerStateChanged(newState: Int) {}
+            override fun onDrawerOpened(drawerView: android.view.View) {
+                updateDrawerHeader(headerBinding)
+            }
+        })
+
+        headerBinding.imgProfile.setOnSingleClickListener {
             bi.drawerLayout.closeDrawer(GravityCompat.START)
             navController.navigate(R.id.profileFragment)
         }
+    }
 
+    private fun updateDrawerHeader(headerBinding: DrawerHeaderBinding) {
+        // Set user name
+        val fullName = buildString {
+            append(preferenceManager.firstName)
+            if (preferenceManager.lastName.isNotEmpty()) {
+                append(" ")
+                append(preferenceManager.lastName)
+            }
+        }
+        headerBinding.txtName.text = fullName.ifEmpty { getString(R.string.app_name) }
+
+        // Set profile image
+        val profileImage = preferenceManager.profileImage
+        if (profileImage.isNotEmpty()) {
+            val imageUrl = AppConstants.IMAGE_URL + profileImage
+            Glide.with(this)
+                .load(imageUrl)
+                .placeholder(R.drawable.ic_avatar)
+                .error(R.drawable.ic_avatar)
+                .circleCrop()
+                .into(headerBinding.imgProfile)
+        }
+
+        // Show/hide influencer badge
+        headerBinding.ivInfluencer.isVisible = preferenceManager.customerType == CUSTOMER_TYPE_INFLUENCER
+    }
+
+    companion object {
+        private const val CUSTOMER_TYPE_INFLUENCER = "influencer"
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -157,17 +205,35 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     private fun initObservers() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.verifyEmailResponse.collectLatest { state ->
-                    when (state) {
-                        is State.Loading -> showProgressBar()
-                        is State.Success -> {
-                            hideProgressBar()
-                            showEmailVerifiedSuccessBottomSheet()
+                launch {
+                    viewModel.verifyEmailResponse.collectLatest { state ->
+                        when (state) {
+                            is State.Loading -> showProgressBar()
+                            is State.Success -> {
+                                hideProgressBar()
+                                showEmailVerifiedSuccessBottomSheet()
+                            }
+                            is State.Error -> {
+                                hideProgressBar()
+                            }
+                            else -> Unit
                         }
-                        is State.Error -> {
-                            hideProgressBar()
+                    }
+                }
+
+                launch {
+                    viewModel.verifyChangePasswordTokenResponse.collectLatest { state ->
+                        when (state) {
+                            is State.Loading -> showProgressBar()
+                            is State.Success -> {
+                                hideProgressBar()
+                                showResetPasswordBottomSheet()
+                            }
+                            is State.Error -> {
+                                hideProgressBar()
+                            }
+                            else -> Unit
                         }
-                        else -> Unit
                     }
                 }
             }
@@ -180,5 +246,13 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             // Handle continue action if needed
         }
         bottomSheet.show(supportFragmentManager, EmailVerifiedSuccessBottomSheetFragment.TAG)
+    }
+
+    private fun showResetPasswordBottomSheet() {
+        val bottomSheet = ResetPasswordBottomSheetFragment.newInstance()
+        bottomSheet.onPasswordReset = {
+            // Handle password reset success if needed
+        }
+        bottomSheet.show(supportFragmentManager, ResetPasswordBottomSheetFragment.TAG)
     }
 }

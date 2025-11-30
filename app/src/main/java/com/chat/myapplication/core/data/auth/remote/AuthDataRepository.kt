@@ -2,15 +2,20 @@ package com.chat.myapplication.core.data.auth.remote
 
 import com.chat.myapplication.core.data.auth.model.AddPhoneNumberRequest
 import com.chat.myapplication.core.data.auth.model.AddPhoneNumberResponse
+import com.chat.myapplication.core.data.auth.model.AllergiesResponse
 import com.chat.myapplication.core.data.auth.model.ChangeEmailRequest
 import com.chat.myapplication.core.data.auth.model.ChangeEmailResponse
+import com.chat.myapplication.core.data.auth.model.ResetPasswordRequest
 import com.chat.myapplication.core.data.auth.model.CountriesAreasResponse
 import com.chat.myapplication.core.data.auth.model.SignInRequest
 import com.chat.myapplication.core.data.auth.model.SignInResponse
+import com.chat.myapplication.core.data.auth.model.UpdateAllergiesRequest
+import com.chat.myapplication.core.data.auth.model.ViewProfileResponse
 import com.chat.myapplication.core.data.auth.model.VerifyEmailChangeRequest
 import com.chat.myapplication.core.data.auth.model.VerifyPhoneNumberRequest
 import com.chat.myapplication.core.data.auth.model.VerifyPhoneNumberResponse
 import com.chat.myapplication.core.data.auth.service.AuthApiService
+import com.chat.myapplication.core.exception.BaseResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -51,6 +56,48 @@ class AuthDataRepository @Inject constructor(private val authApiService: AuthApi
     override fun verifyPhoneNumber(request: VerifyPhoneNumberRequest): Flow<VerifyPhoneNumberResponse> {
         return flow {
             emit(authApiService.verifyPhoneNumber(request))
+        }
+    }
+
+    override fun logout(): Flow<BaseResponse> {
+        return flow {
+            emit(authApiService.logout())
+        }
+    }
+
+    override fun getAllergies(): Flow<AllergiesResponse> {
+        return flow {
+            emit(authApiService.getAllergies())
+        }
+    }
+
+    override fun updateAllergies(request: UpdateAllergiesRequest): Flow<BaseResponse> {
+        return flow {
+            emit(authApiService.updateAllergies(request))
+        }
+    }
+
+    override fun getCustomerProfile(): Flow<ViewProfileResponse> {
+        return flow {
+            emit(authApiService.getCustomerProfile())
+        }
+    }
+
+    override fun changePasswordRequest(): Flow<BaseResponse> {
+        return flow {
+            emit(authApiService.changePasswordRequest())
+        }
+    }
+
+    override fun resetPassword(request: ResetPasswordRequest): Flow<BaseResponse> {
+        return flow {
+            emit(authApiService.resetPassword(request))
+        }
+    }
+
+    override fun verifyChangePasswordToken(token: String): Flow<BaseResponse> {
+        return flow {
+            emit(authApiService.verifyChangePasswordToken(token))
         }
     }
 }

@@ -195,4 +195,5 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
     companion object {
         private const val SPLASH_DELAY = 1000L
     }
+
 }

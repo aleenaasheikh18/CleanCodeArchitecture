@@ -7,6 +7,7 @@ import com.chat.myapplication.core.data.settings.SettingsFactory
 import com.chat.myapplication.core.exception.GsonProvider
 import com.chat.myapplication.ui.fragments.settings.legalStuff.LegalStuffFactory
 import com.chat.myapplication.core.domain.AuthInterceptor
+import com.chat.myapplication.core.domain.SessionManager
 import com.chat.myapplication.utility.NetworkConstants
 import com.chat.myapplication.utility.PreferenceManager
 import com.google.gson.Gson
@@ -61,8 +62,11 @@ object CPCommonModule {
 
     @Provides
     @Singleton
-    fun provideAuthInterceptor(preferenceManager: PreferenceManager): AuthInterceptor {
-        return AuthInterceptor(preferenceManager)
+    fun provideAuthInterceptor(
+        preferenceManager: PreferenceManager,
+        sessionManager: SessionManager
+    ): AuthInterceptor {
+        return AuthInterceptor(preferenceManager, sessionManager)
     }
 
     @Provides

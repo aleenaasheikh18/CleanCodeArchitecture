@@ -53,6 +53,7 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
         private const val KEY_I_AM_HUNGRY = "i_am_hungry"
         private const val KEY_MESSAGE = "message"
         private const val KEY_RECEIPT = "receipt"
+        private const val KEY_UNREAD_MESSAGES = "unread_messages"
 
         // Persona Keys
         private const val KEY_PERSONA_ATTEMPTED_COUNT = "persona_attempted_count"
@@ -66,6 +67,10 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
 
         // Deep Link Keys
         private const val KEY_INFLUENCER_JOB_ID = "influencer_job_id"
+
+        // Allergies Keys
+        private const val KEY_ALLERGIES = "allergies"
+        private const val ALLERGIES_SEPARATOR = "|||"
     }
 
     // region Auth Properties
@@ -178,6 +183,10 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
     var receipt: String
         get() = sharedPreferences.getString(KEY_RECEIPT, "").orEmpty()
         set(value) = sharedPreferences.edit().putString(KEY_RECEIPT, value).apply()
+
+    var unreadMessages: Int
+        get() = sharedPreferences.getInt(KEY_UNREAD_MESSAGES, 0)
+        set(value) = sharedPreferences.edit().putInt(KEY_UNREAD_MESSAGES, value).apply()
     // endregion
 
     // region Persona Properties
@@ -214,6 +223,18 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
         set(value) = sharedPreferences.edit().putString(KEY_INFLUENCER_JOB_ID, value).apply()
     // endregion
 
+    // region Allergies Properties
+    var allergies: List<String>
+        get() {
+            val stored = sharedPreferences.getString(KEY_ALLERGIES, "").orEmpty()
+            return if (stored.isEmpty()) emptyList() else stored.split(ALLERGIES_SEPARATOR)
+        }
+        set(value) {
+            val joined = value.joinToString(ALLERGIES_SEPARATOR)
+            sharedPreferences.edit().putString(KEY_ALLERGIES, joined).apply()
+        }
+    // endregion
+
     // region Login/Logout Methods
     fun handleDataAfterLogin(loginData: SignInData) {
         val customer = loginData.customer
@@ -222,6 +243,7 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
         isLoggedIn = true
         authToken = loginData.token.orEmpty()
         adminId = loginData.adminId.orEmpty()
+        unreadMessages = loginData.unreadMessage
 
         // Customer data
         customer?.let { c ->
@@ -237,9 +259,9 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
 
             // Stripe
             stripeId = c.stripeId.orEmpty()
-            isStripeConnected = c.stripeCompleted
+            isStripeConnected = c.stripeId.orEmpty().isNotEmpty()
 
-            // Location/Currency
+            // Location/Currenc
             country = c.country.orEmpty()
             currency = c.currency.orEmpty()
             currencyIcon = c.currencyIcon.orEmpty()
@@ -267,6 +289,9 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
                 eaterState = addr.state.orEmpty()
                 eaterCountry = addr.country.orEmpty()
             }
+
+            // Allergies
+            allergies = c.allergies.orEmpty()
         }
     }
 

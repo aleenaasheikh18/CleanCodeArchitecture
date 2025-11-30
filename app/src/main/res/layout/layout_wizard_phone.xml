@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
@@ -24,41 +25,53 @@
         android:orientation="horizontal">
 
         <!-- Country Selector (20%) -->
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/layoutCountrySelector"
             android:layout_width="0dp"
             android:layout_height="@dimen/new_dimen_48_dp"
-            android:layout_weight="0.2"
             android:layout_marginEnd="@dimen/new_dimen_8_dp"
-            android:background="@drawable/bg_input_field"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/new_dimen_8_dp">
+            android:layout_weight="0.25"
+            android:background="@drawable/bg_input_field">
 
-            <TextView
-                android:id="@+id/tvCountryFlag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/txt_mediumXX" />
+            <LinearLayout
+                android:id="@+id/layoutCountryContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/tvCountryCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/new_dimen_4_dp"
-                android:hint="@string/select_country"
-                android:textColor="@color/colorBlack"
-                android:textColorHint="@color/colorLightGray"
-                android:textSize="@dimen/txt_medium" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivCountryFlag"
+                    android:layout_width="@dimen/new_dimen_36_dp"
+                    android:layout_height="@dimen/new_dimen_30_dp"
+                    android:textSize="@dimen/txt_mediumXX" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tvCountryCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/new_dimen_4_dp"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorLightGray"
+                    tools:text="+1" />
+
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/progressCountry"
+                android:layout_width="@dimen/new_dimen_24_dp"
+                android:layout_height="@dimen/new_dimen_24_dp"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+        </FrameLayout>
 
         <!-- Phone Number Input (80%) -->
         <FrameLayout
             android:id="@+id/layoutPhoneInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.8">
+            android:layout_weight="0.75">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/etPhoneNumber"
@@ -103,7 +116,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone">
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <!-- OTP Description -->
         <TextView

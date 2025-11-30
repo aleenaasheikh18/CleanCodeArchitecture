@@ -6,6 +6,7 @@ import com.chat.myapplication.core.data.settings.SettingItem
 import com.chat.myapplication.databinding.FragmentSettingsBinding
 import com.chat.myapplication.ui.fragments.settings.SettingType
 import com.chat.myapplication.ui.fragments.settings.SettingsAdapter
+import com.chat.myapplication.ui.wizard.changepassword.ChangePasswordBottomSheetFragment
 import com.chat.myapplication.ui.wizard.editemail.EditEmailBottomSheetFragment
 import com.chat.myapplication.ui.wizard.editphone.EditPhoneBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,7 +45,7 @@ class AccountSecurityFragment :
             }
 
             SettingType.PASSWORD -> {
-
+                showChangePasswordWizard()
             }
 
             else -> {
@@ -70,6 +71,11 @@ class AccountSecurityFragment :
             // Handle phone verified - refresh settings if needed
         }
         wizard.show(parentFragmentManager, EditPhoneBottomSheetFragment.TAG)
+    }
+
+    private fun showChangePasswordWizard() {
+        val wizard = ChangePasswordBottomSheetFragment.newInstance()
+        wizard.show(parentFragmentManager, ChangePasswordBottomSheetFragment.TAG)
     }
 
     override fun onDestroyView() {

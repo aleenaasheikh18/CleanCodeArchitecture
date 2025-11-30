@@ -84,6 +84,11 @@ dependencies {
     // Circle Imageview
     implementation(libs.circleimageview)
 
+    // Glide with SVG support
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
+    implementation(libs.androidsvg)
+
     // Maps
     implementation(libs.playservices.maps)
 

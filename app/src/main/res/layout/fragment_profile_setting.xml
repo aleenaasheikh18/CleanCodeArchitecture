@@ -119,7 +119,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/new_standard_margin"
                 android:background="@drawable/bg_white_top_curves"
                 android:padding="@dimen/standard_size"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -177,46 +176,36 @@
                     app:layout_constraintTop_toTopOf="@id/iconEmail"
                     tools:text="abc@gmail.com" />
 
-                <!-- Allergies Row -->
-                <ImageView
-                    android:id="@+id/iconAllergen"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                <LinearLayout
+                    android:id="@+id/llAllergens"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center|start"
                     android:layout_marginTop="@dimen/new_standard_margin"
-                    android:background="@drawable/round_fill_shadow"
-                    android:padding="@dimen/new_dimen_10_dp"
-                    android:src="@drawable/ic_allergen"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iconEmail" />
+                    app:layout_constraintTop_toBottomOf="@id/iconEmail">
 
-                <TextView
-                    android:id="@+id/tvAllergies"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/new_dimen_8_dp"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/textColor"
-                    android:textSize="@dimen/standard_sub_title_size"
-                    app:layout_constraintBottom_toBottomOf="@id/iconAllergen"
-                    app:layout_constraintEnd_toStartOf="@id/btnManageAllergen"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@id/iconAllergen"
-                    app:layout_constraintTop_toTopOf="@id/iconAllergen"
-                    tools:text="2 allergens added" />
+                    <!-- Allergies Row -->
+                    <ImageView
+                        android:id="@+id/iconAllergen"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/round_fill_shadow"
+                        android:padding="@dimen/new_dimen_10_dp"
+                        android:src="@drawable/ic_allergen" />
 
-                <TextView
-                    android:id="@+id/btnManageAllergen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/monstreat_semi_bold"
-                    android:text="@string/manage_allergen"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/standard_sub_title_size"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@id/iconAllergen"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/iconAllergen"
-                    tools:visibility="visible" />
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chipGroupAllergies"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/new_dimen_8_dp"
+                        app:chipSpacingHorizontal="@dimen/new_dimen_4_dp"
+                        app:chipSpacingVertical="@dimen/new_dimen_4_dp"
+                        app:singleLine="false" />
+
+                </LinearLayout>
 
                 <!-- Address Row -->
                 <ImageView
@@ -227,9 +216,31 @@
                     android:background="@drawable/round_fill_shadow"
                     android:padding="@dimen/new_dimen_10_dp"
                     android:src="@drawable/ic_location"
-                    app:layout_constraintBottom_toBottomOf="@id/tvAddress"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iconAllergen" />
+                    app:layout_constraintTop_toBottomOf="@id/llAllergens" />
+
+                <!-- Add Address Chip (shown when no address) -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipAddAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/new_dimen_8_dp"
+                    android:text="@string/add_address"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    app:chipBackgroundColor="@color/colorGreen"
+                    app:layout_constraintBottom_toBottomOf="@id/iconLocation"
+                    app:layout_constraintStart_toEndOf="@id/iconLocation"
+                    app:layout_constraintTop_toTopOf="@id/iconLocation"
+                    tools:visibility="visible" />
+
+                <!-- Address Content (shown when address exists) -->
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/groupAddressContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="tvAddressTitle,tvAddress,chipRemoveAddress,mapView_1,tvNote1,tvDeliveryAddress" />
 
                 <TextView
                     android:id="@+id/tvAddressTitle"
@@ -240,8 +251,7 @@
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/standard_sub_title_size"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/btnRemoveAddress"
-                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintEnd_toStartOf="@id/chipRemoveAddress"
                     app:layout_constraintStart_toEndOf="@id/iconLocation"
                     app:layout_constraintTop_toTopOf="@id/iconLocation"
                     tools:text="Default Address" />
@@ -251,27 +261,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/new_dimen_8_dp"
-                    android:layout_marginTop="@dimen/new_dimen_8_dp"
-                    android:fontFamily="@font/montserrat_bold"
+                    android:layout_marginTop="@dimen/new_dimen_4_dp"
                     android:textColor="@color/textColor"
                     android:textSize="@dimen/standard_sub_title_size"
-                    app:layout_constraintBottom_toBottomOf="@id/iconLocation"
-                    app:layout_constraintEnd_toStartOf="@id/btnRemoveAddress"
-                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintEnd_toStartOf="@id/chipRemoveAddress"
                     app:layout_constraintStart_toEndOf="@id/iconLocation"
                     app:layout_constraintTop_toBottomOf="@id/tvAddressTitle"
                     tools:text="Address" />
 
-                <TextView
-                    android:id="@+id/btnRemoveAddress"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipRemoveAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/monstreat_semi_bold"
                     android:text="@string/remove_address"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/standard_sub_title_size"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@id/iconLocation"
+                    android:textColor="@color/white"
+                    app:chipBackgroundColor="@color/colorPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/iconLocation"
                     tools:visibility="visible" />
@@ -313,11 +317,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvNote1" />
 
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrierAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="chipAddAddress,tvDeliveryAddress" />
+
                 <TextView
                     android:id="@+id/tvLogout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/new_dimen_8_dp"
+                    android:layout_marginTop="@dimen/new_dimen_24_dp"
                     android:layout_marginBottom="@dimen/standard_size"
                     android:text="@string/logout"
                     android:textColor="@color/colorPrimary"
@@ -326,7 +337,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvDeliveryAddress" />
+                    app:layout_constraintTop_toBottomOf="@id/barrierAddress" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

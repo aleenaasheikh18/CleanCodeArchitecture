@@ -17,6 +17,7 @@ import com.chat.myapplication.databinding.LayoutWizardHeaderBinding
 import com.chat.myapplication.databinding.LayoutWizardPhoneBinding
 import com.chat.myapplication.databinding.LayoutWizardPhoneSuccessBinding
 import com.chat.myapplication.utility.SimpleTextWatcher
+import com.chat.myapplication.utility.glide.loadSvg
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -127,17 +128,14 @@ class EditPhoneBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetEd
     }
 
     private fun showCountrySelector() {
-        val countrySheet = CountrySelectionBottomSheetFragment.newInstance()
+        val countries = viewModel.uiState.value.countries
+        val countrySheet = CountrySelectionBottomSheetFragment.newInstance(countries)
         countrySheet.onCountrySelected = { country -> setSelectedCountry(country) }
         countrySheet.show(childFragmentManager, CountrySelectionBottomSheetFragment.TAG)
     }
 
     private fun setSelectedCountry(country: CountryArea) {
         viewModel.setSelectedCountry(country)
-        with(phoneBinding) {
-            tvCountryFlag.text = country.flag.orEmpty()
-            tvCountryCode.text = country.countryCode.orEmpty()
-        }
     }
 
     private fun showOtpSection(fullPhoneNumber: String) {
@@ -220,6 +218,12 @@ class EditPhoneBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetEd
             // Update loading
             if (state.isLoading) showProgressBar() else hideProgressBar()
 
+            // Update country loading
+            updateCountryLoading(state.isCountriesLoading)
+
+            // Update selected country
+            state.selectedCountry?.let { updateCountryDisplay(it) }
+
             // Update phone error
             updateFieldError(
                 phoneBinding.tvPhoneError,
@@ -241,6 +245,21 @@ class EditPhoneBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetEd
 
             // Update resend cooldown
             updateResendButton(state.resendCooldown)
+        }
+    }
+
+    private fun updateCountryLoading(isLoading: Boolean) {
+        with(phoneBinding) {
+            progressCountry.isVisible = isLoading
+            layoutCountryContent.isVisible = !isLoading
+            layoutCountrySelector.isEnabled = !isLoading
+        }
+    }
+
+    private fun updateCountryDisplay(country: CountryArea) {
+        with(phoneBinding) {
+            ivCountryFlag.loadSvg(country.flag)
+            tvCountryCode.text = country.countryCode.orEmpty()
         }
     }
 
