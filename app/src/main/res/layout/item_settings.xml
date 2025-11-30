@@ -6,15 +6,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/imgIcon"
-        android:layout_width="@dimen/new_dimen_36_dp"
-        android:layout_height="@dimen/new_dimen_36_dp"
+    <FrameLayout
+        android:id="@+id/iconContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/standard_size"
-        android:src="@drawable/ic_settings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgIcon"
+            android:layout_width="@dimen/new_dimen_40_dp"
+            android:layout_height="@dimen/new_dimen_40_dp"
+            android:src="@drawable/ic_settings" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgVerified"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="bottom|end"
+            android:src="@drawable/ic_verified"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/containerText"
@@ -25,7 +41,7 @@
         android:paddingVertical="@dimen/new_dimen_8_dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/imgNext"
-        app:layout_constraintStart_toEndOf="@id/imgIcon"
+        app:layout_constraintStart_toEndOf="@id/iconContainer"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView

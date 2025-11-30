@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_white_top_curves"
     android:gravity="top"
+    android:padding="@dimen/new_dimen_24_dp"
     android:orientation="vertical"
     android:visibility="visible">
 
@@ -44,10 +45,11 @@
 
     <TextView
         android:id="@+id/tvResendMagicLink"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/new_standard_margin"
         android:padding="@dimen/new_dimen_10_sp"
+        android:layout_gravity="center"
         android:fontFamily="@font/montserrat_bold"
         android:text="@string/resend_magic_link"
         android:textAllCaps="false"

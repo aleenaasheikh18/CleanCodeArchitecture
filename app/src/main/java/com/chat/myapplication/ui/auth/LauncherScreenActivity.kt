@@ -1,7 +1,7 @@
 package com.chat.myapplication.ui.auth
 
+import android.content.Intent
 import android.media.MediaPlayer
-import android.os.Handler
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.animation.Animation
@@ -13,41 +13,132 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.chat.myapplication.R
 import com.chat.myapplication.base.BaseActivity
+import com.chat.myapplication.core.data.auth.model.SignInRequest
+import com.chat.myapplication.core.deeplink.DeepLinkEvent
+import com.chat.myapplication.core.deeplink.DeepLinkHandler
+import com.chat.myapplication.core.domain.State
 import com.chat.myapplication.databinding.ActivityLauncherBinding
+import com.chat.myapplication.ui.dashboard.HomeActivity
+import com.chat.myapplication.ui.fragments.settings.SettingType
+import com.chat.myapplication.ui.legal.LegalDocumentActivity
+import com.chat.myapplication.ui.wizard.onboarding.WizardBottomSheetFragment
+import com.chat.myapplication.utility.AppConstants
+import com.chat.myapplication.utility.AppConstants.SCREEN_TYPE
+import com.chat.myapplication.utility.setOnSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import com.chat.myapplication.core.domain.State
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLauncherBinding::inflate),Animation.AnimationListener {
 
     private val viewModel: LauncherViewModel by viewModels()
 
+    @Inject
+    lateinit var deepLinkHandler: DeepLinkHandler
+
+    private var pendingDeepLinkEvent: DeepLinkEvent = DeepLinkEvent.None
+
     override fun initUserInterface() {
-
         initApiObserver()
-        val email = "abc@gmail.com"
-        val password = "12345"
-
         initSplashAnimations()
-        //viewModel.signIn(SignInRequest(email, password))
-
+        initClickListener()
     }
 
+    override fun onStart() {
+        super.onStart()
+        deepLinkHandler.initBranchSession(this) { event ->
+            handleDeepLinkEvent(event)
+        }
+    }
 
-    private fun initSplashAnimations(){
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        if (deepLinkHandler.shouldReInitSession(intent)) {
+            deepLinkHandler.reInitBranchSession(this) { event ->
+                handleDeepLinkEvent(event)
+            }
+        }
+    }
+
+    private fun handleDeepLinkEvent(event: DeepLinkEvent) {
+        when (event) {
+            is DeepLinkEvent.ReferralCode -> {
+                AppConstants.REFERRAL_CODE = event.code
+                pendingDeepLinkEvent = DeepLinkEvent.None
+            }
+            is DeepLinkEvent.InfluencerJob -> {
+                preferenceManager.influencerJobId = event.jobId
+                pendingDeepLinkEvent = DeepLinkEvent.None
+            }
+            is DeepLinkEvent.None -> {
+                pendingDeepLinkEvent = DeepLinkEvent.None
+            }
+            else -> {
+                pendingDeepLinkEvent = event
+            }
+        }
+    }
+
+    private fun initClickListener() {
+        bi.btnLogin.setOnSingleClickListener {
+            showWizardBottomSheet()
+        }
+    }
+
+    private fun showWizardBottomSheet() {
+        val wizard = WizardBottomSheetFragment.newInstance()
+        wizard.onWizardComplete = { email, password ->
+            viewModel.signIn(SignInRequest(email, password))
+        }
+        wizard.onTermsClick = {
+            openLegalDocument(SettingType.TERMS_SERVICE)
+        }
+        wizard.onPrivacyClick = {
+            openLegalDocument(SettingType.PRIVACY_POLICY)
+        }
+        wizard.show(supportFragmentManager, WizardBottomSheetFragment.TAG)
+    }
+
+    private fun openLegalDocument(type: SettingType) {
+        val intent = Intent(this, LegalDocumentActivity::class.java).apply {
+            putExtra(SCREEN_TYPE, type.name)
+        }
+        startActivity(intent)
+    }
+
+    private fun initSplashAnimations() {
         val logoAnim = AnimationUtils.loadAnimation(this, R.anim.splash_animation)
         bi.ivSplash.startAnimation(logoAnim)
 
-        val splashScreenTime = 1000
-        Handler().postDelayed({
-            val logoAnim1 = AnimationUtils.loadAnimation(this, R.anim.splash_animation1)
-            bi.ivSplash.animation = logoAnim1
-            logoAnim1.setAnimationListener(this)
-            startVideo()
-        }, splashScreenTime.toLong())
+        lifecycleScope.launch {
+            delay(SPLASH_DELAY)
+            if (preferenceManager.isLoggedIn) {
+                navigateToHome()
+            } else {
+                showLoginScreen()
+            }
+        }
+    }
 
+    private fun showLoginScreen() {
+        val logoAnim = AnimationUtils.loadAnimation(this, R.anim.splash_animation1)
+        bi.ivSplash.animation = logoAnim
+        logoAnim.setAnimationListener(this)
+        startVideo()
+    }
+
+    private fun navigateToHome() {
+        val intent = Intent(this, HomeActivity::class.java).apply {
+            if (pendingDeepLinkEvent != DeepLinkEvent.None) {
+                putExtra(DeepLinkEvent.EXTRA_DEEP_LINK_EVENT, pendingDeepLinkEvent)
+            }
+        }
+        startActivity(intent)
+        finish()
     }
 
     private fun startVideo() {
@@ -80,6 +171,7 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
                         is State.Loading -> showProgressBar()
                         is State.Success -> {
                             hideProgressBar()
+                            navigateToHome()
                         }
                         is State.Error -> {
                             showInfoDialog(description = state.message)
@@ -100,4 +192,7 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
 
     override fun onAnimationStart(animation: Animation?) = Unit
 
+    companion object {
+        private const val SPLASH_DELAY = 1000L
+    }
 }

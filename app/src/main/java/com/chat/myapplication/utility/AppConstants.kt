@@ -9,4 +9,6 @@ object AppConstants {
     const val BOTH: String = "both"
     const val PUSH: String = "push"
     const val EMAIL: String = "email"
+
+    var REFERRAL_CODE: String = ""
 }

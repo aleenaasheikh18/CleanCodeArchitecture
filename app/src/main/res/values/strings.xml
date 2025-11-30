@@ -1,5 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">FoodChoo</string>
+
+    <!-- Branch.io Keys - Replace with your actual keys -->
+    <string name="branch_key" translatable="false">key_live_iDlWK5RRcKpeRsBWAg7nUhlkzBageSEz</string>
+    <string name="branch_key_test" translatable="false">key_test_cvlZT5PNbQeoRry8yn1p3kijrzmnbGxL</string>
+
     <string name="version">"Version: "</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_maps">MapsActivity</string>
@@ -71,8 +76,8 @@
     <string name="invite_code">Invite Code</string>
     <string name="already">Already have an account?</string>
     <string name="by">By signing up, you agree with our</string>
-    <string name="by_continuing">By continuing, you agree to our</string>
     <string name="create_influencer_profile">you agree to be bound by our Eater Influencer</string>
+    <string name="by_continuing">By continuing, you agree to our</string>
     <string name="terms">Terms of Services</string>
     <string name="and">and</string>
     <string name="policy">Privacy Policy</string>
@@ -785,6 +790,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="messages">Messages</string>
 
+    <!-- Wizard -->
+    <string name="wizard_title_enter_email">Enter Email</string>
+    <string name="wizard_title_enter_password">Enter Password</string>
+    <string name="edit_email_title">Verify Email</string>
+    <string name="you_got_mail_title">%s,\nYou got mail!</string>
 
     <!-- Profile -->
     <string name="manage_allergen"><u>Manage Allergen</u></string>
@@ -814,5 +824,26 @@
     <string name="email_success_detail">You\'ve successfully verified your new email address of:\n%s</string>
     <string name="feed_me">Great now feed me</string>
     <string name="unable_to_load">Unable to load content. Please try again</string>
+    <string name="select_option">Select how you would like to proceed</string>
+    <string name="choose_option">Choose an Option</string>
+    <string name="use_passkey">Use Passkey</string>
+    <string name="what_your_email">What\'s your email?</string>
+
+    <!-- Edit Phone -->
+    <string name="what_your_phone">What\'s your phone number?</string>
+    <string name="enter_phone_number">Enter phone number</string>
+    <string name="clear_phone">Clear phone</string>
+    <string name="continue_text">Continue</string>
+    <string name="verify_phone_title">Verify your phone</string>
+    <string name="otp_sent_description">We\'ve sent a verification code to %s</string>
+    <string name="enter_otp">Enter verification code</string>
+    <string name="clear_otp">Clear OTP</string>
+    <string name="verify">Verify</string>
+    <string name="resend_otp"><u>Resend code</u></string>
+    <string name="search_country">Search country</string>
+    <string name="clear_search">Clear search</string>
+    <string name="phone_verified_title">Phone verified!</string>
+    <string name="phone_verified_description">Your phone number has been successfully verified.</string>
+    <string name="phone_send_code">Send Code</string>
 
 </resources>

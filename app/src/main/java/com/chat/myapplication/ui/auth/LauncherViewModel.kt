@@ -8,6 +8,7 @@ import com.chat.myapplication.core.data.auth.usecase.SignInUseCase
 import com.chat.myapplication.core.domain.State
 import com.chat.myapplication.core.domain.onApiError
 import com.chat.myapplication.core.domain.onApiSuccess
+import com.chat.myapplication.utility.PreferenceManager
 import com.chat.myapplication.utility.collectAsResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LauncherViewModel @Inject constructor(
-    private val signInUseCase: SignInUseCase
+    private val signInUseCase: SignInUseCase,
+    private val preferenceManager: PreferenceManager
 ) : BaseViewModel() {
 
     private val _signInResponse: MutableSharedFlow<State<SignInResponse>> = MutableSharedFlow()
@@ -33,6 +35,9 @@ class LauncherViewModel @Inject constructor(
             .onApiSuccess { response ->
                 response.let {
                     if (it.status) {
+                        it.data?.let { signInData ->
+                            preferenceManager.handleDataAfterLogin(signInData)
+                        }
                         _signInResponse.emit(State.success(it))
                     } else {
                         _signInResponse.emit(State.Error(message = it.message))

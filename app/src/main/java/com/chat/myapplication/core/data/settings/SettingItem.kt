@@ -8,5 +8,6 @@ data class SettingItem(
     val id: SettingType = SettingType.NONE,
     val icon: Int,
     @param:StringRes val title: Int,
-    val description : String = String.empty
+    val description: String = String.empty,
+    val isVerified: Boolean = false
 )

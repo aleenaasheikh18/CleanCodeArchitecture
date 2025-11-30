@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_top_curves"
+    android:orientation="vertical"
+    android:padding="@dimen/new_dimen_24_dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/title_email_success"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/standard_title_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvEmailDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_standard_margin"
+        android:fontFamily="@font/monstreat_medium"
+        android:gravity="start"
+        android:text="@string/email_success_detail"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/standard_sub_title_size" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/new_dimen_20_dp"
+        android:background="@drawable/button_rounded_black"
+        android:fontFamily="@font/monstreat_medium"
+        android:gravity="center"
+        android:text="@string/feed_me"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/button_text_size"
+        android:textStyle="bold" />
+
+</LinearLayout>

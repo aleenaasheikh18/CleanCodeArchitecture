@@ -6,7 +6,9 @@ import com.chat.myapplication.core.data.settings.AccountSecurityFactory
 import com.chat.myapplication.core.data.settings.SettingsFactory
 import com.chat.myapplication.core.exception.GsonProvider
 import com.chat.myapplication.ui.fragments.settings.legalStuff.LegalStuffFactory
+import com.chat.myapplication.core.domain.AuthInterceptor
 import com.chat.myapplication.utility.NetworkConstants
+import com.chat.myapplication.utility.PreferenceManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -39,10 +41,15 @@ object CPCommonModule {
     fun provideDialogManager() = DialogManager()
 
     @Provides
+    @Singleton
+    fun providePreferenceManager(@ApplicationContext context: Context) = PreferenceManager(context)
+
+    @Provides
     fun provideAccountSecurityFactory(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
+        preferenceManager: PreferenceManager
     ): AccountSecurityFactory {
-        return AccountSecurityFactory(context)
+        return AccountSecurityFactory(context,preferenceManager)
     }
 
     @Provides
@@ -54,13 +61,21 @@ object CPCommonModule {
 
     @Provides
     @Singleton
+    fun provideAuthInterceptor(preferenceManager: PreferenceManager): AuthInterceptor {
+        return AuthInterceptor(preferenceManager)
+    }
+
+    @Provides
+    @Singleton
     @PublicHttpClient
-    fun providePublicHttpClient() : OkHttpClient {
+    fun providePublicHttpClient(authInterceptor: AuthInterceptor): OkHttpClient {
         val okHttpBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
         val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
-        okHttpBuilder.addNetworkInterceptor(loggingInterceptor)
+        okHttpBuilder
+            .addInterceptor(authInterceptor)
+            .addNetworkInterceptor(loggingInterceptor)
             .connectTimeout(NetworkConstants.CONNECT_TIME_OUT, TimeUnit.SECONDS)
             .readTimeout(NetworkConstants.READ_TIME_OUT, TimeUnit.SECONDS)
         return okHttpBuilder.build()

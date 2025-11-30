@@ -14,19 +14,46 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.MyApplication">
+
+        <!-- Branch.io SDK Configuration -->
+        <meta-data
+            android:name="io.branch.sdk.BranchKey"
+            android:value="@string/branch_key" />
+        <meta-data
+            android:name="io.branch.sdk.BranchKey.test"
+            android:value="@string/branch_key_test" />
+        <meta-data
+            android:name="io.branch.sdk.TestMode"
+            android:value="false" />
+
         <activity
             android:name=".ui.dashboard.HomeActivity"
-            android:exported="true" >
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="foodchoo.app.link"
+                    android:scheme="https" />
+                <data
+                    android:host="foodchoo-alternate.app.link"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.legal.LegalDocumentActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.auth.LauncherScreenActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.auth.LauncherScreenActivity"
-            android:exported="true">
-
         </activity>
     </application>
 

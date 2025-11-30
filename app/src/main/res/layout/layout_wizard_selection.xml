@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/new_dimen_24_dp">
+
+    <TextView
+        android:id="@+id/tvSelectionSubtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/select_option"
+        android:textColor="@color/textColor"
+        android:textSize="@dimen/txt_mediumX" />
+
+    <LinearLayout
+        android:id="@+id/llGoogle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/new_dimen_48_dp"
+        android:layout_marginTop="@dimen/standard_size"
+        android:background="@drawable/tag_black"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/new_dimen_4_dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/ic_google"
+            android:drawablePadding="@dimen/new_dimen_10_dp"
+            android:fontFamily="@font/monstreat_medium"
+            android:gravity="center"
+            android:text="@string/create_using_google"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/standard_size"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/llPasskey"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/new_dimen_48_dp"
+        android:layout_marginTop="@dimen/standard_size"
+        android:background="@drawable/button_rounded_outline"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/new_dimen_4_dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnOption1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:drawablePadding="@dimen/new_dimen_10_dp"
+            android:drawableStart="@drawable/ic_pass_key"
+            android:text="@string/use_passkey"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="@dimen/txt_mediumXX" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/new_dimen_48_dp"
+        android:layout_marginTop="@dimen/standard_size"
+        android:background="@drawable/button_rounded_outline"
+        android:text="@string/continue_with_email"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="@dimen/txt_mediumXX" />
+
+    <TextView
+        android:id="@+id/tvTerms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_size"
+        android:gravity="center"
+        android:text="@string/by_continuing"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txt_mediumX" />
+
+</LinearLayout>

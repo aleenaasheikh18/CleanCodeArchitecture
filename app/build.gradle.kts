@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -42,6 +43,7 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
+        buildConfig = true
     }
 }
 
@@ -87,6 +89,9 @@ dependencies {
 
     // Switch
     implementation(libs.toggle)
+
+    // Branch.io Deep Linking
+    implementation(libs.branch.io)
 
     // Testing
     testImplementation(libs.junit)

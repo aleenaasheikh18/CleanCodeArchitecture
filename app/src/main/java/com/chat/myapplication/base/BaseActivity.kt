@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.chat.myapplication.R
 import com.chat.myapplication.components.DialogManager
+import com.chat.myapplication.utility.PreferenceManager
 import javax.inject.Inject
 
 abstract class BaseActivity<VB : ViewBinding>(private val inflate: Inflate<VB>) :
@@ -17,6 +18,8 @@ abstract class BaseActivity<VB : ViewBinding>(private val inflate: Inflate<VB>) 
 
     open fun hideProgressBar() = progressDialog?.hideProgressDialog()
 
+    @Inject
+    lateinit var preferenceManager: PreferenceManager
     @Inject
     lateinit var dialogManager: DialogManager
 
