@@ -840,10 +840,22 @@
     <string name="clear_otp">Clear OTP</string>
     <string name="verify">Verify</string>
     <string name="resend_otp"><u>Resend code</u></string>
-    <string name="search_country">Search country</string>
+    <string name="hint_search_country">Search country</string>
+    <string name="title_select_country">Select Country</string>
     <string name="clear_search">Clear search</string>
     <string name="phone_verified_title">Phone verified!</string>
     <string name="phone_verified_description">Your phone number has been successfully verified.</string>
     <string name="phone_send_code">Send Code</string>
+
+    <!-- Validation Messages -->
+    <string name="error_phone_required">Phone number is required</string>
+    <string name="error_phone_invalid">Please enter a valid phone number</string>
+    <string name="error_country_required">Please select a country</string>
+    <string name="error_otp_required">Verification code is required</string>
+    <string name="error_otp_invalid">Please enter valid verification code</string>
+    <string name="error_loading_countries">Failed to load countries</string>
+    <string name="btn_retry">Retry</string>
+    <string name="resend_otp_success">Code sent successfully</string>
+    <string name="no_results_found">No results found</string>
 
 </resources>

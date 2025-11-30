@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/new_dimen_40_dp"
+    android:layout_height="@dimen/new_dimen_4_dp"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="@dimen/new_dimen_12_dp"
+    android:background="@drawable/bg_input_field" />

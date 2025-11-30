@@ -37,4 +37,49 @@
         <item name="cornerSizeBottomRight">0dp</item>
     </style>
 
+    <!-- Wizard Styles -->
+    <style name="WizardTitle">
+        <item name="android:textColor">@color/titleColor</item>
+        <item name="android:textSize">@dimen/txt_mediumX</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="WizardDescription">
+        <item name="android:textColor">@color/colorLightGray</item>
+        <item name="android:textSize">@dimen/txt_mediumX</item>
+    </style>
+
+    <style name="InputField">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/new_dimen_48_dp</item>
+        <item name="android:background">@drawable/bg_input_field</item>
+        <item name="android:paddingStart">@dimen/new_dimen_16_dp</item>
+        <item name="android:paddingEnd">@dimen/new_dimen_48_dp</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textColorHint">@color/colorLightGray</item>
+        <item name="android:textSize">@dimen/txt_mediumX</item>
+    </style>
+
+    <style name="PrimaryButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/new_dimen_48_dp</item>
+        <item name="android:background">@drawable/button_rounded_black</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/defaultButtonTextColor</item>
+        <item name="android:textSize">@dimen/txt_mediumXX</item>
+    </style>
+
+    <style name="ErrorText">
+        <item name="android:textColor">@color/defaultColorPrimary</item>
+        <item name="android:textSize">@dimen/txt_smallXX</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="ClearIcon">
+        <item name="android:layout_width">@dimen/new_dimen_24_dp</item>
+        <item name="android:layout_height">@dimen/new_dimen_24_dp</item>
+        <item name="android:src">@drawable/ic_input_clear</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
 </resources>

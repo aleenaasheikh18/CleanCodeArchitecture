@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/new_dimen_24_dp">
+
+    <ImageView
+        android:layout_width="@dimen/new_dimen_80_dp"
+        android:layout_height="@dimen/new_dimen_80_dp"
+        android:layout_marginTop="@dimen/new_dimen_24_dp"
+        android:contentDescription="@string/phone_verified_title"
+        android:src="@drawable/ic_verified" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_dimen_24_dp"
+        android:gravity="center"
+        android:text="@string/phone_verified_title"
+        android:textColor="@color/titleColor"
+        android:textSize="@dimen/txt_mediumX"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvSuccessDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_dimen_12_dp"
+        android:gravity="center"
+        android:text="@string/phone_verified_description"
+        android:textColor="@color/colorLightGray"
+        android:textSize="@dimen/txt_mediumX" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnDone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/new_dimen_48_dp"
+        android:layout_marginTop="@dimen/new_dimen_32_dp"
+        android:background="@drawable/button_rounded_black"
+        android:text="@string/done"
+        android:textAllCaps="false"
+        android:textColor="@color/defaultButtonTextColor"
+        android:textSize="@dimen/txt_mediumXX" />
+
+</LinearLayout>

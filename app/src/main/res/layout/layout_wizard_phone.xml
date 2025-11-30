@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/new_dimen_24_dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/what_your_phone"
+        android:textColor="@color/titleColor"
+        android:textSize="@dimen/txt_mediumX"
+        android:textStyle="bold" />
+
+    <!-- Country Selector + Phone Input Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_size"
+        android:orientation="horizontal">
+
+        <!-- Country Selector (20%) -->
+        <LinearLayout
+            android:id="@+id/layoutCountrySelector"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/new_dimen_48_dp"
+            android:layout_weight="0.2"
+            android:layout_marginEnd="@dimen/new_dimen_8_dp"
+            android:background="@drawable/bg_input_field"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/new_dimen_8_dp">
+
+            <TextView
+                android:id="@+id/tvCountryFlag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/txt_mediumXX" />
+
+            <TextView
+                android:id="@+id/tvCountryCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/new_dimen_4_dp"
+                android:hint="@string/select_country"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorLightGray"
+                android:textSize="@dimen/txt_medium" />
+
+        </LinearLayout>
+
+        <!-- Phone Number Input (80%) -->
+        <FrameLayout
+            android:id="@+id/layoutPhoneInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/new_dimen_48_dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="@string/enter_phone_number"
+                android:inputType="phone"
+                android:paddingStart="@dimen/new_dimen_16_dp"
+                android:paddingEnd="@dimen/new_dimen_48_dp"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorLightGray"
+                android:textSize="@dimen/txt_mediumX" />
+
+            <ImageView
+                android:id="@+id/ivClearPhone"
+                android:layout_width="@dimen/new_dimen_24_dp"
+                android:layout_height="@dimen/new_dimen_24_dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="@dimen/new_dimen_12_dp"
+                android:contentDescription="@string/clear_phone"
+                android:src="@drawable/ic_input_clear"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!-- Phone Error Text -->
+    <TextView
+        android:id="@+id/tvPhoneError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_dimen_6_dp"
+        android:textColor="@color/defaultColorPrimary"
+        android:textSize="@dimen/txt_smallXX"
+        android:visibility="gone" />
+
+    <!-- OTP Section - Initially Hidden -->
+    <LinearLayout
+        android:id="@+id/layoutOtpSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <!-- OTP Description -->
+        <TextView
+            android:id="@+id/tvOtpDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/new_dimen_16_dp"
+            android:textColor="@color/colorLightGray"
+            android:textSize="@dimen/txt_mediumX" />
+
+        <!-- OTP Input -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/new_dimen_12_dp">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etOtpCode"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/new_dimen_48_dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="@string/enter_otp"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingStart="@dimen/new_dimen_16_dp"
+                android:paddingEnd="@dimen/new_dimen_48_dp"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/colorLightGray"
+                android:textSize="@dimen/txt_mediumX" />
+
+            <ImageView
+                android:id="@+id/ivClearOtp"
+                android:layout_width="@dimen/new_dimen_24_dp"
+                android:layout_height="@dimen/new_dimen_24_dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="@dimen/new_dimen_12_dp"
+                android:contentDescription="@string/clear_otp"
+                android:src="@drawable/ic_input_clear"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+        <!-- OTP Error Text -->
+        <TextView
+            android:id="@+id/tvOtpError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/new_dimen_6_dp"
+            android:textColor="@color/defaultColorPrimary"
+            android:textSize="@dimen/txt_smallXX"
+            android:visibility="gone" />
+
+        <!-- Resend OTP -->
+        <TextView
+            android:id="@+id/tvResendOtp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/new_dimen_8_dp"
+            android:padding="@dimen/new_dimen_4_dp"
+            android:text="@string/resend_otp"
+            android:textColor="@color/defaultColorPrimary"
+            android:textSize="@dimen/txt_mediumX" />
+
+    </LinearLayout>
+
+    <!-- Continue/Verify Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/new_dimen_48_dp"
+        android:layout_marginTop="@dimen/new_dimen_24_dp"
+        android:background="@drawable/button_rounded_black"
+        android:text="@string/phone_send_code"
+        android:textAllCaps="false"
+        android:textColor="@color/defaultButtonTextColor"
+        android:textSize="@dimen/txt_mediumXX" />
+
+</LinearLayout>
