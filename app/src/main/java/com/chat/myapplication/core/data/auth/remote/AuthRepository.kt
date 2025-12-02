@@ -7,6 +7,9 @@ import com.chat.myapplication.core.data.auth.model.ChangeEmailRequest
 import com.chat.myapplication.core.data.auth.model.ChangeEmailResponse
 import com.chat.myapplication.core.data.auth.model.ResetPasswordRequest
 import com.chat.myapplication.core.data.auth.model.CountriesAreasResponse
+import com.chat.myapplication.core.data.auth.model.PasskeyLoginRequest
+import com.chat.myapplication.core.data.auth.model.PasskeyRegisterRequest
+import com.chat.myapplication.core.data.auth.model.PasskeyRegisterResponse
 import com.chat.myapplication.core.data.auth.model.SignInRequest
 import com.chat.myapplication.core.data.auth.model.SignInResponse
 import com.chat.myapplication.core.data.auth.model.UpdateAllergiesRequest
@@ -44,4 +47,8 @@ interface AuthRepository {
     fun resetPassword(request: ResetPasswordRequest): Flow<BaseResponse>
 
     fun verifyChangePasswordToken(token: String): Flow<BaseResponse>
+
+    fun registerPasskey(request: PasskeyRegisterRequest): Flow<PasskeyRegisterResponse>
+
+    fun loginWithPasskey(request: PasskeyLoginRequest): Flow<SignInResponse>
 }

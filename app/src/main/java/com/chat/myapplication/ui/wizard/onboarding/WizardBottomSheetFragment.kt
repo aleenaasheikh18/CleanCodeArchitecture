@@ -2,6 +2,7 @@ package com.chat.myapplication.ui.wizard.onboarding
 
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -10,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.chat.myapplication.R
 import com.chat.myapplication.base.BaseBottomSheetDialogFragment
+import com.chat.myapplication.core.data.auth.model.SignInData
 import com.chat.myapplication.databinding.BottomSheetWizardBinding
 import com.chat.myapplication.databinding.LayoutWizardEmailBinding
 import com.chat.myapplication.databinding.LayoutWizardHeaderBinding
@@ -44,6 +46,7 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
     var onWizardCancelled: (() -> Unit)? = null
     var onTermsClick: (() -> Unit)? = null
     var onPrivacyClick: (() -> Unit)? = null
+    var onPasskeyLoginSuccess: ((SignInData) -> Unit)? = null
 
     override fun initUserInterface() {
         setupHeader()
@@ -86,7 +89,7 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
             }
             llPasskey.setOnClickListener {
                 viewModel.setSelectedOption(2)
-                // Handle Passkey sign in
+                viewModel.authenticateWithPasskey(requireActivity())
             }
             btnLogin.setOnClickListener {
                 viewModel.setSelectedOption(3)
@@ -204,6 +207,32 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
                         }
                     }
                 }
+
+                launch {
+                    viewModel.passkeyLoginState.collectLatest { state ->
+                        handlePasskeyLoginState(state)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun handlePasskeyLoginState(state: PasskeyLoginState) {
+        when (state) {
+            is PasskeyLoginState.Idle -> {
+                selectionBinding.llPasskey.isEnabled = true
+            }
+            is PasskeyLoginState.Loading -> {
+                selectionBinding.llPasskey.isEnabled = false
+            }
+            is PasskeyLoginState.Success -> {
+                selectionBinding.llPasskey.isEnabled = true
+                onPasskeyLoginSuccess?.invoke(state.data)
+                dismiss()
+            }
+            is PasskeyLoginState.Error -> {
+                selectionBinding.llPasskey.isEnabled = true
+                Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
             }
         }
     }

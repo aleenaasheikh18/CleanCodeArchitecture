@@ -11,7 +11,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.chat.myapplication"
+        applicationId = "com.project.foodchooeater"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -97,6 +97,10 @@ dependencies {
 
     // Branch.io Deep Linking
     implementation(libs.branch.io)
+
+    // Credential Manager for Passkeys
+    implementation(libs.credentials)
+    implementation(libs.credentials.play.services)
 
     // Testing
     testImplementation(libs.junit)

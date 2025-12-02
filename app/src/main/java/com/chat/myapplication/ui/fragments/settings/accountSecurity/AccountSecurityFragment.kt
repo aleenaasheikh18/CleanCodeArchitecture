@@ -1,6 +1,10 @@
 package com.chat.myapplication.ui.fragments.settings.accountSecurity
 
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.chat.myapplication.base.BaseFragment
 import com.chat.myapplication.core.data.settings.SettingItem
 import com.chat.myapplication.databinding.FragmentSettingsBinding
@@ -10,6 +14,8 @@ import com.chat.myapplication.ui.wizard.changepassword.ChangePasswordBottomSheet
 import com.chat.myapplication.ui.wizard.editemail.EditEmailBottomSheetFragment
 import com.chat.myapplication.ui.wizard.editphone.EditPhoneBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AccountSecurityFragment :
@@ -23,6 +29,39 @@ class AccountSecurityFragment :
                 handleItemClick(item)
             }
             bi.rvSettings.adapter = adapter
+        }
+
+        initObservers()
+    }
+
+    private fun initObservers() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.passkeyRegisterState.collectLatest { state ->
+                    handlePasskeyRegisterState(state)
+                }
+            }
+        }
+    }
+
+    private fun handlePasskeyRegisterState(state: PasskeyRegisterState) {
+        when (state) {
+            is PasskeyRegisterState.Idle -> {
+                // Do nothing
+            }
+            is PasskeyRegisterState.Loading -> {
+                // Show loading if needed
+            }
+            is PasskeyRegisterState.Success -> {
+                Toast.makeText(
+                    requireContext(),
+                    "Passkey registered successfully",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            is PasskeyRegisterState.Error -> {
+                Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -41,7 +80,7 @@ class AccountSecurityFragment :
             }
 
             SettingType.PASSKEY -> {
-
+                viewModel.registerPasskey(requireActivity())
             }
 
             SettingType.PASSWORD -> {

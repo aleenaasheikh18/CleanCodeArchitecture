@@ -7,6 +7,9 @@ import com.chat.myapplication.core.data.auth.model.ChangeEmailRequest
 import com.chat.myapplication.core.data.auth.model.ChangeEmailResponse
 import com.chat.myapplication.core.data.auth.model.ResetPasswordRequest
 import com.chat.myapplication.core.data.auth.model.CountriesAreasResponse
+import com.chat.myapplication.core.data.auth.model.PasskeyLoginRequest
+import com.chat.myapplication.core.data.auth.model.PasskeyRegisterRequest
+import com.chat.myapplication.core.data.auth.model.PasskeyRegisterResponse
 import com.chat.myapplication.core.data.auth.model.SignInRequest
 import com.chat.myapplication.core.data.auth.model.SignInResponse
 import com.chat.myapplication.core.data.auth.model.UpdateAllergiesRequest
@@ -52,7 +55,7 @@ interface AuthApiService {
     @GET("customers")
     suspend fun getCustomerProfile(): ViewProfileResponse
 
-    @GET("customers/change-password")
+    @GET("customers/change-password-request")
     suspend fun changePasswordRequest(): BaseResponse
 
     @GET("customers/change-password-request/{change_password_token}")
@@ -60,4 +63,10 @@ interface AuthApiService {
 
     @POST("customers/reset-password")
     suspend fun resetPassword(@Body request: ResetPasswordRequest): BaseResponse
+
+    @POST("customers/passkey/register")
+    suspend fun registerPasskey(@Body request: PasskeyRegisterRequest): PasskeyRegisterResponse
+
+    @POST("customers/passkey/login")
+    suspend fun loginWithPasskey(@Body request: PasskeyLoginRequest): SignInResponse
 }

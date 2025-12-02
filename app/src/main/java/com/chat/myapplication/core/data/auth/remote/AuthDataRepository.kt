@@ -7,6 +7,9 @@ import com.chat.myapplication.core.data.auth.model.ChangeEmailRequest
 import com.chat.myapplication.core.data.auth.model.ChangeEmailResponse
 import com.chat.myapplication.core.data.auth.model.ResetPasswordRequest
 import com.chat.myapplication.core.data.auth.model.CountriesAreasResponse
+import com.chat.myapplication.core.data.auth.model.PasskeyLoginRequest
+import com.chat.myapplication.core.data.auth.model.PasskeyRegisterRequest
+import com.chat.myapplication.core.data.auth.model.PasskeyRegisterResponse
 import com.chat.myapplication.core.data.auth.model.SignInRequest
 import com.chat.myapplication.core.data.auth.model.SignInResponse
 import com.chat.myapplication.core.data.auth.model.UpdateAllergiesRequest
@@ -98,6 +101,18 @@ class AuthDataRepository @Inject constructor(private val authApiService: AuthApi
     override fun verifyChangePasswordToken(token: String): Flow<BaseResponse> {
         return flow {
             emit(authApiService.verifyChangePasswordToken(token))
+        }
+    }
+
+    override fun registerPasskey(request: PasskeyRegisterRequest): Flow<PasskeyRegisterResponse> {
+        return flow {
+            emit(authApiService.registerPasskey(request))
+        }
+    }
+
+    override fun loginWithPasskey(request: PasskeyLoginRequest): Flow<SignInResponse> {
+        return flow {
+            emit(authApiService.loginWithPasskey(request))
         }
     }
 }
