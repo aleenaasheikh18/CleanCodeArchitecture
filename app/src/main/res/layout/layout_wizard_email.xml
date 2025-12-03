@@ -25,7 +25,6 @@
             android:layout_height="@dimen/new_dimen_48_dp"
             android:background="@drawable/bg_input_field"
             android:hint="Enter your email"
-            android:text="m.rafayakram+eatusa@gmail.com "
             android:inputType="textEmailAddress"
             android:paddingStart="@dimen/new_dimen_16_dp"
             android:paddingEnd="@dimen/new_dimen_48_dp"

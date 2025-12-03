@@ -23,7 +23,7 @@ class SettingsAdapter(
                 text = item.description
                 if (item.description.isNotEmpty()) show() else hide()
             }
-            imgVerified.apply { if (item.description.isNotEmpty()) show() else hide() }
+            imgVerified.apply{ if (item.isVerified) show() else hide() }
             root.setOnClickListener { onItemClick(item) }
         }
     }

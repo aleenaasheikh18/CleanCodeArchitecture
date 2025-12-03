@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
 import androidx.viewbinding.ViewBinding
 import com.chat.myapplication.R
+import com.chat.myapplication.components.DialogManager
 import com.chat.myapplication.utility.PreferenceManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -25,6 +27,9 @@ abstract class BaseBottomSheetDialogFragment<VB : ViewBinding>(
     protected val bi get() = _binding!!
 
     private var progressDialog: CustomProgressDialog? = null
+
+    @Inject
+    lateinit var dialogManager: DialogManager
 
     @Inject
     lateinit var preferenceManager: PreferenceManager
@@ -76,6 +81,24 @@ abstract class BaseBottomSheetDialogFragment<VB : ViewBinding>(
     open fun showProgressBar() = progressDialog?.showProgressDialog()
 
     open fun hideProgressBar() = progressDialog?.hideProgressDialog()
+
+    open fun showInfoDialog(
+        title: String = getString(R.string.str_alert),
+        description: String,
+        @StringRes buttonResource: Int = R.string.str_ok,
+        @StringRes extraButtonResource: Int = 0,
+        onPositiveButtonClick: () -> Unit = {}
+    ) {
+        hideProgressBar()
+        dialogManager.showDialog(
+            context = requireContext(),
+            positiveButtonStringResource = buttonResource,
+            extraButtonStringResource = extraButtonResource,
+            titleStringResource = title,
+            descriptionStringResource = description,
+            onPositiveButtonClick = { onPositiveButtonClick.invoke() }
+        )
+    }
 
     protected abstract fun initUserInterface()
 }

@@ -120,6 +120,13 @@ class EditPhoneBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetEd
         }
     }
 
+    private fun initializePhoneFromPreference() {
+        val currentPhone = preferenceManager.phoneNumber
+        if (currentPhone.isNotEmpty()) {
+            viewModel.initializeWithCurrentPhone(currentPhone)
+        }
+    }
+
     private fun setupSuccessScreen() {
         successBinding.btnDone.setOnClickListener {
             onPhoneVerified?.invoke()
@@ -209,6 +216,8 @@ class EditPhoneBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetEd
         }
     }
 
+    private var hasInitializedPhone = false
+
     private suspend fun observeUiState() {
         viewModel.uiState.collectLatest { state ->
             // Update step
@@ -221,8 +230,20 @@ class EditPhoneBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetEd
             // Update country loading
             updateCountryLoading(state.isCountriesLoading)
 
+            // Initialize phone number from preference after countries are loaded
+            if (!state.isCountriesLoading && state.countries.isNotEmpty() && !hasInitializedPhone) {
+                hasInitializedPhone = true
+                initializePhoneFromPreference()
+            }
+
             // Update selected country
             state.selectedCountry?.let { updateCountryDisplay(it) }
+
+            // Update phone number field when state changes
+            if (state.phoneNumber.isNotEmpty() && phoneBinding.etPhoneNumber.text.toString() != state.phoneNumber) {
+                phoneBinding.etPhoneNumber.setText(state.phoneNumber)
+                phoneBinding.ivClearPhone.isVisible = true
+            }
 
             // Update phone error
             updateFieldError(

@@ -25,8 +25,14 @@ class YouGotMailViewModel @Inject constructor(
     private val _resendState = MutableStateFlow<State<BaseResponse>>(State.idle())
     val resendState: StateFlow<State<BaseResponse>> = _resendState
 
+    private var userEmail: String = ""
+
+    fun setEmail(email: String) {
+        userEmail = email
+    }
+
     fun resendLoginLink() {
-        sendLoginLinkUseCase()
+        sendLoginLinkUseCase(userEmail)
             .collectAsResult()
             .flowOn(Dispatchers.IO)
             .onApiSuccess { response ->

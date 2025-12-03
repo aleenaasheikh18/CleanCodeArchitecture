@@ -71,6 +71,10 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
         // Allergies Keys
         private const val KEY_ALLERGIES = "allergies"
         private const val ALLERGIES_SEPARATOR = "|||"
+
+        // Security Keys
+        private const val KEY_IS_SET_PASSWORD = "is_set_password"
+        private const val KEY_PASSKEY_COUNT = "passkey_count"
     }
 
     // region Auth Properties
@@ -235,6 +239,16 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
         }
     // endregion
 
+    // region Security Properties
+    var isSetPassword: Boolean
+        get() = sharedPreferences.getBoolean(KEY_IS_SET_PASSWORD, false)
+        set(value) = sharedPreferences.edit().putBoolean(KEY_IS_SET_PASSWORD, value).apply()
+
+    var passkeyCount: Int
+        get() = sharedPreferences.getInt(KEY_PASSKEY_COUNT, 0)
+        set(value) = sharedPreferences.edit().putInt(KEY_PASSKEY_COUNT, value).apply()
+    // endregion
+
     // region Login/Logout Methods
     fun handleDataAfterLogin(loginData: SignInData) {
         val customer = loginData.customer
@@ -292,6 +306,10 @@ class PreferenceManager @Inject constructor(@ApplicationContext private val cont
 
             // Allergies
             allergies = c.allergies.orEmpty()
+
+            // Security data
+            isSetPassword = c.isSetPassword
+            passkeyCount = c.passkeys?.size ?: 0
         }
     }
 

@@ -18,7 +18,6 @@ import com.chat.myapplication.core.data.auth.model.SignInRequest
 import com.chat.myapplication.core.data.auth.model.SignInResponse
 import com.chat.myapplication.core.data.auth.model.UpdateAllergiesRequest
 import com.chat.myapplication.core.data.auth.model.ViewProfileResponse
-import com.chat.myapplication.core.data.auth.model.VerifyEmailChangeRequest
 import com.chat.myapplication.core.data.auth.model.VerifyPhoneNumberRequest
 import com.chat.myapplication.core.data.auth.model.VerifyPhoneNumberResponse
 import com.chat.myapplication.core.exception.BaseResponse
@@ -30,7 +29,7 @@ interface AuthRepository {
 
     fun changeEmail(request: ChangeEmailRequest): Flow<ChangeEmailResponse>
 
-    fun verifyEmailChange(request: VerifyEmailChangeRequest): Flow<SignInResponse>
+    fun verifyEmailChange(token: String): Flow<SignInResponse>
 
     fun getCountriesAreas(): Flow<CountriesAreasResponse>
 
@@ -50,7 +49,7 @@ interface AuthRepository {
 
     fun resetPassword(request: ResetPasswordRequest): Flow<BaseResponse>
 
-    fun verifyChangePasswordToken(token: String): Flow<BaseResponse>
+    fun verifyChangePasswordToken(token: String): Flow<SignInResponse>
 
     fun registerPasskey(request: PasskeyRegisterRequest): Flow<PasskeyRegisterResponse>
 
@@ -62,7 +61,9 @@ interface AuthRepository {
 
     fun register(request: RegisterRequest): Flow<BaseResponse>
 
-    fun sendLoginLink(): Flow<BaseResponse>
+    fun sendLoginLink(email: String): Flow<BaseResponse>
 
     fun verifyLoginToken(token: String): Flow<SignInResponse>
+
+    fun verifyAccountToken(token: String): Flow<SignInResponse>
 }

@@ -8,7 +8,7 @@ import javax.inject.Inject
 class SendLoginLinkUseCase @Inject constructor(
     private val authRepository: AuthRepository
 ) {
-    operator fun invoke(): Flow<BaseResponse> {
-        return authRepository.sendLoginLink()
+    operator fun invoke(email: String): Flow<BaseResponse> {
+        return authRepository.sendLoginLink(email)
     }
 }

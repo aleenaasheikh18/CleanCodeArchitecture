@@ -43,6 +43,7 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
 
     private var pendingDeepLinkEvent: DeepLinkEvent = DeepLinkEvent.None
     private var currentWizard: WizardBottomSheetFragment? = null
+    private var hasNavigatedFromDeepLink = false
 
     override fun initUserInterface() {
         initApiObserver()
@@ -78,9 +79,36 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
                 pendingDeepLinkEvent = DeepLinkEvent.None
             }
             is DeepLinkEvent.LoginToken -> {
-                // Verify login token
+                // Verify login token - this will navigate on success
                 viewModel.verifyLoginToken(event.token)
                 pendingDeepLinkEvent = DeepLinkEvent.None
+                hasNavigatedFromDeepLink = true
+            }
+            is DeepLinkEvent.VerifyEmailChange -> {
+                // Email change verification requires user to be logged in
+                if (preferenceManager.isLoggedIn) {
+                    // Navigate immediately to Home with the event
+                    hasNavigatedFromDeepLink = true
+                    navigateToHomeWithEvent(event)
+                } else {
+                    // User must be logged in to verify email change
+                    showInfoDialog(description = "Please login first to verify your email change")
+                }
+            }
+            is DeepLinkEvent.ResetPassword -> {
+                // Password reset - navigate immediately if logged in
+                if (preferenceManager.isLoggedIn) {
+                    hasNavigatedFromDeepLink = true
+                    navigateToHomeWithEvent(event)
+                } else {
+                    // Store event to pass after login
+                    pendingDeepLinkEvent = event
+                }
+            }
+            is DeepLinkEvent.VerifyAccount -> {
+                // Verify account token and login on success
+                viewModel.verifyAccountToken(event.token)
+                hasNavigatedFromDeepLink = true
             }
             is DeepLinkEvent.None -> {
                 pendingDeepLinkEvent = DeepLinkEvent.None
@@ -143,11 +171,8 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
     }
 
     private fun showYouGotMailScreen(email: String) {
-        val fragment = YouGotMailFragment.newInstance(email)
-        supportFragmentManager.beginTransaction()
-            .replace(android.R.id.content, fragment)
-            .addToBackStack(null)
-            .commit()
+        val sheet = YouGotMailFragment.newInstance(email)
+        sheet.show(supportFragmentManager, "YouGotMailFragment")
     }
 
     private fun openLegalDocument(type: SettingType) {
@@ -163,6 +188,10 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
 
         lifecycleScope.launch {
             delay(SPLASH_DELAY)
+            // Check if we already navigated from a deep link
+            if (hasNavigatedFromDeepLink) {
+                return@launch
+            }
             if (preferenceManager.isLoggedIn) {
                 navigateToHome()
             } else {
@@ -183,6 +212,14 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
             if (pendingDeepLinkEvent != DeepLinkEvent.None) {
                 putExtra(DeepLinkEvent.EXTRA_DEEP_LINK_EVENT, pendingDeepLinkEvent)
             }
+        }
+        startActivity(intent)
+        finish()
+    }
+
+    private fun navigateToHomeWithEvent(event: DeepLinkEvent) {
+        val intent = Intent(this, HomeActivity::class.java).apply {
+            putExtra(DeepLinkEvent.EXTRA_DEEP_LINK_EVENT, event)
         }
         startActivity(intent)
         finish()
@@ -239,6 +276,24 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
                             }
                             is State.Error -> {
                                 Log.d("LauncherActivity", "verifyTokenResponse State.Error - message='${state.message}'")
+                                hideProgressBar()
+                                showInfoDialog(description = state.message)
+                            }
+                            else -> Unit
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.verifyAccountResponse.collectLatest { state ->
+                        when (state) {
+                            is State.Loading -> showProgressBar()
+                            is State.Success -> {
+                                hideProgressBar()
+                                navigateToHome()
+                            }
+                            is State.Error -> {
+                                Log.d("LauncherActivity", "verifyAccountResponse State.Error - message='${state.message}'")
                                 hideProgressBar()
                                 showInfoDialog(description = state.message)
                             }

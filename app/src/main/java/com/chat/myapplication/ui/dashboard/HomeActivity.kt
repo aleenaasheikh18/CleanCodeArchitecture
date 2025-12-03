@@ -58,6 +58,10 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
+        // Check if LauncherScreenActivity passed a deep link event
+        handleDeepLinkFromIntent()
+
+        // Also handle Branch.io re-initialization if needed
         if (deepLinkHandler.shouldReInitSession(intent)) {
             deepLinkHandler.reInitBranchSession(this) { event ->
                 handleDeepLinkEvent(event)
@@ -76,8 +80,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     }
 
     private fun handleDeepLinkEvent(event: DeepLinkEvent) {
+        // Navigate to home fragment FIRST for ALL deep links
+        navigateToHomeFragment()
+
         when (event) {
             is DeepLinkEvent.VerifyAccount -> {
+                // Handle account verification
             }
             is DeepLinkEvent.ResetPassword -> {
                 viewModel.verifyChangePasswordToken(event.token)
@@ -97,6 +105,19 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             }
             is DeepLinkEvent.LoginToken -> Unit
         }
+    }
+
+    private fun navigateToHomeFragment() {
+        // Navigate to home fragment and clear back stack for ALL deep links
+        navController.navigate(
+            R.id.nav_home,
+            null,
+            NavOptions.Builder()
+                .setPopUpTo(R.id.nav_home, inclusive = true)
+                .build()
+        )
+        // Close drawer if open
+        bi.drawerLayout.closeDrawer(GravityCompat.START)
     }
 
     private fun setupNavigation() {
@@ -211,10 +232,17 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
                             is State.Loading -> showProgressBar()
                             is State.Success -> {
                                 hideProgressBar()
+                                // Update email in PreferenceManager
+                                state.data?.data?.customer?.email?.let { newEmail ->
+                                    preferenceManager.email = newEmail
+                                }
                                 showEmailVerifiedSuccessBottomSheet()
                             }
                             is State.Error -> {
                                 hideProgressBar()
+                                showInfoDialog(
+                                    description = state.message.ifEmpty { "Email verification failed. Please try again." }
+                                )
                             }
                             else -> Unit
                         }

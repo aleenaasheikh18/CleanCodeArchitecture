@@ -184,11 +184,12 @@ class WizardViewModel @Inject constructor(
             }
             !data.socialType.isNullOrEmpty() -> {
                 // Show error message for social login
-                _emailError.value = "This email is registered with ${data.socialType}. Please use ${data.socialType} to login."
+                _emailError.value = "This email is registered with ${data.socialType}. Please login via Google."
             }
             !data.isSetPassword -> {
                 // User needs to set password - send login link and go to "You Got Mail"
-                sendLoginLinkForPasswordSetup()
+                // Save first name to use in You Got Mail screen
+                sendLoginLinkForPasswordSetup(data.firstName.orEmpty())
             }
             else -> {
                 _emailError.value = "Unable to proceed with this email"
@@ -196,15 +197,15 @@ class WizardViewModel @Inject constructor(
         }
     }
 
-    private suspend fun sendLoginLinkForPasswordSetup() {
-        sendLoginLinkUseCase()
+    private suspend fun sendLoginLinkForPasswordSetup(firstName: String) {
+        sendLoginLinkUseCase(_email.value.trim())
             .catch { e ->
                 _emailError.value = e.message ?: "Failed to send email"
             }
             .collect { response ->
                 if (response.status && response.statusCode in 200..299) {
-                    // Navigate to You Got Mail screen
-                    _emailValidationEvent.emit(EmailValidationEvent.ShowYouGotMail(_email.value))
+                    // Navigate to You Got Mail screen with firstName
+                    _emailValidationEvent.emit(EmailValidationEvent.ShowYouGotMail(_email.value, firstName))
                 } else {
                     _emailError.value = response.message.ifEmpty { "Failed to send email" }
                 }
@@ -367,7 +368,7 @@ sealed class PasskeyLoginState {
 }
 
 sealed class EmailValidationEvent {
-    data class ShowYouGotMail(val email: String) : EmailValidationEvent()
+    data class ShowYouGotMail(val email: String, val firstName: String) : EmailValidationEvent()
 }
 
 sealed class GoogleLoginState {

@@ -32,7 +32,7 @@ sealed class DeepLinkEvent : Parcelable {
 
     companion object {
         const val KEY_VERIFICATION_TOKEN = "verification_token"
-        const val KEY_RESET_PASSWORD_TOKEN = "reset_password_token"
+        const val KEY_RESET_PASSWORD_TOKEN = "change_password_toke"
         const val KEY_REFERRAL_CODE = "referral_code"
         const val KEY_INFLUENCER_JOB_ID = "influencer_job_id"
         const val KEY_CHANGE_EMAIL_TOKEN = "change_email_token"

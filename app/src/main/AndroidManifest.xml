@@ -34,10 +34,33 @@
             android:name="io.branch.sdk.TestMode"
             android:value="false" />
 
+        <!-- Digital Asset Links for Passkey Support -->
+        <meta-data
+            android:name="asset_statements"
+            android:value="@string/asset_statements" />
+
         <activity
             android:name=".ui.dashboard.HomeActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+            <!-- Note: HomeActivity no longer handles deep links directly.
+                 All deep links are routed through LauncherScreenActivity which
+                 acts as a single gate and navigates to HomeActivity with the event. -->
+        <activity
+            android:name=".ui.legal.LegalDocumentActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.auth.LauncherScreenActivity"
             android:exported="true"
             android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Branch.io Deep Link Intent Filters -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -48,19 +71,6 @@
                 <data
                     android:host="foodchoo-alternate.app.link"
                     android:scheme="https" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.legal.LegalDocumentActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".ui.auth.LauncherScreenActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

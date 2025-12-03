@@ -54,10 +54,16 @@ class EditEmailViewModel @Inject constructor(
             .flowOn(Dispatchers.IO)
             .onApiSuccess { response ->
                 if (response.status) {
-                    if (response.canChangeEmail) {
+                    // Check can_change_email from data object
+                    val canChangeEmail = response.data?.canChangeEmail ?: false
+                    if (canChangeEmail) {
+                        // Navigate to You Got Mail screen
                         _currentStep.value = EditEmailWizardStep.YouGotMail
+                        _changeEmailResponse.emit(State.success(response))
+                    } else {
+                        // Show inline error when canChangeEmail is false
+                        _changeEmailResponse.emit(State.Error(message = response.message.ifEmpty { "Unable to change email at this time" }))
                     }
-                    _changeEmailResponse.emit(State.success(response))
                 } else {
                     _changeEmailResponse.emit(State.Error(message = response.message))
                 }

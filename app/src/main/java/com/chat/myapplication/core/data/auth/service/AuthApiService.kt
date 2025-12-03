@@ -13,11 +13,11 @@ import com.chat.myapplication.core.data.auth.model.PasskeyRegisterRequest
 import com.chat.myapplication.core.data.auth.model.PasskeyRegisterResponse
 import com.chat.myapplication.core.data.auth.model.RegisterRequest
 import com.chat.myapplication.core.data.auth.model.ResetPasswordRequest
+import com.chat.myapplication.core.data.auth.model.SendLoginLinkRequest
 import com.chat.myapplication.core.data.auth.model.SignInRequest
 import com.chat.myapplication.core.data.auth.model.SignInResponse
 import com.chat.myapplication.core.data.auth.model.SocialLoginRequest
 import com.chat.myapplication.core.data.auth.model.UpdateAllergiesRequest
-import com.chat.myapplication.core.data.auth.model.VerifyEmailChangeRequest
 import com.chat.myapplication.core.data.auth.model.VerifyPhoneNumberRequest
 import com.chat.myapplication.core.data.auth.model.VerifyPhoneNumberResponse
 import com.chat.myapplication.core.data.auth.model.ViewProfileResponse
@@ -35,8 +35,8 @@ interface AuthApiService {
     @PUT("customers/change-email")
     suspend fun changeEmail(@Body request: ChangeEmailRequest): ChangeEmailResponse
 
-    @POST("customers/verify-email-change")
-    suspend fun verifyEmailChange(@Body request: VerifyEmailChangeRequest): SignInResponse
+    @GET("customers/verify-email-change/{token}")
+    suspend fun verifyEmailChange(@Path("token") token: String): SignInResponse
 
     @GET("common/countries-areas")
     suspend fun getCountriesAreas(): CountriesAreasResponse
@@ -63,9 +63,9 @@ interface AuthApiService {
     suspend fun changePasswordRequest(): BaseResponse
 
     @GET("customers/change-password-request/{change_password_token}")
-    suspend fun verifyChangePasswordToken(@Path("change_password_token") token: String): BaseResponse
+    suspend fun verifyChangePasswordToken(@Path("change_password_token") token: String): SignInResponse
 
-    @POST("customers/reset-password")
+    @POST("customers/change-password")
     suspend fun resetPassword(@Body request: ResetPasswordRequest): BaseResponse
 
     @POST("customers/passkey/register")
@@ -84,8 +84,11 @@ interface AuthApiService {
     suspend fun register(@Body request: RegisterRequest): BaseResponse
 
     @POST("customers/send-login-link")
-    suspend fun sendLoginLink(): BaseResponse
+    suspend fun sendLoginLink(@Body request: SendLoginLinkRequest): BaseResponse
 
     @GET("customers/verify-login-link/{token}")
     suspend fun verifyLoginToken(@Path("token") token: String): SignInResponse
+
+    @GET("customers/account-verify-v2/{token}")
+    suspend fun verifyAccountToken(@Path("token") token: String): SignInResponse
 }

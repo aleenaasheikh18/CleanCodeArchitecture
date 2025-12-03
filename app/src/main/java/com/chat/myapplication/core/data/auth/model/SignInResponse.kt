@@ -80,6 +80,7 @@ data class Customer(
     @SerializedName("countries") val countries: List<CustomerCountry>? = null,
     @SerializedName("order_count") val orderCount: Int = 0,
     @SerializedName("is_set_password") val isSetPassword: Boolean = false,
+    @SerializedName("passkeys") val passkeys: List<String>? = null,
     @SerializedName("minimum_withdrawal") val minimumWithdrawal: Float = 0f,
     @SerializedName("foodchoo_deposit_fees") val foodchooDepositFees: Float = 0f,
     @SerializedName("foodchoo_withdrawal_fees") val foodchooWithdrawalFees: Float = 0f,

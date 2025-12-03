@@ -6,7 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.chat.myapplication.base.BaseFragment
+import com.chat.myapplication.base.BaseBottomSheetDialogFragment
 import com.chat.myapplication.core.domain.State
 import com.chat.myapplication.databinding.LayoutWizardYouGotMailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class YouGotMailFragment : BaseFragment<LayoutWizardYouGotMailBinding>(
+class YouGotMailFragment : BaseBottomSheetDialogFragment<LayoutWizardYouGotMailBinding>(
     LayoutWizardYouGotMailBinding::inflate
 ) {
 
@@ -25,12 +25,19 @@ class YouGotMailFragment : BaseFragment<LayoutWizardYouGotMailBinding>(
     override fun initUserInterface() {
         userEmail = arguments?.getString(ARG_EMAIL) ?: ""
 
+        // Set email in ViewModel for resend functionality
+        viewModel.setEmail(userEmail)
+
         setupUI()
         setupClickListeners()
         initObservers()
     }
 
     private fun setupUI() {
+        // Set title with user's name
+        val userName = preferenceManager.firstName
+        bi.tvTitle.text = getString(com.chat.myapplication.R.string.you_got_mail_title, userName)
+
         // Update the email detail text to include the user's email using string resource
         bi.tvEmailDetail.text = getString(com.chat.myapplication.R.string.email_verification_detail, userEmail)
     }
@@ -54,6 +61,7 @@ class YouGotMailFragment : BaseFragment<LayoutWizardYouGotMailBinding>(
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
             startActivity(intent)
+            dismiss()
         } catch (_: Exception) {
             // If no email app found, show error
             showInfoDialog(description = "No email app found")

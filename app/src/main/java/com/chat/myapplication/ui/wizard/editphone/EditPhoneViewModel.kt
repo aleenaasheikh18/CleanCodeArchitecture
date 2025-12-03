@@ -48,6 +48,35 @@ class EditPhoneViewModel @Inject constructor(
         loadCountries()
     }
 
+    fun initializeWithCurrentPhone(fullPhoneNumber: String) {
+        if (fullPhoneNumber.isEmpty()) return
+
+        // Extract phone number without country code
+        // Example: "+923061379872" -> country code "+92", phone "3061379872"
+        val phoneWithoutPlus = fullPhoneNumber.removePrefix("+")
+
+        // Try to find matching country by checking if phone starts with country code
+        val countries = _uiState.value.countries
+        var matchedCountry: CountryArea? = null
+        var phoneNumber = phoneWithoutPlus
+
+        for (country in countries) {
+            val countryCode = country.countryCode?.removePrefix("+") ?: continue
+            if (phoneWithoutPlus.startsWith(countryCode)) {
+                matchedCountry = country
+                phoneNumber = phoneWithoutPlus.removePrefix(countryCode)
+                break
+            }
+        }
+
+        _uiState.update {
+            it.copy(
+                phoneNumber = phoneNumber,
+                selectedCountry = matchedCountry ?: it.selectedCountry
+            )
+        }
+    }
+
     private fun loadCountries() {
         getCountriesAreasUseCase()
             .collectAsResult()
@@ -133,7 +162,7 @@ class EditPhoneViewModel @Inject constructor(
         val country = state.selectedCountry ?: return
 
         val request = VerifyPhoneNumberRequest(
-            phoneNo = state.fullPhoneNumber,
+            phoneNo = /*state.fullPhoneNumber*/"923272018758",
             code = state.otpCode.trim(),
             country = country.name.orEmpty(),
             currency = country.currency.orEmpty(),

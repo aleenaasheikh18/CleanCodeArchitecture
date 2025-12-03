@@ -9,6 +9,7 @@ import com.chat.myapplication.core.data.auth.model.EmailValidationRequest
 import com.chat.myapplication.core.data.auth.model.EmailValidationResponse
 import com.chat.myapplication.core.data.auth.model.RegisterRequest
 import com.chat.myapplication.core.data.auth.model.ResetPasswordRequest
+import com.chat.myapplication.core.data.auth.model.SendLoginLinkRequest
 import com.chat.myapplication.core.data.auth.model.SocialLoginRequest
 import com.chat.myapplication.core.data.auth.model.CountriesAreasResponse
 import com.chat.myapplication.core.data.auth.model.PasskeyLoginRequest
@@ -18,7 +19,6 @@ import com.chat.myapplication.core.data.auth.model.SignInRequest
 import com.chat.myapplication.core.data.auth.model.SignInResponse
 import com.chat.myapplication.core.data.auth.model.UpdateAllergiesRequest
 import com.chat.myapplication.core.data.auth.model.ViewProfileResponse
-import com.chat.myapplication.core.data.auth.model.VerifyEmailChangeRequest
 import com.chat.myapplication.core.data.auth.model.VerifyPhoneNumberRequest
 import com.chat.myapplication.core.data.auth.model.VerifyPhoneNumberResponse
 import com.chat.myapplication.core.data.auth.service.AuthApiService
@@ -42,9 +42,9 @@ class AuthDataRepository @Inject constructor(private val authApiService: AuthApi
         }
     }
 
-    override fun verifyEmailChange(request: VerifyEmailChangeRequest): Flow<SignInResponse> {
+    override fun verifyEmailChange(token: String): Flow<SignInResponse> {
         return flow {
-            emit(authApiService.verifyEmailChange(request))
+            emit(authApiService.verifyEmailChange(token))
         }
     }
 
@@ -102,7 +102,7 @@ class AuthDataRepository @Inject constructor(private val authApiService: AuthApi
         }
     }
 
-    override fun verifyChangePasswordToken(token: String): Flow<BaseResponse> {
+    override fun verifyChangePasswordToken(token: String): Flow<SignInResponse> {
         return flow {
             emit(authApiService.verifyChangePasswordToken(token))
         }
@@ -138,15 +138,21 @@ class AuthDataRepository @Inject constructor(private val authApiService: AuthApi
         }
     }
 
-    override fun sendLoginLink(): Flow<BaseResponse> {
+    override fun sendLoginLink(email: String): Flow<BaseResponse> {
         return flow {
-            emit(authApiService.sendLoginLink())
+            emit(authApiService.sendLoginLink(SendLoginLinkRequest(email)))
         }
     }
 
     override fun verifyLoginToken(token: String): Flow<SignInResponse> {
         return flow {
             emit(authApiService.verifyLoginToken(token))
+        }
+    }
+
+    override fun verifyAccountToken(token: String): Flow<SignInResponse> {
+        return flow {
+            emit(authApiService.verifyAccountToken(token))
         }
     }
 }

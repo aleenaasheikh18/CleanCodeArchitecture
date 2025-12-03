@@ -95,8 +95,7 @@ class ResetPasswordViewModel @Inject constructor(
         if (!_isFormValid.value) return
 
         val request = ResetPasswordRequest(
-            newPassword = _newPassword.value,
-            confirmPassword = _confirmPassword.value
+            newPassword = _newPassword.value
         )
         resetPasswordUseCase(ResetPasswordUseCase.Params(request))
             .collectAsResult()

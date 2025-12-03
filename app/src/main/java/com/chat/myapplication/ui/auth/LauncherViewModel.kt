@@ -6,6 +6,7 @@ import com.chat.myapplication.base.BaseViewModel
 import com.chat.myapplication.core.data.auth.model.SignInRequest
 import com.chat.myapplication.core.data.auth.model.SignInResponse
 import com.chat.myapplication.core.data.auth.usecase.SignInUseCase
+import com.chat.myapplication.core.data.auth.usecase.VerifyAccountTokenUseCase
 import com.chat.myapplication.core.data.auth.usecase.VerifyLoginTokenUseCase
 import com.chat.myapplication.core.domain.State
 import com.chat.myapplication.core.domain.onApiFailure
@@ -24,6 +25,7 @@ import javax.inject.Inject
 class LauncherViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
     private val verifyLoginTokenUseCase: VerifyLoginTokenUseCase,
+    private val verifyAccountTokenUseCase: VerifyAccountTokenUseCase,
     private val preferenceManager: PreferenceManager
 ) : BaseViewModel() {
 
@@ -32,6 +34,9 @@ class LauncherViewModel @Inject constructor(
 
     private val _verifyTokenResponse: MutableSharedFlow<State<SignInResponse>> = MutableSharedFlow()
     val verifyTokenResponse: MutableSharedFlow<State<SignInResponse>> = _verifyTokenResponse
+
+    private val _verifyAccountResponse: MutableSharedFlow<State<SignInResponse>> = MutableSharedFlow()
+    val verifyAccountResponse: MutableSharedFlow<State<SignInResponse>> = _verifyAccountResponse
 
     fun signIn(signInRequest: SignInRequest) {
 
@@ -69,6 +74,25 @@ class LauncherViewModel @Inject constructor(
             }
             .onStart {
                 _verifyTokenResponse.emit(State.loading())
+            }.launchIn(viewModelScope)
+    }
+
+    fun verifyAccountToken(token: String) {
+        verifyAccountTokenUseCase(token)
+            .collectAsResult()
+            .flowOn(Dispatchers.IO)
+            .onApiSuccess { response ->
+                response.data?.let { signInData ->
+                    preferenceManager.handleDataAfterLogin(signInData)
+                }
+                _verifyAccountResponse.emit(State.success(response))
+            }
+            .onApiFailure { errorMessage ->
+                Log.d("LauncherViewModel", "verifyAccountToken onApiFailure - errorMessage='$errorMessage'")
+                _verifyAccountResponse.emit(State.Error(errorMessage))
+            }
+            .onStart {
+                _verifyAccountResponse.emit(State.loading())
             }.launchIn(viewModelScope)
     }
 

@@ -56,6 +56,18 @@ class ChangePasswordBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSh
     }
 
     private fun setupChangePasswordScreen() {
+        // Set title based on whether user has password set
+        val titleRes = if (preferenceManager.isSetPassword) {
+            R.string.reset_password
+        } else {
+            R.string.set_password
+        }
+        changePasswordBinding.tvTitle.text = getString(titleRes)
+
+        // Format description with user email using %s placeholder
+        val email = preferenceManager.email
+        changePasswordBinding.tvDescription.text = getString(R.string.change_password_desc, email)
+
         changePasswordBinding.btnChangePassword.setOnClickListener {
             viewModel.changePasswordRequest()
         }
@@ -64,6 +76,10 @@ class ChangePasswordBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSh
     private fun setupYouGotMailScreen() {
         val userName = preferenceManager.firstName
         youGotMailBinding.tvTitle.text = getString(R.string.you_got_mail_title, userName)
+
+        // Format email detail with user's email using %s placeholder
+        val email = preferenceManager.email
+        youGotMailBinding.tvEmailDetail.text = getString(R.string.email_verification_detail, email)
 
         youGotMailBinding.btnOpenMailApp.setOnClickListener {
             openEmailApp()
@@ -95,6 +111,10 @@ class ChangePasswordBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSh
     }
 
     private fun goToYouGotMailScreen() {
+        // Update email detail before showing the screen
+        val email = preferenceManager.email
+        youGotMailBinding.tvEmailDetail.text = getString(R.string.email_verification_detail, email)
+
         bi.viewFlipper.setInAnimation(requireContext(), R.anim.slide_in_right)
         bi.viewFlipper.setOutAnimation(requireContext(), R.anim.slide_out_left)
         bi.viewFlipper.displayedChild = 1

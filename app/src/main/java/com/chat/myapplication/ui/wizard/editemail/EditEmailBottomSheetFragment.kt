@@ -74,6 +74,14 @@ class EditEmailBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetEd
 
     private fun setupEmailScreen() {
         with(emailBinding) {
+            // Pre-populate with current email from SharedPreferences
+            val currentEmail = preferenceManager.email
+            if (currentEmail.isNotEmpty()) {
+                etEmail.setText(currentEmail)
+                viewModel.setEmail(currentEmail)
+                ivClearEmail.isVisible = true
+            }
+
             etEmail.addTextChangedListener(SimpleTextWatcher { text ->
                 viewModel.setEmail(text)
                 ivClearEmail.isVisible = text.isNotEmpty()
@@ -92,11 +100,6 @@ class EditEmailBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetEd
 
     private fun setupYouGotMailScreen() {
         with(youGotMailBinding) {
-            val userName = preferenceManager.firstName
-            tvTitle.text = getString(R.string.you_got_mail_title, userName)
-
-            val email = viewModel.email.value
-            tvEmailDetail.text = getString(R.string.email_verification_detail,email)
             btnOpenMailApp.setOnClickListener {
                 openEmailApp()
             }
@@ -105,6 +108,17 @@ class EditEmailBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetEd
                 viewModel.resendEmail()
                 onResendEmail?.invoke(viewModel.email.value)
             }
+        }
+    }
+
+    private fun updateYouGotMailContent(email: String) {
+        // Ensure we have a valid email before updating
+        if (email.isEmpty()) return
+
+        with(youGotMailBinding) {
+            val userName = preferenceManager.firstName
+            tvTitle.text = getString(R.string.you_got_mail_title, userName)
+            tvEmailDetail.text = getString(R.string.email_verification_detail, email)
         }
     }
 
@@ -147,6 +161,19 @@ class EditEmailBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetEd
                     viewModel.currentStep.collectLatest { step ->
                         updateHeader(step)
                         animateToStep(step)
+                        // Update You Got Mail screen content when navigating to it
+                        if (step is EditEmailWizardStep.YouGotMail) {
+                            updateYouGotMailContent(viewModel.email.value)
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.email.collectLatest { email ->
+                        // Update You Got Mail screen content whenever email changes
+                        if (viewModel.currentStep.value is EditEmailWizardStep.YouGotMail) {
+                            updateYouGotMailContent(email)
+                        }
                     }
                 }
 
@@ -187,6 +214,16 @@ class EditEmailBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetEd
                         }
                     }
                 }
+
+                launch {
+                    viewModel.isLoading.collectLatest { isLoading ->
+                        if (isLoading) {
+                            showProgressBar()
+                        } else {
+                            hideProgressBar()
+                        }
+                    }
+                }
             }
         }
     }
@@ -206,6 +243,16 @@ class EditEmailBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetEd
         }
 
         bi.viewFlipper.displayedChild = targetChild
+
+        // Update You Got Mail content after animation completes
+        if (step is EditEmailWizardStep.YouGotMail) {
+            bi.viewFlipper.post {
+                val email = viewModel.email.value
+                if (email.isNotEmpty()) {
+                    updateYouGotMailContent(email)
+                }
+            }
+        }
     }
 
     companion object {

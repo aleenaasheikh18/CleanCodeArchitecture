@@ -8,6 +8,13 @@
     <!-- Google Maps API Key -->
     <string name="google_maps_key" translatable="false">AIzaSyAVwyKaZ6NFVTM5kVpAGElJKFfND5pH8yk</string>
 
+    <!-- Digital Asset Links for Passkey Support -->
+    <string name="asset_statements" translatable="false">
+        [{
+            \"include\": \"https://eater.foodchoo.com/.well-known/assetlinks.json\"
+        }]
+    </string>
+
     <string name="version">"Version: "</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_maps">MapsActivity</string>
@@ -790,6 +797,7 @@
     <string name="str_yes">Yes</string>
     <string name="str_ok">Ok</string>
     <string name="str_alert">Alert</string>
+    <string name="str_retry">Retry</string>
 
     <string-array name="account_types">
         <item>Individual</item>
@@ -867,10 +875,12 @@
     <string name="btn_retry">Retry</string>
     <string name="resend_otp_success">Code sent successfully</string>
     <string name="no_results_found">No results found</string>
-    <string name="change_password_desc">We’ll send a magic link to your %s address.\n\nTap the link in that email to be able to open the app and enter your new password.\n\nOh – and check the spam folder in case your email provider hates us for some reason.</string>
+    <string name="change_password_desc">We’ll send a magic link to \n%s.\n\nTap the link in that email to be able to open the app and enter your new password.\n\nOh – and check the spam folder in case your email provider hates us for some reason.</string>
     <string name="reset_password">Reset Password</string>
     <string name="send_now">Send Now</string>
 
     <string name="set_password">Set Password</string>
+    <string name="password_is_set">Password is set</string>
+    <string name="passkey_configured">%1$d passkey(s) configured</string>
 
 </resources>

@@ -37,13 +37,19 @@ class AccountSecurityFactory @Inject constructor(
                 id = SettingType.PASSKEY,
                 icon = R.drawable.ic_pass_key,
                 title = R.string.title_passkey,
-                description = context.getString(R.string.description_passkey)
+                description = if (preferenceManager.passkeyCount > 0)
+                    context.getString(R.string.passkey_configured, preferenceManager.passkeyCount)
+                    else context.getString(R.string.description_passkey),
+                isVerified = preferenceManager.passkeyCount > 0
             ),
             SettingItem(
                 id = SettingType.PASSWORD,
                 icon = R.drawable.ic_password,
                 title = R.string.title_password,
-                description = context.getString(R.string.description_password)
+                description = if (preferenceManager.isSetPassword)
+                    context.getString(R.string.password_is_set)
+                    else context.getString(R.string.description_password),
+                isVerified = preferenceManager.isSetPassword
             )
         )
     }

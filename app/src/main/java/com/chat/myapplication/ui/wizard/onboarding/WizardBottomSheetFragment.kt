@@ -1,6 +1,5 @@
 package com.chat.myapplication.ui.wizard.onboarding
 
-import android.app.Activity
 import android.content.Intent
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -16,7 +15,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.chat.myapplication.R
 import com.chat.myapplication.base.BaseBottomSheetDialogFragment
 import com.chat.myapplication.core.data.auth.model.SignInData
-import com.chat.myapplication.core.domain.google.GoogleSignInManager
 import com.chat.myapplication.databinding.BottomSheetWizardBinding
 import com.chat.myapplication.databinding.LayoutWizardEmailBinding
 import com.chat.myapplication.databinding.LayoutWizardHeaderBinding
@@ -109,8 +107,11 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
     private fun setupSelectionScreen() {
         with(selectionBinding) {
             llGoogle.setOnClickListener {
+                // Suggestion 5: Disable button immediately for visual feedback
+                llGoogle.isEnabled = false
                 viewModel.prepareGoogleSignIn(requireActivity()) { signInIntent ->
                     googleSignInLauncher.launch(signInIntent)
+                    // Re-enable will happen in state handler
                 }
             }
             llPasskey.setOnClickListener {
@@ -337,10 +338,11 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
                     viewModel.emailValidationEvent.collectLatest { event ->
                         when (event) {
                             is EmailValidationEvent.ShowYouGotMail -> {
+                                // Save firstName to PreferenceManager so YouGotMailFragment can display it
+                                preferenceManager.firstName = event.firstName
                                 onShowYouGotMail?.invoke(event.email)
                                 dismiss()
                             }
-                            else -> Unit
                         }
                     }
                 }
@@ -351,19 +353,33 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
     private fun handlePasskeyLoginState(state: PasskeyLoginState) {
         when (state) {
             is PasskeyLoginState.Idle -> {
+                hideProgressBar()
                 selectionBinding.llPasskey.isEnabled = true
             }
             is PasskeyLoginState.Loading -> {
+                showProgressBar()
                 selectionBinding.llPasskey.isEnabled = false
             }
             is PasskeyLoginState.Success -> {
+                hideProgressBar()
                 selectionBinding.llPasskey.isEnabled = true
                 onPasskeyLoginSuccess?.invoke(state.data)
                 dismiss()
             }
             is PasskeyLoginState.Error -> {
+                hideProgressBar()
                 selectionBinding.llPasskey.isEnabled = true
-                showInfoDialog(description = state.message)
+                // Show error dialog with retry option
+                showInfoDialog(
+                    title = getString(R.string.str_alert),
+                    description = state.message,
+                    buttonResource = R.string.str_ok,
+                    extraButtonResource = R.string.str_retry,
+                    onPositiveButtonClick = {
+                        // Retry Passkey authentication
+                        viewModel.authenticateWithPasskey(requireActivity())
+                    }
+                )
             }
         }
     }
@@ -371,19 +387,36 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
     private fun handleGoogleLoginState(state: GoogleLoginState) {
         when (state) {
             is GoogleLoginState.Idle -> {
+                hideProgressBar()
                 selectionBinding.llGoogle.isEnabled = true
             }
             is GoogleLoginState.Loading -> {
+                showProgressBar()
                 selectionBinding.llGoogle.isEnabled = false
             }
             is GoogleLoginState.Success -> {
+                hideProgressBar()
                 selectionBinding.llGoogle.isEnabled = true
                 onGoogleLoginSuccess?.invoke(state.data)
                 dismiss()
             }
             is GoogleLoginState.Error -> {
+                hideProgressBar()
                 selectionBinding.llGoogle.isEnabled = true
-                showInfoDialog(description = state.message)
+                // Suggestion 4: Show error dialog with retry option
+                showInfoDialog(
+                    title = getString(R.string.str_alert),
+                    description = state.message,
+                    buttonResource = R.string.str_ok,
+                    extraButtonResource = R.string.str_retry,
+                    onPositiveButtonClick = {
+                        // Retry Google Sign-In
+                        selectionBinding.llGoogle.isEnabled = false
+                        viewModel.prepareGoogleSignIn(requireActivity()) { signInIntent ->
+                            googleSignInLauncher.launch(signInIntent)
+                        }
+                    }
+                )
             }
         }
     }
