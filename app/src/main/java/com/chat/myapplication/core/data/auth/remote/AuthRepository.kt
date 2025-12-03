@@ -5,7 +5,11 @@ import com.chat.myapplication.core.data.auth.model.AddPhoneNumberResponse
 import com.chat.myapplication.core.data.auth.model.AllergiesResponse
 import com.chat.myapplication.core.data.auth.model.ChangeEmailRequest
 import com.chat.myapplication.core.data.auth.model.ChangeEmailResponse
+import com.chat.myapplication.core.data.auth.model.EmailValidationRequest
+import com.chat.myapplication.core.data.auth.model.EmailValidationResponse
+import com.chat.myapplication.core.data.auth.model.RegisterRequest
 import com.chat.myapplication.core.data.auth.model.ResetPasswordRequest
+import com.chat.myapplication.core.data.auth.model.SocialLoginRequest
 import com.chat.myapplication.core.data.auth.model.CountriesAreasResponse
 import com.chat.myapplication.core.data.auth.model.PasskeyLoginRequest
 import com.chat.myapplication.core.data.auth.model.PasskeyRegisterRequest
@@ -51,4 +55,14 @@ interface AuthRepository {
     fun registerPasskey(request: PasskeyRegisterRequest): Flow<PasskeyRegisterResponse>
 
     fun loginWithPasskey(request: PasskeyLoginRequest): Flow<SignInResponse>
+
+    fun validateEmail(request: EmailValidationRequest): Flow<EmailValidationResponse>
+
+    fun socialLogin(request: SocialLoginRequest): Flow<SignInResponse>
+
+    fun register(request: RegisterRequest): Flow<BaseResponse>
+
+    fun sendLoginLink(): Flow<BaseResponse>
+
+    fun verifyLoginToken(token: String): Flow<SignInResponse>
 }

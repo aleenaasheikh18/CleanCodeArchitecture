@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.google.services)
     id("kotlin-parcelize")
 }
 
@@ -101,6 +102,9 @@ dependencies {
     // Credential Manager for Passkeys
     implementation(libs.credentials)
     implementation(libs.credentials.play.services)
+
+    // Google Sign-In
+    implementation(libs.google.auth)
 
     // Testing
     testImplementation(libs.junit)

@@ -78,7 +78,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     private fun handleDeepLinkEvent(event: DeepLinkEvent) {
         when (event) {
             is DeepLinkEvent.VerifyAccount -> {
-                // TODO: Handle verify account API call
             }
             is DeepLinkEvent.ResetPassword -> {
                 viewModel.verifyChangePasswordToken(event.token)
@@ -96,6 +95,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             is DeepLinkEvent.None -> {
                 // No deep link action needed
             }
+            is DeepLinkEvent.LoginToken -> Unit
         }
     }
 

@@ -10,5 +10,9 @@ object AppConstants {
     const val PUSH: String = "push"
     const val EMAIL: String = "email"
 
+    // Social Login Constants
+    const val SOCIAL_TYPE_GMAIL = "gmail"
+    const val SOCIAL_LOGIN_PASSWORD = "social_login"
+
     var REFERRAL_CODE: String = ""
 }

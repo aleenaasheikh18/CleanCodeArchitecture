@@ -5,18 +5,22 @@ import com.chat.myapplication.core.data.auth.model.AddPhoneNumberResponse
 import com.chat.myapplication.core.data.auth.model.AllergiesResponse
 import com.chat.myapplication.core.data.auth.model.ChangeEmailRequest
 import com.chat.myapplication.core.data.auth.model.ChangeEmailResponse
-import com.chat.myapplication.core.data.auth.model.ResetPasswordRequest
 import com.chat.myapplication.core.data.auth.model.CountriesAreasResponse
+import com.chat.myapplication.core.data.auth.model.EmailValidationRequest
+import com.chat.myapplication.core.data.auth.model.EmailValidationResponse
 import com.chat.myapplication.core.data.auth.model.PasskeyLoginRequest
 import com.chat.myapplication.core.data.auth.model.PasskeyRegisterRequest
 import com.chat.myapplication.core.data.auth.model.PasskeyRegisterResponse
+import com.chat.myapplication.core.data.auth.model.RegisterRequest
+import com.chat.myapplication.core.data.auth.model.ResetPasswordRequest
 import com.chat.myapplication.core.data.auth.model.SignInRequest
 import com.chat.myapplication.core.data.auth.model.SignInResponse
+import com.chat.myapplication.core.data.auth.model.SocialLoginRequest
 import com.chat.myapplication.core.data.auth.model.UpdateAllergiesRequest
-import com.chat.myapplication.core.data.auth.model.ViewProfileResponse
 import com.chat.myapplication.core.data.auth.model.VerifyEmailChangeRequest
 import com.chat.myapplication.core.data.auth.model.VerifyPhoneNumberRequest
 import com.chat.myapplication.core.data.auth.model.VerifyPhoneNumberResponse
+import com.chat.myapplication.core.data.auth.model.ViewProfileResponse
 import com.chat.myapplication.core.exception.BaseResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -69,4 +73,19 @@ interface AuthApiService {
 
     @POST("customers/passkey/login")
     suspend fun loginWithPasskey(@Body request: PasskeyLoginRequest): SignInResponse
+
+    @POST("customers/email-validation")
+    suspend fun validateEmail(@Body request: EmailValidationRequest): EmailValidationResponse
+
+    @POST("customers/social-login")
+    suspend fun socialLogin(@Body request: SocialLoginRequest): SignInResponse
+
+    @POST("customers/register-v3")
+    suspend fun register(@Body request: RegisterRequest): BaseResponse
+
+    @POST("customers/send-login-link")
+    suspend fun sendLoginLink(): BaseResponse
+
+    @GET("customers/verify-login-link/{token}")
+    suspend fun verifyLoginToken(@Path("token") token: String): SignInResponse
 }

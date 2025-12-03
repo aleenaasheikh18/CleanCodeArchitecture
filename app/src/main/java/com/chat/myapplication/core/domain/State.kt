@@ -1,6 +1,7 @@
 package com.chat.myapplication.core.domain
 
 import android.net.Uri
+import android.util.Log
 import com.chat.myapplication.core.exception.BaseError
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
@@ -60,4 +61,19 @@ inline fun <T> Flow<ApiState<T>>.onApiError(crossinline block: suspend (BaseErro
 inline fun <T> Flow<ApiState<T>>.onCustomError(crossinline block: suspend (Int, String) -> Unit): Flow<ApiState<T>> =
     onEach {
         if (it is ApiState.CustomError) block(it.customErrorCode, it.message)
+    }
+
+inline fun <T> Flow<ApiState<T>>.onApiFailure(crossinline block: suspend (String) -> Unit): Flow<ApiState<T>> =
+    onEach {
+        when (it) {
+            is ApiState.StatusFailed -> {
+                Log.d("onApiFailure", "StatusFailed - message='${it.message}'")
+                block(it.message)
+            }
+            is ApiState.Error -> {
+                Log.d("onApiFailure", "Error - errorMessage='${it.error.errorMessage}'")
+                block(it.error.errorMessage)
+            }
+            else -> Unit
+        }
     }

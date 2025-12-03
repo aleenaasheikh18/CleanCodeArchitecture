@@ -8,7 +8,7 @@ import com.chat.myapplication.core.data.auth.usecase.GetAllergiesUseCase
 import com.chat.myapplication.core.data.auth.usecase.GetCustomerProfileUseCase
 import com.chat.myapplication.core.data.auth.usecase.LogoutUseCase
 import com.chat.myapplication.core.domain.State
-import com.chat.myapplication.core.domain.onApiError
+import com.chat.myapplication.core.domain.onApiFailure
 import com.chat.myapplication.core.domain.onApiSuccess
 import com.chat.myapplication.core.exception.BaseResponse
 import com.chat.myapplication.di.IODispatcher
@@ -44,14 +44,10 @@ class ProfileSettingViewModel @Inject constructor(
             .collectAsResult()
             .flowOn(ioDispatcher)
             .onApiSuccess { response ->
-                if (response.status) {
-                    _logoutState.value = State.Success(response)
-                } else {
-                    _logoutState.value = State.Error(response.message)
-                }
+                _logoutState.value = State.Success(response)
             }
-            .onApiError { error ->
-                _logoutState.value = State.Error(error.errorMessage)
+            .onApiFailure { errorMessage ->
+                _logoutState.value = State.Error(errorMessage)
             }
             .onStart {
                 _logoutState.value = State.Loading()
@@ -64,17 +60,13 @@ class ProfileSettingViewModel @Inject constructor(
             .collectAsResult()
             .flowOn(ioDispatcher)
             .onApiSuccess { response ->
-                if (response.status) {
-                    val allergies = response.data?.allergies.orEmpty().map { allergy ->
-                        allergy.copy(isSelected = userAllergies.contains(allergy.name))
-                    }
-                    _allergiesState.value = State.Success(allergies)
-                } else {
-                    _allergiesState.value = State.Error(response.message)
+                val allergies = response.data?.allergies.orEmpty().map { allergy ->
+                    allergy.copy(isSelected = userAllergies.contains(allergy.name))
                 }
+                _allergiesState.value = State.Success(allergies)
             }
-            .onApiError { error ->
-                _allergiesState.value = State.Error(error.errorMessage)
+            .onApiFailure { errorMessage ->
+                _allergiesState.value = State.Error(errorMessage)
             }
             .onStart {
                 _allergiesState.value = State.Loading()
@@ -91,18 +83,14 @@ class ProfileSettingViewModel @Inject constructor(
             .collectAsResult()
             .flowOn(ioDispatcher)
             .onApiSuccess { response ->
-                if (response.status) {
-                    response.data?.let { customer ->
-                        _profileState.value = State.Success(customer)
-                    } ?: run {
-                        _profileState.value = State.Error(response.message)
-                    }
-                } else {
-                    _profileState.value = State.Error(response.message)
+                response.data?.let { customer ->
+                    _profileState.value = State.Success(customer)
+                } ?: run {
+                    _profileState.value = State.Error("No profile data available")
                 }
             }
-            .onApiError { error ->
-                _profileState.value = State.Error(error.errorMessage)
+            .onApiFailure { errorMessage ->
+                _profileState.value = State.Error(errorMessage)
             }
             .onStart {
                 _profileState.value = State.Loading()

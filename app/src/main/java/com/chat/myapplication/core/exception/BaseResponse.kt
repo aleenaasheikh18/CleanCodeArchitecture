@@ -11,4 +11,11 @@ open class BaseResponse: Throwable() {
 
     @SerializedName("message")
     override var message: String = ""
+
+    /**
+     * Override toString to prevent statusCode from being displayed
+     */
+    override fun toString(): String {
+        return message.ifEmpty { "An error occurred" }
+    }
 }

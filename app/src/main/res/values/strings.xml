@@ -871,4 +871,6 @@
     <string name="reset_password">Reset Password</string>
     <string name="send_now">Send Now</string>
 
+    <string name="set_password">Set Password</string>
+
 </resources>

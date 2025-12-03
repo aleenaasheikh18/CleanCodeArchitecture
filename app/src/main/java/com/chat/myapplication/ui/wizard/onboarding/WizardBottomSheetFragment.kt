@@ -1,8 +1,12 @@
 package com.chat.myapplication.ui.wizard.onboarding
 
+import android.app.Activity
+import android.content.Intent
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -12,9 +16,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.chat.myapplication.R
 import com.chat.myapplication.base.BaseBottomSheetDialogFragment
 import com.chat.myapplication.core.data.auth.model.SignInData
+import com.chat.myapplication.core.domain.google.GoogleSignInManager
 import com.chat.myapplication.databinding.BottomSheetWizardBinding
 import com.chat.myapplication.databinding.LayoutWizardEmailBinding
 import com.chat.myapplication.databinding.LayoutWizardHeaderBinding
+import com.chat.myapplication.databinding.LayoutWizardNameBinding
 import com.chat.myapplication.databinding.LayoutWizardPasswordBinding
 import com.chat.myapplication.databinding.LayoutWizardSelectionBinding
 import com.chat.myapplication.utility.ClickableText
@@ -35,6 +41,8 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
         LayoutWizardSelectionBinding.bind(bi.layoutSelection.root)
     private val emailBinding: LayoutWizardEmailBinding get() =
         LayoutWizardEmailBinding.bind(bi.layoutEmail.root)
+    private val nameBinding: LayoutWizardNameBinding get() =
+        LayoutWizardNameBinding.bind(bi.layoutName.root)
     private val passwordBinding: LayoutWizardPasswordBinding get() =
         LayoutWizardPasswordBinding.bind(bi.layoutPassword.root)
 
@@ -42,16 +50,33 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
 
     private var isPasswordVisible = false
 
+    private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
+
     var onWizardComplete: ((email: String, password: String) -> Unit)? = null
     var onWizardCancelled: (() -> Unit)? = null
     var onTermsClick: (() -> Unit)? = null
     var onPrivacyClick: (() -> Unit)? = null
     var onPasskeyLoginSuccess: ((SignInData) -> Unit)? = null
+    var onGoogleLoginSuccess: ((SignInData) -> Unit)? = null
+    var onRegistrationComplete: ((email: String) -> Unit)? = null
+    var onShowYouGotMail: ((email: String) -> Unit)? = null
+    var onLoginSuccess: (() -> Unit)? = null
+
+    override fun onCreate(savedInstanceState: android.os.Bundle?) {
+        super.onCreate(savedInstanceState)
+        googleSignInLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            // Always pass the result to ViewModel, it will handle cancellation properly
+            viewModel.handleGoogleSignInResult(result.data)
+        }
+    }
 
     override fun initUserInterface() {
         setupHeader()
         setupSelectionScreen()
         setupEmailScreen()
+        setupNameScreen()
         setupPasswordScreen()
         initObservers()
     }
@@ -84,15 +109,14 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
     private fun setupSelectionScreen() {
         with(selectionBinding) {
             llGoogle.setOnClickListener {
-                viewModel.setSelectedOption(1)
-                // Handle Google sign in
+                viewModel.prepareGoogleSignIn(requireActivity()) { signInIntent ->
+                    googleSignInLauncher.launch(signInIntent)
+                }
             }
             llPasskey.setOnClickListener {
-                viewModel.setSelectedOption(2)
                 viewModel.authenticateWithPasskey(requireActivity())
             }
             btnLogin.setOnClickListener {
-                viewModel.setSelectedOption(3)
                 viewModel.goToEmailStep()
             }
             setupTermsText()
@@ -142,6 +166,34 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
         }
     }
 
+    private fun setupNameScreen() {
+        with(nameBinding) {
+            etFirstName.addTextChangedListener(SimpleTextWatcher { text ->
+                viewModel.setFirstName(text)
+                ivClearFirstName.isVisible = text.isNotEmpty()
+            })
+
+            etLastName.addTextChangedListener(SimpleTextWatcher { text ->
+                viewModel.setLastName(text)
+                ivClearLastName.isVisible = text.isNotEmpty()
+            })
+
+            ivClearFirstName.setOnClickListener {
+                etFirstName.text?.clear()
+                viewModel.setFirstName("")
+            }
+
+            ivClearLastName.setOnClickListener {
+                etLastName.text?.clear()
+                viewModel.setLastName("")
+            }
+
+            btnContinueName.setOnClickListener {
+                viewModel.goToPasswordStepFromName()
+            }
+        }
+    }
+
     private fun setupPasswordScreen() {
         with(passwordBinding) {
             etPassword.addTextChangedListener(SimpleTextWatcher { text ->
@@ -166,7 +218,6 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
                         viewModel.email.value,
                         viewModel.password.value
                     )
-                    dismiss()
                 }
             }
         }
@@ -213,6 +264,86 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
                         handlePasskeyLoginState(state)
                     }
                 }
+
+                launch {
+                    viewModel.firstNameError.collectLatest { error ->
+                        with(nameBinding) {
+                            tvFirstNameError.isVisible = error != null
+                            tvFirstNameError.text = error
+                            etFirstName.setBackgroundResource(
+                                if (error != null) R.drawable.bg_input_field_error
+                                else R.drawable.bg_input_field
+                            )
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.lastNameError.collectLatest { error ->
+                        with(nameBinding) {
+                            tvLastNameError.isVisible = error != null
+                            tvLastNameError.text = error
+                            etLastName.setBackgroundResource(
+                                if (error != null) R.drawable.bg_input_field_error
+                                else R.drawable.bg_input_field
+                            )
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.welcomeBackName.collectLatest { name ->
+                        with(passwordBinding) {
+                            tvTitle.text = if (name != null) {
+                                "${getString(R.string.welcome_back)}, $name"
+                            } else {
+                                getString(R.string.wizard_title_enter_password)
+                            }
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.isLoading.collectLatest { isLoading ->
+                        emailBinding.btnContinueEmail.isEnabled = !isLoading
+                        emailBinding.btnContinueEmail.text = if (isLoading) "Loading..." else "Continue"
+
+                        nameBinding.btnContinueName.isEnabled = !isLoading
+                        nameBinding.btnContinueName.text = if (isLoading) "Loading..." else "Continue"
+                    }
+                }
+
+                launch {
+                    viewModel.googleLoginState.collectLatest { state ->
+                        handleGoogleLoginState(state)
+                    }
+                }
+
+                launch {
+                    viewModel.registerState.collectLatest { state ->
+                        when (state) {
+                            is RegisterState.Success -> {
+                                onRegistrationComplete?.invoke(state.email)
+                                dismiss()
+                            }
+                            is RegisterState.Error -> {
+                                Toast.makeText(requireContext(), state.message, Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.emailValidationEvent.collectLatest { event ->
+                        when (event) {
+                            is EmailValidationEvent.ShowYouGotMail -> {
+                                onShowYouGotMail?.invoke(event.email)
+                                dismiss()
+                            }
+                            else -> Unit
+                        }
+                    }
+                }
             }
         }
     }
@@ -232,7 +363,27 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
             }
             is PasskeyLoginState.Error -> {
                 selectionBinding.llPasskey.isEnabled = true
-                Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
+                showInfoDialog(description = state.message)
+            }
+        }
+    }
+
+    private fun handleGoogleLoginState(state: GoogleLoginState) {
+        when (state) {
+            is GoogleLoginState.Idle -> {
+                selectionBinding.llGoogle.isEnabled = true
+            }
+            is GoogleLoginState.Loading -> {
+                selectionBinding.llGoogle.isEnabled = false
+            }
+            is GoogleLoginState.Success -> {
+                selectionBinding.llGoogle.isEnabled = true
+                onGoogleLoginSuccess?.invoke(state.data)
+                dismiss()
+            }
+            is GoogleLoginState.Error -> {
+                selectionBinding.llGoogle.isEnabled = true
+                showInfoDialog(description = state.message)
             }
         }
     }
@@ -252,6 +403,21 @@ class WizardBottomSheetFragment : BaseBottomSheetDialogFragment<BottomSheetWizar
         }
 
         bi.viewFlipper.displayedChild = targetChild
+    }
+
+    fun setLoginError(error: String) {
+        viewModel.setLoginError(error)
+        setLoginLoading(false)
+    }
+
+    fun setLoginLoading(isLoading: Boolean) {
+        passwordBinding.btnSubmit.isEnabled = !isLoading
+        passwordBinding.btnSubmit.text = if (isLoading) "Loading..." else "Submit"
+    }
+
+    fun onLoginSuccessful() {
+        onLoginSuccess?.invoke()
+        dismiss()
     }
 
     companion object {

@@ -17,7 +17,8 @@ abstract class BaseWizardViewModel : BaseViewModel() {
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     fun setEmail(email: String) {
-        _email.value = email
+        // Trim email to remove leading/trailing whitespace
+        _email.value = email.trim()
         _emailError.value = null
     }
 

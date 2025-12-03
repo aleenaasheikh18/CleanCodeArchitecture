@@ -15,9 +15,11 @@ import com.chat.myapplication.base.BaseFragment
 import com.chat.myapplication.core.data.auth.model.Allergy
 import com.chat.myapplication.core.data.auth.model.Customer
 import com.chat.myapplication.core.domain.State
+import com.chat.myapplication.core.domain.google.GoogleSignInManager
 import com.chat.myapplication.databinding.FragmentProfileSettingBinding
 import com.chat.myapplication.ui.auth.LauncherScreenActivity
 import com.chat.myapplication.utility.AppConstants
+import javax.inject.Inject
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -38,6 +40,9 @@ class ProfileSettingFragment : BaseFragment<FragmentProfileSettingBinding>(
     private var googleMap: GoogleMap? = null
     private var pendingLocation: LatLng? = null
     private var mapView: MapView? = null
+
+    @Inject
+    lateinit var googleSignInManager: GoogleSignInManager
 
     override fun initUserInterface() {
         initMapView()
@@ -299,12 +304,16 @@ class ProfileSettingFragment : BaseFragment<FragmentProfileSettingBinding>(
     }
 
     private fun navigateToLogin() {
-        preferenceManager.clearSession()
-        val intent = Intent(requireContext(), LauncherScreenActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        // Sign out from Google first
+        googleSignInManager.signOut(requireActivity()) {
+            // After Google sign-out, clear session and navigate
+            preferenceManager.clearSession()
+            val intent = Intent(requireContext(), LauncherScreenActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            }
+            startActivity(intent)
+            requireActivity().finish()
         }
-        startActivity(intent)
-        requireActivity().finish()
     }
 
     companion object {

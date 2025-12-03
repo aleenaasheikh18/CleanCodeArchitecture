@@ -7,7 +7,7 @@ import com.chat.myapplication.core.data.auth.model.VerifyEmailChangeRequest
 import com.chat.myapplication.core.data.auth.usecase.VerifyChangePasswordTokenUseCase
 import com.chat.myapplication.core.data.auth.usecase.VerifyEmailChangeUseCase
 import com.chat.myapplication.core.domain.State
-import com.chat.myapplication.core.domain.onApiError
+import com.chat.myapplication.core.domain.onApiFailure
 import com.chat.myapplication.core.domain.onApiSuccess
 import com.chat.myapplication.core.exception.BaseResponse
 import com.chat.myapplication.utility.collectAsResult
@@ -38,14 +38,10 @@ class HomeViewModel @Inject constructor(
             .collectAsResult()
             .flowOn(Dispatchers.IO)
             .onApiSuccess { response ->
-                if (response.status) {
-                    _verifyEmailResponse.emit(State.success(response))
-                } else {
-                    _verifyEmailResponse.emit(State.Error(message = response.message))
-                }
+                _verifyEmailResponse.emit(State.success(response))
             }
-            .onApiError { error ->
-                _verifyEmailResponse.emit(State.Error(error.errorMessage))
+            .onApiFailure { errorMessage ->
+                _verifyEmailResponse.emit(State.Error(message = errorMessage))
             }
             .onStart {
                 _verifyEmailResponse.emit(State.loading())
@@ -58,14 +54,10 @@ class HomeViewModel @Inject constructor(
             .collectAsResult()
             .flowOn(Dispatchers.IO)
             .onApiSuccess { response ->
-                if (response.status) {
-                    _verifyChangePasswordTokenResponse.emit(State.success(response))
-                } else {
-                    _verifyChangePasswordTokenResponse.emit(State.Error(message = response.message))
-                }
+                _verifyChangePasswordTokenResponse.emit(State.success(response))
             }
-            .onApiError { error ->
-                _verifyChangePasswordTokenResponse.emit(State.Error(error.errorMessage))
+            .onApiFailure { errorMessage ->
+                _verifyChangePasswordTokenResponse.emit(State.Error(message = errorMessage))
             }
             .onStart {
                 _verifyChangePasswordTokenResponse.emit(State.loading())

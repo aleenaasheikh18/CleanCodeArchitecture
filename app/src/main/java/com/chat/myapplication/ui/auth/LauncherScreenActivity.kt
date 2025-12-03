@@ -3,6 +3,7 @@ package com.chat.myapplication.ui.auth
 import android.content.Intent
 import android.media.MediaPlayer
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
@@ -22,6 +23,7 @@ import com.chat.myapplication.ui.dashboard.HomeActivity
 import com.chat.myapplication.ui.fragments.settings.SettingType
 import com.chat.myapplication.ui.legal.LegalDocumentActivity
 import com.chat.myapplication.ui.wizard.onboarding.WizardBottomSheetFragment
+import com.chat.myapplication.ui.wizard.youGotMail.YouGotMailFragment
 import com.chat.myapplication.utility.AppConstants
 import com.chat.myapplication.utility.AppConstants.SCREEN_TYPE
 import com.chat.myapplication.utility.setOnSingleClickListener
@@ -40,6 +42,7 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
     lateinit var deepLinkHandler: DeepLinkHandler
 
     private var pendingDeepLinkEvent: DeepLinkEvent = DeepLinkEvent.None
+    private var currentWizard: WizardBottomSheetFragment? = null
 
     override fun initUserInterface() {
         initApiObserver()
@@ -74,6 +77,11 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
                 preferenceManager.influencerJobId = event.jobId
                 pendingDeepLinkEvent = DeepLinkEvent.None
             }
+            is DeepLinkEvent.LoginToken -> {
+                // Verify login token
+                viewModel.verifyLoginToken(event.token)
+                pendingDeepLinkEvent = DeepLinkEvent.None
+            }
             is DeepLinkEvent.None -> {
                 pendingDeepLinkEvent = DeepLinkEvent.None
             }
@@ -91,8 +99,39 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
 
     private fun showWizardBottomSheet() {
         val wizard = WizardBottomSheetFragment.newInstance()
+        currentWizard = wizard
+
         wizard.onWizardComplete = { email, password ->
-            viewModel.signIn(SignInRequest(email, password))
+            // Trim email and password before sending to API
+            viewModel.signIn(SignInRequest(email.trim(), password.trim()))
+        }
+        wizard.onLoginSuccess = {
+            // Login successful, navigate to home
+            currentWizard = null
+            navigateToHome()
+        }
+        wizard.onPasskeyLoginSuccess = { signInData ->
+            // Passkey login successful, navigate to home
+            currentWizard = null
+            navigateToHome()
+        }
+        wizard.onGoogleLoginSuccess = { signInData ->
+            // Google login successful, navigate to home
+            currentWizard = null
+            navigateToHome()
+        }
+        wizard.onRegistrationComplete = { email ->
+            // Show You Got Mail screen after registration
+            currentWizard = null
+            showYouGotMailScreen(email)
+        }
+        wizard.onShowYouGotMail = { email ->
+            // Show You Got Mail screen for password setup
+            currentWizard = null
+            showYouGotMailScreen(email)
+        }
+        wizard.onWizardCancelled = {
+            currentWizard = null
         }
         wizard.onTermsClick = {
             openLegalDocument(SettingType.TERMS_SERVICE)
@@ -101,6 +140,14 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
             openLegalDocument(SettingType.PRIVACY_POLICY)
         }
         wizard.show(supportFragmentManager, WizardBottomSheetFragment.TAG)
+    }
+
+    private fun showYouGotMailScreen(email: String) {
+        val fragment = YouGotMailFragment.newInstance(email)
+        supportFragmentManager.beginTransaction()
+            .replace(android.R.id.content, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun openLegalDocument(type: SettingType) {
@@ -166,17 +213,37 @@ class LauncherScreenActivity : BaseActivity<ActivityLauncherBinding>(ActivityLau
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.signInResponse.collectLatest { state ->
-                    when (state) {
-                        is State.Loading -> showProgressBar()
-                        is State.Success -> {
-                            hideProgressBar()
-                            navigateToHome()
+                launch {
+                    viewModel.signInResponse.collectLatest { state ->
+                        when (state) {
+                            is State.Loading -> currentWizard?.setLoginLoading(true)
+                            is State.Success -> {
+                                currentWizard?.onLoginSuccessful()
+                            }
+                            is State.Error -> {
+                                Log.d("LauncherActivity", "signInResponse State.Error - message='${state.message}'")
+                                currentWizard?.setLoginError(state.message)
+                            }
+                            else -> Unit
                         }
-                        is State.Error -> {
-                            showInfoDialog(description = state.message)
+                    }
+                }
+
+                launch {
+                    viewModel.verifyTokenResponse.collectLatest { state ->
+                        when (state) {
+                            is State.Loading -> showProgressBar()
+                            is State.Success -> {
+                                hideProgressBar()
+                                navigateToHome()
+                            }
+                            is State.Error -> {
+                                Log.d("LauncherActivity", "verifyTokenResponse State.Error - message='${state.message}'")
+                                hideProgressBar()
+                                showInfoDialog(description = state.message)
+                            }
+                            else -> Unit
                         }
-                        else -> Unit
                     }
                 }
             }

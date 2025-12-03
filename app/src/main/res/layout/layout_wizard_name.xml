@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/new_dimen_24_dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="What's your name?"
+        android:textColor="@color/titleColor"
+        android:textSize="@dimen/txt_mediumX"
+        android:textStyle="bold" />
+
+    <!-- First Name Input -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_size">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/new_dimen_48_dp"
+            android:background="@drawable/bg_input_field"
+            android:hint="First name"
+            android:inputType="textPersonName|textCapWords"
+            android:paddingStart="@dimen/new_dimen_16_dp"
+            android:paddingEnd="@dimen/new_dimen_48_dp"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorLightGray"
+            android:textSize="@dimen/txt_mediumX" />
+
+        <ImageView
+            android:id="@+id/ivClearFirstName"
+            android:layout_width="@dimen/new_dimen_24_dp"
+            android:layout_height="@dimen/new_dimen_24_dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="@dimen/new_dimen_12_dp"
+            android:contentDescription="Clear first name"
+            android:src="@drawable/ic_input_clear"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <!-- First Name Error Text -->
+    <TextView
+        android:id="@+id/tvFirstNameError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_dimen_6_dp"
+        android:textColor="@color/defaultColorPrimary"
+        android:textSize="@dimen/txt_smallXX"
+        android:visibility="gone" />
+
+    <!-- Last Name Input -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_dimen_16_dp">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etLastName"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/new_dimen_48_dp"
+            android:background="@drawable/bg_input_field"
+            android:hint="Last name"
+            android:inputType="textPersonName|textCapWords"
+            android:paddingStart="@dimen/new_dimen_16_dp"
+            android:paddingEnd="@dimen/new_dimen_48_dp"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorLightGray"
+            android:textSize="@dimen/txt_mediumX" />
+
+        <ImageView
+            android:id="@+id/ivClearLastName"
+            android:layout_width="@dimen/new_dimen_24_dp"
+            android:layout_height="@dimen/new_dimen_24_dp"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="@dimen/new_dimen_12_dp"
+            android:contentDescription="Clear last name"
+            android:src="@drawable/ic_input_clear"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <!-- Last Name Error Text -->
+    <TextView
+        android:id="@+id/tvLastNameError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/new_dimen_6_dp"
+        android:textColor="@color/defaultColorPrimary"
+        android:textSize="@dimen/txt_smallXX"
+        android:visibility="gone" />
+
+    <!-- Continue Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnContinueName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/new_dimen_48_dp"
+        android:layout_marginTop="@dimen/new_dimen_24_dp"
+        android:background="@drawable/button_rounded_black"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:textColor="@color/defaultButtonTextColor"
+        android:textSize="@dimen/txt_mediumXX" />
+
+</LinearLayout>

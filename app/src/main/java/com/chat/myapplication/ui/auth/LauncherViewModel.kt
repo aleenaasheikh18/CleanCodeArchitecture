@@ -1,12 +1,14 @@
 package com.chat.myapplication.ui.auth
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.chat.myapplication.base.BaseViewModel
 import com.chat.myapplication.core.data.auth.model.SignInRequest
 import com.chat.myapplication.core.data.auth.model.SignInResponse
 import com.chat.myapplication.core.data.auth.usecase.SignInUseCase
+import com.chat.myapplication.core.data.auth.usecase.VerifyLoginTokenUseCase
 import com.chat.myapplication.core.domain.State
-import com.chat.myapplication.core.domain.onApiError
+import com.chat.myapplication.core.domain.onApiFailure
 import com.chat.myapplication.core.domain.onApiSuccess
 import com.chat.myapplication.utility.PreferenceManager
 import com.chat.myapplication.utility.collectAsResult
@@ -21,11 +23,15 @@ import javax.inject.Inject
 @HiltViewModel
 class LauncherViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
+    private val verifyLoginTokenUseCase: VerifyLoginTokenUseCase,
     private val preferenceManager: PreferenceManager
 ) : BaseViewModel() {
 
     private val _signInResponse: MutableSharedFlow<State<SignInResponse>> = MutableSharedFlow()
     val signInResponse: MutableSharedFlow<State<SignInResponse>> = _signInResponse
+
+    private val _verifyTokenResponse: MutableSharedFlow<State<SignInResponse>> = MutableSharedFlow()
+    val verifyTokenResponse: MutableSharedFlow<State<SignInResponse>> = _verifyTokenResponse
 
     fun signIn(signInRequest: SignInRequest) {
 
@@ -33,20 +39,36 @@ class LauncherViewModel @Inject constructor(
             Dispatchers.IO
         )
             .onApiSuccess { response ->
-                response.let {
-                    if (it.status) {
-                        it.data?.let { signInData ->
-                            preferenceManager.handleDataAfterLogin(signInData)
-                        }
-                        _signInResponse.emit(State.success(it))
-                    } else {
-                        _signInResponse.emit(State.Error(message = it.message))
-                    }
+                response.data?.let { signInData ->
+                    preferenceManager.handleDataAfterLogin(signInData)
                 }
-            }.onApiError { error ->
-                _signInResponse.emit(State.Error(error.errorMessage))
-            }.onStart {
+                _signInResponse.emit(State.success(response))
+            }
+            .onApiFailure { errorMessage ->
+                Log.d("LauncherViewModel", "signIn onApiFailure - errorMessage='$errorMessage'")
+                _signInResponse.emit(State.Error(message = errorMessage))
+            }
+            .onStart {
                 _signInResponse.emit(State.loading())
+            }.launchIn(viewModelScope)
+    }
+
+    fun verifyLoginToken(token: String) {
+        verifyLoginTokenUseCase(token)
+            .collectAsResult()
+            .flowOn(Dispatchers.IO)
+            .onApiSuccess { response ->
+                response.data?.let { signInData ->
+                    preferenceManager.handleDataAfterLogin(signInData)
+                }
+                _verifyTokenResponse.emit(State.success(response))
+            }
+            .onApiFailure { errorMessage ->
+                Log.d("LauncherViewModel", "verifyLoginToken onApiFailure - errorMessage='$errorMessage'")
+                _verifyTokenResponse.emit(State.Error(errorMessage))
+            }
+            .onStart {
+                _verifyTokenResponse.emit(State.loading())
             }.launchIn(viewModelScope)
     }
 

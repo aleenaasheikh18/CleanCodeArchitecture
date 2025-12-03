@@ -1,0 +1,235 @@
+{
+  "project_info": {
+    "project_number": "809748310080",
+    "firebase_url": "https://fresh-effort-277702.firebaseio.com",
+    "project_id": "fresh-effort-277702",
+    "storage_bucket": "fresh-effort-277702.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:809748310080:android:3c9b7d8b1898c2f76cd7a5",
+        "android_client_info": {
+          "package_name": "com.foodchoo.affiliate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "809748310080-ct3hgm4nstkmqouu96i8r9bi8u8uqf27.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.foodchoo.affiliate",
+            "certificate_hash": "61a27cc181b446b3c350015a27dfdd1b71f3feba"
+          }
+        },
+        {
+          "client_id": "809748310080-t945nhmv7kdo0roit3oqbif6rr0h9u0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuqGuwkftc1SagpwMR5ET8hKFSmfKAV70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "809748310080-3u6ii9sror8qiiljund3495deosp2oc2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "809748310080-0mlsl24pgedskofhfmcqbgb5ksu4qgof.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.foodchoo.customer"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:809748310080:android:8d2c02529e1bd9ef6cd7a5",
+        "android_client_info": {
+          "package_name": "com.project.foodchooapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "809748310080-hnuqalc6n3i8ag2fiahbt95gm7463crs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.foodchooapp",
+            "certificate_hash": "2f32aa2e49304de79263032df4e273dd580a6b04"
+          }
+        },
+        {
+          "client_id": "809748310080-u0f536l368s1hujmq2vr1h03p588o2er.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.foodchooapp",
+            "certificate_hash": "3fd03974536d71370d5b3b8fea6c3bf5f77ddf70"
+          }
+        },
+        {
+          "client_id": "809748310080-t945nhmv7kdo0roit3oqbif6rr0h9u0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuqGuwkftc1SagpwMR5ET8hKFSmfKAV70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "809748310080-3u6ii9sror8qiiljund3495deosp2oc2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "809748310080-0mlsl24pgedskofhfmcqbgb5ksu4qgof.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.foodchoo.customer"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:809748310080:android:d29d03b7c40330e26cd7a5",
+        "android_client_info": {
+          "package_name": "com.project.foodchooeater"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "809748310080-a67qguied81iplrc9ii2l620j1ca38pt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.foodchooeater",
+            "certificate_hash": "a5e12747ba8bdef324171b88d841c37c1de93ff5"
+          }
+        },
+        {
+          "client_id": "809748310080-nanqcs5kpsob9j520hu8g7heokf51mb5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.foodchooeater",
+            "certificate_hash": "fcf6abb20495285c4847665a3b8d6251c871732f"
+          }
+        },
+        {
+          "client_id": "809748310080-ojkl74095ufd3vfhmfers4iumphuc9d8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.foodchooeater",
+            "certificate_hash": "c4afa5b0cada1ae692145d56f4836607ef218d41"
+          }
+        },
+        {
+          "client_id": "809748310080-t945nhmv7kdo0roit3oqbif6rr0h9u0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuqGuwkftc1SagpwMR5ET8hKFSmfKAV70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "809748310080-3u6ii9sror8qiiljund3495deosp2oc2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "809748310080-0mlsl24pgedskofhfmcqbgb5ksu4qgof.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.foodchoo.customer"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:809748310080:android:8a4053855053db506cd7a5",
+        "android_client_info": {
+          "package_name": "com.project.foodchooriderapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "809748310080-5jmtpdojpj0mavekidt8v8k3kph8u6q9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.foodchooriderapp",
+            "certificate_hash": "9c0d44dd870e36b44bcf154a36c1ab2c9e54a2ec"
+          }
+        },
+        {
+          "client_id": "809748310080-a9uneq6hg3fi0m1i6ledpk5v4n93j0hn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.foodchooriderapp",
+            "certificate_hash": "edd18d85da57dd65e42098f28a03ba4d2b36d5e6"
+          }
+        },
+        {
+          "client_id": "809748310080-f5mjsbistdaeuk8qh90hksc3tc2fb4b6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.foodchooriderapp",
+            "certificate_hash": "c4afa5b0cada1ae692145d56f4836607ef218d41"
+          }
+        },
+        {
+          "client_id": "809748310080-icrmqk6tjsbnauq0reulaohgmafrp4e8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.project.foodchooriderapp",
+            "certificate_hash": "61a27cc181b446b3c350015a27dfdd1b71f3feba"
+          }
+        },
+        {
+          "client_id": "809748310080-t945nhmv7kdo0roit3oqbif6rr0h9u0v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuqGuwkftc1SagpwMR5ET8hKFSmfKAV70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "809748310080-3u6ii9sror8qiiljund3495deosp2oc2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "809748310080-0mlsl24pgedskofhfmcqbgb5ksu4qgof.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.foodchoo.customer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -22,6 +22,9 @@ sealed class DeepLinkEvent : Parcelable {
     data class VerifyEmailChange(val token: String) : DeepLinkEvent()
 
     @Parcelize
+    data class LoginToken(val token: String) : DeepLinkEvent()
+
+    @Parcelize
     data class Unknown(val path: String) : DeepLinkEvent()
 
     @Parcelize
@@ -33,6 +36,7 @@ sealed class DeepLinkEvent : Parcelable {
         const val KEY_REFERRAL_CODE = "referral_code"
         const val KEY_INFLUENCER_JOB_ID = "influencer_job_id"
         const val KEY_CHANGE_EMAIL_TOKEN = "change_email_token"
+        const val KEY_LOGIN_TOKEN = "login_token"
         const val EXTRA_DEEP_LINK_EVENT = "extra_deep_link_event"
     }
 }

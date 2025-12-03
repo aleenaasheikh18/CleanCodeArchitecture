@@ -5,7 +5,11 @@ import com.chat.myapplication.core.data.auth.model.AddPhoneNumberResponse
 import com.chat.myapplication.core.data.auth.model.AllergiesResponse
 import com.chat.myapplication.core.data.auth.model.ChangeEmailRequest
 import com.chat.myapplication.core.data.auth.model.ChangeEmailResponse
+import com.chat.myapplication.core.data.auth.model.EmailValidationRequest
+import com.chat.myapplication.core.data.auth.model.EmailValidationResponse
+import com.chat.myapplication.core.data.auth.model.RegisterRequest
 import com.chat.myapplication.core.data.auth.model.ResetPasswordRequest
+import com.chat.myapplication.core.data.auth.model.SocialLoginRequest
 import com.chat.myapplication.core.data.auth.model.CountriesAreasResponse
 import com.chat.myapplication.core.data.auth.model.PasskeyLoginRequest
 import com.chat.myapplication.core.data.auth.model.PasskeyRegisterRequest
@@ -113,6 +117,36 @@ class AuthDataRepository @Inject constructor(private val authApiService: AuthApi
     override fun loginWithPasskey(request: PasskeyLoginRequest): Flow<SignInResponse> {
         return flow {
             emit(authApiService.loginWithPasskey(request))
+        }
+    }
+
+    override fun validateEmail(request: EmailValidationRequest): Flow<EmailValidationResponse> {
+        return flow {
+            emit(authApiService.validateEmail(request))
+        }
+    }
+
+    override fun socialLogin(request: SocialLoginRequest): Flow<SignInResponse> {
+        return flow {
+            emit(authApiService.socialLogin(request))
+        }
+    }
+
+    override fun register(request: RegisterRequest): Flow<BaseResponse> {
+        return flow {
+            emit(authApiService.register(request))
+        }
+    }
+
+    override fun sendLoginLink(): Flow<BaseResponse> {
+        return flow {
+            emit(authApiService.sendLoginLink())
+        }
+    }
+
+    override fun verifyLoginToken(token: String): Flow<SignInResponse> {
+        return flow {
+            emit(authApiService.verifyLoginToken(token))
         }
     }
 }

@@ -126,6 +126,13 @@ class DeepLinkHandler @Inject constructor() {
                     DeepLinkEvent.VerifyEmailChange(token)
                 } else DeepLinkEvent.None
             }
+            deepLinkPath.contains(DeepLinkEvent.KEY_LOGIN_TOKEN) -> {
+                val token = extractValue(DeepLinkEvent.KEY_LOGIN_TOKEN, deepLinkPath)
+                if (token.isNotEmpty()) {
+                    Log.i(TAG, "Login Token: $token")
+                    DeepLinkEvent.LoginToken(token)
+                } else DeepLinkEvent.None
+            }
             else -> {
                 Log.i(TAG, "Unknown deep link path: $deepLinkPath")
                 DeepLinkEvent.Unknown(deepLinkPath)

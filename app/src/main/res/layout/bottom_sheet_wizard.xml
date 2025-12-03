@@ -44,7 +44,12 @@
             android:id="@+id/layoutEmail"
             layout="@layout/layout_wizard_email" />
 
-        <!-- Screen 3: Password -->
+        <!-- Screen 3: Name -->
+        <include
+            android:id="@+id/layoutName"
+            layout="@layout/layout_wizard_name" />
+
+        <!-- Screen 4: Password -->
         <include
             android:id="@+id/layoutPassword"
             layout="@layout/layout_wizard_password" />

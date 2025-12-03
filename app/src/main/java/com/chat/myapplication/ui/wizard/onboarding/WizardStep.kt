@@ -26,8 +26,18 @@ sealed class WizardStep(
         )
     )
 
-    data object Password : WizardStep(
+    data object Name : WizardStep(
         position = 2,
+        headerConfig = HeaderConfig(
+            titleRes = R.string.wizard_title_enter_email,
+            showBack = true,
+            showClose = true,
+            showHeader = true
+        )
+    )
+
+    data object Password : WizardStep(
+        position = 3,
         headerConfig = HeaderConfig(
             titleRes = R.string.wizard_title_enter_password,
             showBack = true,
@@ -37,7 +47,7 @@ sealed class WizardStep(
     )
 
     companion object {
-        val entries: List<WizardStep> = listOf(Selection, Email, Password)
+        val entries: List<WizardStep> = listOf(Selection, Email, Name, Password)
 
         fun fromPosition(position: Int): WizardStep =
             entries.getOrElse(position) { Selection }
